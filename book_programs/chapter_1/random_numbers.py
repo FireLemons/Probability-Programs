@@ -34,5 +34,10 @@ if 'random_number_count' in globals() and random_number_count < 0:
 # Print usage help when arguments are bad
 if bad_input:
     print("Usage: python3 random_numbers.py <n>\n  n is the number of random values between 0 and 1 to generate")
+    sys.exit(1)
 
+print()
+print("Note: Python's random number generation yields numbers in the range [0, 1)")
 
+for i in range(random_number_count):
+    print(random.random())
