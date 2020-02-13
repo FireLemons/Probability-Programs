@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-# Example Usage: python3 random_numbers.py <n> 
-# Param n:       The number of random values between 0 and 1 to generate
+# Example Usage: python3 coin_tosses.py <n> 
+# Param n:       The number of coin tosses tom simulate
 
 import random
 import sys
