@@ -36,8 +36,18 @@ if bad_input:
     print("\nUsage: python3 de_mere_1.py <n>\n  n is the number of four dice roll experiments to simulate")
     sys.exit(1)
 
+successCount = 0
+
 for i in range(random_dice_experiment_count):
     currentExperimentResults = []
     for i in range(4):
         currentExperimentResults.append(random.randint(1, 6))
     print(currentExperimentResults)
+    try:
+        currentExperimentResults.index(6)
+        successCount += 1
+    except ValueError:
+        pass
+
+print("Number of successes: ", successCount)
+print("Proportion of successes: ", successCount/random_dice_experiment_count)
