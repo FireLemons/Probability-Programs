@@ -14,7 +14,7 @@ bad_input = False
 # No arguments
 if len(args) < 2:
     bad_input = True
-    print("ERROR: Insufficient arguments\n")
+    print("ERROR: Insufficient arguments")
 
 # Try to convert argument into an integer
 try:
@@ -33,7 +33,7 @@ if 'random_number_count' in globals() and random_number_count < 0:
 
 # Print usage help when arguments are bad
 if bad_input:
-    print("Usage: python3 random_numbers.py <n>\n  n is the number of random values between 0 and 1 to generate")
+    print("\nUsage: python3 random_numbers.py <n>\n  n is the number of random values between 0 and 1 to generate")
     sys.exit(1)
 
 for i in range(random_number_count):

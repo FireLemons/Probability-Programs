@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Example Usage: python3 coin_tosses.py <n> 
-# Param n:       The number of coin tosses tom simulate
+# Param n:       The number of coin tosses to simulate
 
 import random
 import sys
@@ -14,7 +14,7 @@ bad_input = False
 # No arguments
 if len(args) < 2:
     bad_input = True
-    print("ERROR: Insufficient arguments\n")
+    print("ERROR: Insufficient arguments")
 
 # Try to convert argument into an integer
 try:
@@ -33,7 +33,7 @@ if 'random_coin_toss_count' in globals() and random_coin_toss_count < 0:
 
 # Print usage help when arguments are bad
 if bad_input:
-    print("Usage: python3 coin_tosses.py <n>\n  n is the number of coin tosses to simulate")
+    print("\nUsage: python3 coin_tosses.py <n>\n  n is the number of coin tosses to simulate")
     sys.exit(1)
 
 headsCount = 0
