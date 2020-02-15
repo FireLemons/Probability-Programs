@@ -33,7 +33,8 @@ if 'random_coin_toss_count' in globals() and random_coin_toss_count < 0:
 
 # Print usage help when arguments are bad
 if bad_input:
-    print("\nUsage: python3 coin_tosses.py <n>\n  n is the number of coin tosses to simulate")
+    print("\nUsage: python3 coin_tosses.py <n>")
+    print("  n is the number of coin tosses to simulate")
     sys.exit(1)
 
 headsCount = 0

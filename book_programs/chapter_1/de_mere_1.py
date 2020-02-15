@@ -33,7 +33,8 @@ if 'random_dice_experiment_count' in globals() and random_dice_experiment_count 
 
 # Print usage help when arguments are bad
 if bad_input:
-    print("\nUsage: python3 de_mere_1.py <n>\n  n is the number of four dice roll experiments to simulate")
+    print("\nUsage: python3 de_mere_1.py <n>")
+    print("  n is the number of four dice roll experiments to simulate")
     sys.exit(1)
 
 successCount = 0
