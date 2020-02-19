@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
-# Example Usage: python3 random_numbers.py <n> 
+# Usage: python3 random_numbers.py <n> 
 # Param n:       The number of random values between 0 and 1 to generate
+
+# Example Usage: python3 random_numbers.py 10
 
 import random
 import sys

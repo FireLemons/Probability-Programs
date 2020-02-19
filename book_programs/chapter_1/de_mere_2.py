@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
-# Example Usage: python3 de_mere_2.py <m> <n> 
+# Usage: python3 de_mere_2.py <m> <n> 
 # Param m:       The number of <n> double dice roll experiments to simulate
 # Param n:       The number of times to roll a pair of dice to see if a pair of sixes show up
+
+# Example Usage: python3 de_mere_2.py 24 10
 
 import random
 import sys

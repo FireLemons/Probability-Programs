@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
-# Example Usage: python3 coin_tosses.py <n> 
+# Usage: python3 coin_tosses.py <n> 
 # Param n:       The number of coin tosses to simulate
+
+# Example Usage: python3 coin_tosses.py 10
 
 import random
 import sys

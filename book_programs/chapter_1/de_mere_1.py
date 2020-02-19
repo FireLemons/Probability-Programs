@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
-# Example Usage: python3 de_mere_1.py <n> 
+# Usage: python3 de_mere_1.py <n> 
 # Param n:       The number of four dice roll experiments to simulate
+
+# Example Usage: python3 de_mere_1.py 10
 
 import random
 import sys
