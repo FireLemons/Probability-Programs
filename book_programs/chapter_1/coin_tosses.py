@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
-# Usage: python3 coin_tosses.py <n> 
-# Param n:       The number of coin tosses to simulate
+# Usage: python3 coin_tosses.py <n> <mute_output>
+# Param n:              The number of coin tosses to simulate
+# Param mute_output:    If the value is "mute" or "m" the results of the experiments are not printed
 
 # Example Usage: python3 coin_tosses.py 10
 
@@ -35,8 +36,9 @@ if 'random_coin_toss_count' in globals() and random_coin_toss_count < 0:
 
 # Print usage help when arguments are bad
 if bad_input:
-    print("\nUsage: python3 coin_tosses.py <n>")
+    print("\nUsage: python3 coin_tosses.py <n> <mute_output>")
     print("  n is the number of coin tosses to simulate")
+    print("  mute_output can be set to \"mute\" or \"m\" to hide the results of the experiments")
     sys.exit(1)
 
 headsCount = 0
@@ -49,6 +51,8 @@ for i in range(random_coin_toss_count):
     else:
         results += "T"
 
-print(results)
-print()
+if not(len(args) >= 3 and (args[2] == "m" or args[2] == "mute")):
+    print(results)
+    print()
+
 print("The proportion in n tosses is ", random_coin_toss_count, " is ", headsCount / random_coin_toss_count)
