@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
 # Usage: python3 de_mere_2.py <m> <n> <mute_output>
-# Param m:              The number of <n> double dice roll experiments to simulate
-# Param n:              The number of times to roll a pair of dice to see if a pair of sixes show up
+# Param m:              The number of times to roll a pair of dice in each experiment
+# Param n:              The number of double dice roll experiments to simulate
 # Param mute_output:    If the value is "mute" or "m" the results of the experiments are not printed
 
-# Example Usage: python3 de_mere_2.py 24 10
+# Example Usage: python3 de_mere_2.py 10 24
 
 import random
 import sys
@@ -27,7 +27,7 @@ except IndexError:
     pass
 except ValueError:
     bad_input = True
-    print("ERROR: Could not convert param m to an integer")
+    print("ERROR: Could not convert param n to an integer")
 
 try:
     dice_roll_count = int(args[2])
@@ -35,7 +35,7 @@ except IndexError:
     pass
 except ValueError:
     bad_input = True
-    print("ERROR: Could not convert param n to an integer")
+    print("ERROR: Could not convert param m to an integer")
 
 # Argument m is negtive
 if 'random_dice_experiment_count' in globals() and random_dice_experiment_count < 0:
@@ -50,8 +50,8 @@ if 'dice_roll_count' in globals() and dice_roll_count < 0:
 # Print usage help when arguments are bad
 if bad_input:
     print("\nUsage: python3 de_mere_1.py <m> <n> <mute_output>")
-    print("  m is the number of <n> double dice roll experiments to simulate")
-    print("  n is the number of times to roll a pair of dice to see if a pair of sixes show up")
+    print("  m is the number of times to roll a pair of dice in each experiment")
+    print("  n is the number of double dice roll experiments to simulate")
     print("  mute_output can be set to \"mute\" or \"m\" to hide the results of the experiments")
     sys.exit(1)
 
