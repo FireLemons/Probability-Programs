@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-# Usage: python3 de_mere_1.py <n>  <mute_output>
-# Param n:       The number of four dice roll experiments to simulate
+# Usage: python3 de_mere_1.py <n> <mute_output>
+# Param n:              The number of four dice roll experiments to simulate
 # Param mute_output:    If the value is "mute" or "m" the results of the experiments are not printed
 
 # Example Usage: python3 de_mere_1.py 10
@@ -49,7 +49,7 @@ for i in range(random_dice_experiment_count):
     for i in range(4):
         currentExperimentResults.append(random.randint(1, 6))
  
-    if not(mute_output):
+    if not mute_output:
         print(currentExperimentResults)
     try:
         currentExperimentResults.index(6)

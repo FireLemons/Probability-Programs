@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 
-# Usage: python3 de_mere_2.py <m> <n> 
-# Param m:       The number of <n> double dice roll experiments to simulate
-# Param n:       The number of times to roll a pair of dice to see if a pair of sixes show up
+# Usage: python3 de_mere_2.py <m> <n> <mute_output>
+# Param m:              The number of <n> double dice roll experiments to simulate
+# Param n:              The number of times to roll a pair of dice to see if a pair of sixes show up
+# Param mute_output:    If the value is "mute" or "m" the results of the experiments are not printed
 
 # Example Usage: python3 de_mere_2.py 24 10
 
@@ -48,19 +49,23 @@ if 'dice_roll_count' in globals() and dice_roll_count < 0:
 
 # Print usage help when arguments are bad
 if bad_input:
-    print("\nUsage: python3 de_mere_1.py <m> <n>")
+    print("\nUsage: python3 de_mere_1.py <m> <n> <mute_output>")
     print("  m is the number of <n> double dice roll experiments to simulate")
     print("  n is the number of times to roll a pair of dice to see if a pair of sixes show up")
+    print("  mute_output can be set to \"mute\" or \"m\" to hide the results of the experiments")
     sys.exit(1)
 
+mute_output = len(args) >= 4 and (args[3] == "m" or args[3] == "mute")
 successCount = 0
 
 for i in range(random_dice_experiment_count):
     currentExperimentResults = []
     for i in range(dice_roll_count):
         currentExperimentResults.append((random.randint(1, 6), random.randint(1, 6)))
-    print(currentExperimentResults)
-    print()
+
+    if not mute_output:
+        print(currentExperimentResults)
+        print()
     try:
         currentExperimentResults.index((6, 6))
         successCount += 1
