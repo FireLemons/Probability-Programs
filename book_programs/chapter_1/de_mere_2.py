@@ -49,7 +49,7 @@ if 'dice_roll_count' in globals() and dice_roll_count < 0:
 
 # Print usage help when arguments are bad
 if bad_input:
-    print("\nUsage: python3 de_mere_1.py <m> <n> <mute_output>")
+    print("\nUsage: python3 de_mere_2.py <m> <n> <mute_output>")
     print("  m is the number of times to roll a pair of dice in each experiment")
     print("  n is the number of double dice roll experiments to simulate")
     print("  mute_output can be set to \"mute\" or \"m\" to hide the results of the experiments")
