@@ -4,6 +4,7 @@ The scripts for [Introduction to Probability by Charles M. Grinstead and J. Laur
 ## Setup
 ### Linux
 Install Python 3.x and git  
+  
 Make sure pip for python 3 is installed  
 `pip3 --version` should not print an error  
   
