@@ -80,7 +80,12 @@ for i in range(random_coin_experiment_count):
         if random_coin_experiment_count == 1 and not mute_output:
             toss_list.append(current_winnings)
 
+pyplot.figure()
+#Plot similar to figure 1.1
+pyplot.subplot(311)
 pyplot.plot(range(len(toss_list)), toss_list)
-pyplot.ylabel("winnings")
+pyplot.suptitle("1.1 Winnings in " + str(coin_flip_count) + " plays of heads or tails")
 pyplot.xlabel("coin flips")
+pyplot.ylabel("winnings")
+#Plot similar to figure 1.2
 pyplot.show()
