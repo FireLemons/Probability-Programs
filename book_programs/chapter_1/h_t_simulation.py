@@ -3,8 +3,9 @@
 # Usage: python3 de_mere_2.py <m> <n> <mute_output>
 # Param m:              The number of coin flips in each experiment
 # Param n:              The number of coin flip experiments to run
-#                       If n is set to 1 the results of the experiment will be graphed unless the output is muted
-# Param mute_output:    If the value is "mute" or "m" the results of the experiments are not printed
+#                       If n is set to 1 the winnings will be plotted
+#                       If n is greater than 1 the distributions of overall winnings and times in the lead will be plotted
+# Param mute_output:    If the value is "mute" or "m" the results of the experiments will not be plotted
 
 # Example Usage: python3 h_t_simulation.py
 
@@ -80,12 +81,23 @@ for i in range(random_coin_experiment_count):
         if random_coin_experiment_count == 1 and not mute_output:
             toss_list.append(current_winnings)
 
-pyplot.figure()
-#Plot similar to figure 1.1
-pyplot.subplot(311)
-pyplot.plot(range(len(toss_list)), toss_list)
-pyplot.suptitle("1.1 Winnings in " + str(coin_flip_count) + " plays of heads or tails")
-pyplot.xlabel("coin flips")
-pyplot.ylabel("winnings")
-#Plot similar to figure 1.2
-pyplot.show()
+if random_coin_experiment_count == 0:
+    pass
+# n = 1
+elif random_coin_experiment_count == 1:
+    #Plot figure 1.1
+    pyplot.plot(range(len(toss_list)), toss_list)
+    pyplot.suptitle("1.1 Winnings in " + str(coin_flip_count) + " plays of heads or tails")
+    pyplot.xlabel("coin flips")
+    pyplot.ylabel("winnings")
+    pyplot.show()
+# n > 1
+else:
+    pyplot.figure()
+
+    #Plot figure 1.2
+    pyplot.subplot(211)
+    pyplot.stem(range(len(toss_list)), toss_list)
+
+    pyplot.show()
+
