@@ -15,7 +15,9 @@ import sys
 
 args = sys.argv
 
+################
 # Error checking
+################
 bad_input = False
 
 # Less than 2 arguments
@@ -52,16 +54,17 @@ if 'coin_flip_count' in globals() and coin_flip_count < 0:
 
 # Print usage help when arguments are bad
 if bad_input:
-#                       If n is set to 1 the results of the experiment will be graphed unless the output is muted
-# Param mute_output:    If the value is "mute" or "m" the results of the experiments are not printed
     print("\nUsage: python3 h_t_simulation.py <m> <n> <mute_output>")
     print("  m is the number of coin flips in each experiment")
     print("  n is the number of coin flip experiments to run")
-    print("    If n is set to 1 the results of the experiment will be graphed unless the output is muted")
-    print("  mute_output can be set to \"mute\" or \"m\" to hide the results of the experiments")
+    print("    If n is set to 1 the winnings will be plotted")
+    print("    If n is greater than 1 the distributions of overall winnings and times in the lead will be plotted")
+    print("  mute_output:    If the value is \"mute\" or \"m\" the results of the experiments will not be plotted")
     sys.exit(1)
 
+######################
 # Coin flip simulation
+######################
 mute_output = len(args) >= 4 and (args[3] == "m" or args[3] == "mute")
 times_in_lead_list = []
 toss_list = []
@@ -81,6 +84,38 @@ for i in range(random_coin_experiment_count):
         if random_coin_experiment_count == 1 and not mute_output:
             toss_list.append(current_winnings)
 
+        if current_winnings > 0 or (current_winnings == 0 and previous_winnings > 0 ):
+            lead += 1
+
+        previous_winnings = current_winnings
+    times_in_lead_list.append(lead)
+
+##################
+# Plotting Results
+##################
+
+# Functions to reformat data for plotting
+ 
+def list_to_frequency_list(recurring_element_list):
+    """
+    Converts a list of numbers into a frequency representation
+
+        Args:
+            recurring_element_list (list): A list
+
+        Returns:
+            dict: A dictionary where the keys are values from number_list and the values are how frequently they appear in number_list
+    """
+    frequency_table = {}
+
+    for elem in recurring_element_list:
+        if elem in frequency_table:
+            frequency_table[elem] += 1
+        else:
+            frequency_table[elem] = 1
+
+    return frequency_table
+
 if random_coin_experiment_count == 0:
     pass
 # n = 1
@@ -94,10 +129,12 @@ elif random_coin_experiment_count == 1:
 # n > 1
 else:
     pyplot.figure()
-
     #Plot figure 1.2
-    pyplot.subplot(211)
-    pyplot.stem(range(len(toss_list)), toss_list)
+    #Plot figure 1.3
+    frequency_data = list_to_frequency_list(times_in_lead_list)
+    pyplot.subplot(212)
+    pyplot.suptitle("Figure 1.3: Distribution of number of times in the lead.")
+    pyplot.stem(frequency_data.keys(), frequency_data.values())
 
     pyplot.show()
 
