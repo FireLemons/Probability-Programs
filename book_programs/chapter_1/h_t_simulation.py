@@ -152,3 +152,8 @@ else: # Several experiments were run
 
     pyplot.show()
 
+print("Winnings List")
+print(winnings_list)
+print()
+print("Times in Lead List")
+print(times_in_lead_list)
