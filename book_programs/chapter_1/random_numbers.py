@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Usage: python3 random_numbers.py <n> 
-# Param n:       The number of random values between 0 and 1 to generate
+#   n:       The number of random values between 0 and 1 to generate
 
 # Example Usage: python3 random_numbers.py 10
 
@@ -26,12 +26,12 @@ except IndexError:
     pass
 except ValueError:
     bad_input = True
-    print("ERROR: Could not convert param n to an integer")
+    print("ERROR: Could not convert n to an integer")
 
 # Argument is negtive
 if 'random_number_count' in globals() and random_number_count < 0:
     bad_input = True
-    print("ERROR: Param n cannot be negative")
+    print("ERROR: n cannot be negative")
 
 # Print usage help when arguments are bad
 if bad_input:

@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 # Usage: python3 de_mere_1.py <n> <mute_output>
-# Param n:              The number of four dice roll experiments to simulate
-# Param mute_output:    If the value is "mute" or "m" the results of the experiments are not printed
+#   n:              The number of four dice roll experiments to simulate
+#   mute_output:    If the value is "mute" or "m" the results of the experiments are not printed
 
 # Example Usage: python3 de_mere_1.py 10
 
@@ -27,12 +27,12 @@ except IndexError:
     pass
 except ValueError:
     bad_input = True
-    print("ERROR: Could not convert param n to an integer")
+    print("ERROR: Could not convert n to an integer")
 
 # Argument is negtive
 if 'random_dice_experiment_count' in globals() and random_dice_experiment_count < 0:
     bad_input = True
-    print("ERROR: Param n cannot be negative")
+    print("ERROR: n cannot be negative")
 
 # Print usage help when arguments are bad
 if bad_input:
