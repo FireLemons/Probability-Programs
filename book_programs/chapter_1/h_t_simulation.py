@@ -143,7 +143,7 @@ else:
     frequency_data = number_list_to_frequency_list(times_in_lead_list)
     pyplot.subplot(212)
     pyplot.suptitle("Figure 1.3: Distribution of number of times in the lead.")
-    pyplot.stem(frequency_data.keys(), frequency_data.values())
+    pyplot.stem(frequency_data.keys(), frequency_data.values(), use_line_collection=True)
 
     pyplot.show()
 
