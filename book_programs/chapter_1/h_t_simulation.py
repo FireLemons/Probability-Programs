@@ -66,6 +66,7 @@ if bad_input:
 # Coin flip simulation
 ######################
 mute_output = len(args) >= 4 and (args[3] == "m" or args[3] == "mute")
+
 times_in_lead_list = []
 toss_list = []
 winnings_list = []
@@ -89,6 +90,7 @@ for i in range(random_coin_experiment_count):
 
         previous_winnings = current_winnings
     times_in_lead_list.append(lead)
+    winnings_list.append(current_winnings)
 
 ##################
 # Plotting Results
@@ -119,31 +121,34 @@ def number_list_to_frequency_list(recurring_number_list):
 
     unique_elements = frequency_table.keys()
 
+    # Check for non numeric values
     for elem in unique_elements:
         if not(isinstance(elem, float) or isinstance(elem, int)):
             raise TypeError("ERROR: An element of recurring_number_list was not numeric")
 
     return frequency_table
 
-if random_coin_experiment_count == 0:
+# Generate plots
+if random_coin_experiment_count == 0 or mute_output: # No experiments were run or the output was muted
     pass
-# n = 1
-elif random_coin_experiment_count == 1:
+elif random_coin_experiment_count == 1: # One experiment was run
     #Plot figure 1.1
     pyplot.plot(range(len(toss_list)), toss_list)
     pyplot.suptitle("1.1 Winnings in " + str(coin_flip_count) + " plays of heads or tails")
     pyplot.xlabel("coin flips")
     pyplot.ylabel("winnings")
     pyplot.show()
-# n > 1
-else:
-    pyplot.figure()
+
+else: # Several experiments were run
+    pyplot.figure(tight_layout=True)
     #Plot figure 1.2
+    winnings_frequency_data = number_list_to_frequency_list(winnings_list)
+    pyplot.subplot(211, title="Figure 1.2: Distribution of Winnings.")
+    pyplot.stem(winnings_frequency_data.keys(), winnings_frequency_data.values(), use_line_collection=True)
     #Plot figure 1.3
-    frequency_data = number_list_to_frequency_list(times_in_lead_list)
-    pyplot.subplot(212)
-    pyplot.suptitle("Figure 1.3: Distribution of number of times in the lead.")
-    pyplot.stem(frequency_data.keys(), frequency_data.values(), use_line_collection=True)
+    times_in_lead_frequency_data = number_list_to_frequency_list(times_in_lead_list)
+    pyplot.subplot(212, title="Figure 1.3: Distribution of number of times in the lead.")
+    pyplot.stem(times_in_lead_frequency_data.keys(), times_in_lead_frequency_data.values(), use_line_collection=True)
 
     pyplot.show()
 
