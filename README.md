@@ -17,12 +17,21 @@ Clone the repo
 Install the project dependencies  
 `cd Probability-Programs`  
 `pipenv install`  
+**this may take several minutes**
+
+Install tkinter to be able to display graphs
+`sudo apt install python3-tk`
 
 ### Windows  
 Help wanted  
   
 ## Running Programs  
-TBA  
+run `pipenv shell` in the project folder to start a subshell with all the dependencies loaded  
+  
+In the subshell `python3 name_of_program.py` will run a program.  
+Most programs require arguments(user input usually a number).  
+If the arguments are erroneous a usage hint will be printed.  
+The same usage hint is also at the top of each program file.
 
 ## Contributing  
 This repo aims to port the wolfram mathematica programs found [here](http://www.dartmouth.edu/~chance/teaching_aids/books_articles/probability_book/BookAlgorithms.html) to python.  
