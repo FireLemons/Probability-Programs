@@ -11,7 +11,9 @@ import sys
 
 args = sys.argv
 
-# Error checking
+#####################
+# User Input Handling
+#####################
 bad_input = False
 
 # No arguments
@@ -41,6 +43,9 @@ if bad_input:
     print("  mute_output can be set to \"mute\" or \"m\" to hide the results of the experiments")
     sys.exit(1)
 
+######################
+# Coin Flip Simulation
+######################
 headsCount = 0
 results = ""
 
@@ -51,6 +56,9 @@ for i in range(random_coin_toss_count):
     else:
         results += "T"
 
+##########################
+# Print Experiment Results
+##########################
 if not(len(args) >= 3 and (args[2] == "m" or args[2] == "mute")):
     print(results)
     print()

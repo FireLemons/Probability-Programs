@@ -12,7 +12,9 @@ import sys
 
 args = sys.argv
 
-# Error checking
+#####################
+# User Input Handling
+#####################
 bad_input = False
 
 # Less than 2 arguments
@@ -55,6 +57,9 @@ if bad_input:
     print("  mute_output can be set to \"mute\" or \"m\" to hide the results of the experiments")
     sys.exit(1)
 
+######################
+# Dice Roll Experiment
+######################
 mute_output = len(args) >= 4 and (args[3] == "m" or args[3] == "mute")
 successCount = 0
 
@@ -72,5 +77,8 @@ for i in range(random_dice_experiment_count):
     except ValueError:
         pass
 
+##########################
+# Print Experiment Results
+##########################
 print("Number of successes: ", successCount)
 print("Proportion of successes: ", successCount/random_dice_experiment_count)

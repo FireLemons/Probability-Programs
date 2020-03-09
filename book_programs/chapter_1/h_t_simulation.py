@@ -15,9 +15,9 @@ import sys
 
 args = sys.argv
 
-################
-# Error checking
-################
+#####################
+# User Input Handling
+#####################
 bad_input = False
 
 # Less than 2 arguments

@@ -10,7 +10,9 @@ import sys
 
 args = sys.argv
 
-# Error checking
+#####################
+# User Input Handling
+#####################
 bad_input = False
 
 # No arguments
@@ -39,5 +41,8 @@ if bad_input:
     print("  n is the number of random values between 0 and 1 to generate")
     sys.exit(1)
 
+###################################
+# Generate and Print Random Numbers
+###################################
 for i in range(random_number_count):
     print(random.uniform(0, 1))
