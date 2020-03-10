@@ -39,6 +39,7 @@ if 'random_number_count' in globals() and random_number_count < 0:
 if bad_input:
     print("\nUsage: python3 random_numbers.py <n>")
     print("  n is the number of random values between 0 and 1 to generate")
+    print("\nExample Usage: python3 random_numbers.py 10")
     sys.exit(1)
 
 ###################################

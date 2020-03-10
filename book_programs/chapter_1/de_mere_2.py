@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
 # Usage: python3 de_mere_2.py <m> <n> <mute_output>
-#   m:              The number of times to roll a pair of dice in each experiment
-#   n:              The number of double dice roll experiments to simulate
-#   mute_output:    If the value is "mute" or "m" the results of the experiments are not printed
+#   m:                      The number of times to roll a pair of dice in each experiment
+#   n:                      The number of double dice roll experiments to simulate
+#   mute_output(optional):  If the value is "mute" or "m" the results of the experiments are not printed
 
 # Example Usage: python3 de_mere_2.py 10 24
 
@@ -54,7 +54,8 @@ if bad_input:
     print("\nUsage: python3 de_mere_2.py <m> <n> <mute_output>")
     print("  m is the number of times to roll a pair of dice in each experiment")
     print("  n is the number of double dice roll experiments to simulate")
-    print("  mute_output can be set to \"mute\" or \"m\" to hide the results of the experiments")
+    print("  mute_output(optional) can be set to \"mute\" or \"m\" to hide the results of the experiments")
+    print("\nExample Usage: python3 de_mere_2.py 10 24")
     sys.exit(1)
 
 ######################

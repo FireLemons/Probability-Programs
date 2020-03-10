@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 
 # Usage: python3 de_mere_2.py <m> <n> <mute_output>
-#   m:              The number of coin flips in each experiment
-#   n:              The number of coin flip experiments to run
-#                       If n is set to 1 the winnings will be plotted
-#                       If n is greater than 1 the distributions of overall winnings and times in the lead will be plotted
-#   mute_output:    If the value is "mute" or "m" the results of the experiments will not be plotted
+#   m:                      The number of coin flips in each experiment
+#   n:                      The number of coin flip experiments to run
+#                               If n is set to 1 the winnings will be plotted
+#                               If n is greater than 1 the distributions of overall winnings and times in the lead will be plotted
+#   mute_output(optional):  If the value is "mute" or "m" the results of the experiments will not be plotted
 
-# Example Usage: python3 h_t_simulation.py
+# Example Usage: python3 h_t_simulation.py 40 1
 
 import matplotlib.pyplot as pyplot
 import random
@@ -59,7 +59,8 @@ if bad_input:
     print("  n is the number of coin flip experiments to run")
     print("    If n is set to 1 the winnings will be plotted")
     print("    If n is greater than 1 the distributions of overall winnings and times in the lead will be plotted")
-    print("  mute_output:    If the value is \"mute\" or \"m\" the results of the experiments will not be plotted")
+    print("  mute_output(optional): If the value is \"mute\" or \"m\" the results of the experiments will not be plotted")
+    print("\nExample Usage: python3 h_t_simulation.py 40 1")
     sys.exit(1)
 
 ######################
