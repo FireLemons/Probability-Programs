@@ -40,7 +40,7 @@ if 'horse_race_count' in globals() and horse_race_count < 0:
 if bad_input:
     print("\nUsage: python3 horse_race.py <n> <mute_output>")
     print("  n is the number of horse races to simulate")
-    print("  mute_output(optional) can be set to \"mute\" or \"m\" to hide the results of the experiments")
+    print("  mute_output(optional) can be set to \"mute\" or \"m\" to hide the results of individual experiments")
     print("\nExample Usage: python3 horse_race.py 10")
     sys.exit(1)
 

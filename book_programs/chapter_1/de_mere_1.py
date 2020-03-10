@@ -2,7 +2,7 @@
 
 # Usage: python3 de_mere_1.py <n> <mute_output>
 #   n:                      The number of four dice roll experiments to simulate
-#   mute_output(optional):  If the value is "mute" or "m" the results of the experiments are not printed
+#   mute_output(optional):  If the value is "mute" or "m" the results of individual experiments are not printed
 
 # Example Usage: python3 de_mere_1.py 10
 
@@ -40,7 +40,7 @@ if 'random_dice_experiment_count' in globals() and random_dice_experiment_count 
 if bad_input:
     print("\nUsage: python3 de_mere_1.py <n> <mute_output>")
     print("  n is the number of four dice roll experiments to simulate")
-    print("  mute_output(optional) can be set to \"mute\" or \"m\" to hide the results of the experiments")
+    print("  mute_output(optional) can be set to \"mute\" or \"m\" to hide the results of indivdual experiments")
     print("\nExample Usage: python3 de_mere_1.py 10")
     sys.exit(1)
 

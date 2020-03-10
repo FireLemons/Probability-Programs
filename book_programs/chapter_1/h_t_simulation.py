@@ -5,7 +5,7 @@
 #   n:                      The number of coin flip experiments to run
 #                               If n is set to 1 the winnings will be plotted
 #                               If n is greater than 1 the distributions of overall winnings and times in the lead will be plotted
-#   mute_output(optional):  If the value is "mute" or "m" the results of the experiments will not be plotted
+#   mute_output(optional):  If the value is "mute" or "m" the results of individual experiments will not be plotted
 
 # Example Usage: python3 h_t_simulation.py 40 1
 
@@ -59,7 +59,7 @@ if bad_input:
     print("  n is the number of coin flip experiments to run")
     print("    If n is set to 1 the winnings will be plotted")
     print("    If n is greater than 1 the distributions of overall winnings and times in the lead will be plotted")
-    print("  mute_output(optional): If the value is \"mute\" or \"m\" the results of the experiments will not be plotted")
+    print("  mute_output(optional): If the value is \"mute\" or \"m\" the results of individual experiments will not be plotted")
     print("\nExample Usage: python3 h_t_simulation.py 40 1")
     sys.exit(1)
 
