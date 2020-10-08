@@ -1,0 +1,410 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     10601,        331]*)
+(*NotebookOutlinePosition[     11741,        367]*)
+(*  CellTagsIndexPosition[     11697,        363]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[TextData[StyleBox[
+"PROGRAM:  AbsorbingChain\nCALLING SEQUENCE:  AbsorbingChain[P, stateslist, \
+print]\nPARAMETERS:\n     P - a Markov chain transition matrix\n     \
+stateslist - a list of values, with Length[stateslist] = Length[P]\n     \
+print - a Boolean variable (True or False)\nSYNOPSIS:\n     -  This program \
+takes as its parameters P, a Markov chain transition matrix, and\n        \
+stateslist, the list of possible states in the Markov chain, and finds and \
+returns the\n        matrices Q, R, N, B, and vector t, as defined in the \
+book.   If print = True, then the\n        program also displays these \
+matrices and vector, with rows and columns\n        labeled.\n    -  Note:  \
+this program requires the program \"LabelMatrix[M, rowlabels,\n       \
+columnlabels]\" be initialized.\n   RETURN VALUES:\n        -  the list {Q, \
+R, N, t, B}\n  LOCATION:\n       Folder:  Chapter 11\n       File:       \
+\"AbsorbingChain.Chpt11.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[AbsorbingChain];
+AbsorbingChain[P_, stateslist_, print_] :=
+Block[{Absorb = {}, Trans = {}, 
+       abslist = {}, translist = {},temp,
+       Absorb2 = {}, Trans2 = {},
+       r, s, Q, Q2, R, R2, N, N2, t, t2, B, B2
+      },
+      For[i = 1, i <= Length[P], i++,
+          If[MemberQ[P[[i]], 1],
+             If[print,
+                abslist = Append[abslist, 
+                                 stateslist[[i]]
+                                ]
+               ];
+             Absorb = Append[Absorb, P[[i]]],
+             If[print,
+                translist = Append[translist, 
+                                   stateslist[[i]]
+                                  ]
+               ];
+             Trans = Append[Trans, P[[i]]]
+            ]
+         ];
+      temp = Transpose[Join[Trans, Absorb]];
+      For[i = 1, i <= Length[temp], i++,
+          If[MemberQ[temp[[i]], 1],
+             Absorb2 = Append[Absorb2, temp[[i]]],
+             Trans2 = Append[Trans2, temp[[i]]]
+            ]
+         ];
+      temp = Transpose[Join[Trans2, Absorb2]];
+      r = Length[Absorb2]; s = Length[P] - r;
+      Q = Take[temp, s]; 
+      R = Take[temp, s];
+      For[i = 1, i <= s, i++,
+          Q[[i]] = Drop[Q[[i]], -r];
+          R[[i]] = Drop[R[[i]], s]
+         ];
+      N = Inverse[IdentityMatrix[s] - Q];
+      t = N.Table[1, {i, 1, s}];
+      B = N.R;
+      If[print,
+         Print[\"Matrix Q:\"];
+         Print[LabelMatrix[Q, translist, translist]];
+         Print[\"  \"];  Print[\"  \"];
+         Print[\"Matrix R:\"];
+         Print[LabelMatrix[R, translist, abslist]];
+         Print[\"  \"];  Print[\"  \"];
+         Print[\"Fundamental Matrix N:\"];
+         Print[LabelMatrix[N, translist, translist]];
+         Print[\"  \"];  Print[\"  \"];
+         Print[\"Times to absorption t:\"];
+         Print[Prepend[{t}, translist]//MatrixForm];
+         Print[\"  \"];  Print[\"  \"];
+         Print[\"Absorption probabilities B:\"];
+         Print[LabelMatrix[B, translist, abslist]]
+        ];
+      Return[{Q, R, N, t, B}]
+      ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+AbsorbingChain[{{1,0,0,0,0},{.5,0,.5,0,0},
+                {0,.5,0,.5,0}, {0,0,.5,0,.5},
+                {0,0,0,0,1}},
+                {0,1,2,3,4}, True
+              ]\
+\>", "Input",
+  AspectRatioFixed->True],
+
+Cell[BoxData[
+    \("Matrix Q:"\)], "Print"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", GridBox[{
+            {\(" "\), "1", "2", "3"},
+            {"1", "0", 
+              StyleBox["0.5`",
+                StyleBoxAutoDelete->True,
+                PrintPrecision->1], "0"},
+            {"2", 
+              StyleBox["0.5`",
+                StyleBoxAutoDelete->True,
+                PrintPrecision->1], "0", 
+              StyleBox["0.5`",
+                StyleBoxAutoDelete->True,
+                PrintPrecision->1]},
+            {"3", "0", 
+              StyleBox["0.5`",
+                StyleBoxAutoDelete->True,
+                PrintPrecision->1], "0"}
+            }], ")"}],
+      (MatrixForm[ #]&)]], "Print"],
+
+Cell[BoxData[
+    \("  "\)], "Print"],
+
+Cell[BoxData[
+    \("  "\)], "Print"],
+
+Cell[BoxData[
+    \("Matrix R:"\)], "Print"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", GridBox[{
+            {\(" "\), "0", "4"},
+            {"1", 
+              StyleBox["0.5`",
+                StyleBoxAutoDelete->True,
+                PrintPrecision->1], "0"},
+            {"2", "0", "0"},
+            {"3", "0", 
+              StyleBox["0.5`",
+                StyleBoxAutoDelete->True,
+                PrintPrecision->1]}
+            }], ")"}],
+      (MatrixForm[ #]&)]], "Print"],
+
+Cell[BoxData[
+    \("  "\)], "Print"],
+
+Cell[BoxData[
+    \("  "\)], "Print"],
+
+Cell[BoxData[
+    \("Fundamental Matrix N:"\)], "Print"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", GridBox[{
+            {\(" "\), "1", "2", "3"},
+            {"1", "1.5`", "1.`", "0.500000000000000000043`"},
+            {"2", "1.`", "2.`", "1.0000000000000000001`"},
+           
+             {"3", "0.500000000000000000043`", "1.0000000000000000001`", 
+              "1.50000000000000000008`"}
+            }], ")"}],
+      (MatrixForm[ #]&)]], "Print"],
+
+Cell[BoxData[
+    \("  "\)], "Print"],
+
+Cell[BoxData[
+    \("  "\)], "Print"],
+
+Cell[BoxData[
+    \("Times to absorption t:"\)], "Print"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", GridBox[{
+            {"1", "2", "3"},
+            {"3.`", "4.`", "3.00000000000000000043`"}
+            }], ")"}],
+      (MatrixForm[ #]&)]], "Print"],
+
+Cell[BoxData[
+    \("  "\)], "Print"],
+
+Cell[BoxData[
+    \("  "\)], "Print"],
+
+Cell[BoxData[
+    \("Absorption probabilities B:"\)], "Print"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", GridBox[{
+            {\(" "\), "0", "4"},
+            {"1", "0.75`", "0.250000000000000000021`"},
+            {"2", "0.5`", "0.500000000000000000043`"},
+            {"3", "0.250000000000000000021`", "0.750000000000000000043`"}
+            }], ")"}],
+      (MatrixForm[ #]&)]], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{
+            RowBox[{"{", 
+              RowBox[{"0", ",", 
+                StyleBox["0.5`",
+                  StyleBoxAutoDelete->True,
+                  PrintPrecision->1], ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+              RowBox[{
+                StyleBox["0.5`",
+                  StyleBoxAutoDelete->True,
+                  PrintPrecision->1], ",", "0", ",", 
+                StyleBox["0.5`",
+                  StyleBoxAutoDelete->True,
+                  PrintPrecision->1]}], "}"}], ",", 
+            RowBox[{"{", 
+              RowBox[{"0", ",", 
+                StyleBox["0.5`",
+                  StyleBoxAutoDelete->True,
+                  PrintPrecision->1], ",", "0"}], "}"}]}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{
+            RowBox[{"{", 
+              RowBox[{
+                StyleBox["0.5`",
+                  StyleBoxAutoDelete->True,
+                  PrintPrecision->1], ",", "0"}], "}"}], ",", \({0, 0}\), ",",
+             
+            RowBox[{"{", 
+              RowBox[{"0", ",", 
+                StyleBox["0.5`",
+                  StyleBoxAutoDelete->True,
+                  PrintPrecision->1]}], "}"}]}], "}"}], ",", 
+        \({{1.5`, 1.`, 0.500000000000000000043`}, {1.`, 2.`, 
+            1.0000000000000000001`}, {0.500000000000000000043`, 
+            1.0000000000000000001`, 1.50000000000000000008`}}\), ",", 
+        \({3.`, 4.`, 3.00000000000000000043`}\), ",", 
+        \({{0.75`, 0.250000000000000000021`}, {0.5`, 
+            0.500000000000000000043`}, {0.250000000000000000021`, 
+            0.750000000000000000043`}}\)}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[
+"AbsorbingChain[{{1,0,0,0,0,0},{.5,0,.5,0,0,0},\n                \
+{0,.5,0,.5,0,0}, {0,0,.5,0,.5,0},\n                \
+{0,0,0,.5,0,.5},{0,0,0,0,0,1}},\n                {0,1,2,3,4,5}, False\n       \
+       ]"], "Input",
+  AspectRatioFixed->True],
+
+Cell[OutputFormData[
+"\<\
+{{{0, 0.5, 0, 0}, {0.5, 0, 0.5, 0}, {0, 0.5, 0, 0.5}, 
+   {0, 0, 0.5, 0}}, {{0.5, 0}, {0, 0}, {0, 0}, {0, 0.5}}, 
+  {{1.6, 1.2, 0.7999999999999999, 0.4}, 
+   {1.2, 2.399999999999999, 1.6, 0.8}, 
+   {0.7999999999999999, 1.6, 2.399999999999999, 1.2}, 
+   {0.3999999999999999, 0.7999999999999999, 1.2, 1.6}}, 
+  {4., 6., 6., 4.}, {{0.8, 0.2}, {0.5999999999999999, 0.4}, 
+   {0.3999999999999999, 0.6}, {0.2, 0.8}}}\
+\>", 
+"\<\
+{{{0, 0.5, 0, 0}, {0.5, 0, 0.5, 0}, {0, 0.5, 0, 0.5}, 
+ 
+   {0, 0, 0.5, 0}}, {{0.5, 0}, {0, 0}, {0, 0}, {0, 0.5}}, 
+ 
+  {{1.6, 1.2, 0.8, 0.4}, {1.2, 2.4, 1.6, 0.8}, 
+ 
+   {0.8, 1.6, 2.4, 1.2}, {0.4, 0.8, 1.2, 1.6}}, 
+ 
+  {4., 6., 6., 4.}, {{0.8, 0.2}, {0.6, 0.4}, {0.4, 0.6}, 
+ 
+   {0.2, 0.8}}}\
+\>"], "Output",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+}, Open  ]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 832}, {0, 604}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{150, Automatic}, {Automatic, 82}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1709, 49, 1047, 16, 337, "Text"],
+Cell[2759, 67, 2119, 62, 838, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[4903, 133, 219, 7, 82, "Input"],
+Cell[5125, 142, 44, 1, 22, "Print"],
+Cell[5172, 145, 672, 20, 68, "Print"],
+Cell[5847, 167, 37, 1, 22, "Print"],
+Cell[5887, 170, 37, 1, 22, "Print"],
+Cell[5927, 173, 44, 1, 22, "Print"],
+Cell[5974, 176, 442, 14, 68, "Print"],
+Cell[6419, 192, 37, 1, 22, "Print"],
+Cell[6459, 195, 37, 1, 22, "Print"],
+Cell[6499, 198, 56, 1, 22, "Print"],
+Cell[6558, 201, 399, 10, 68, "Print"],
+Cell[6960, 213, 37, 1, 22, "Print"],
+Cell[7000, 216, 37, 1, 22, "Print"],
+Cell[7040, 219, 57, 1, 22, "Print"],
+Cell[7100, 222, 196, 6, 36, "Print"],
+Cell[7299, 230, 37, 1, 22, "Print"],
+Cell[7339, 233, 37, 1, 22, "Print"],
+Cell[7379, 236, 62, 1, 22, "Print"],
+Cell[7444, 239, 331, 8, 68, "Print"],
+Cell[7778, 249, 1698, 42, 71, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9513, 296, 261, 5, 82, "Input"],
+Cell[9777, 303, 808, 25, 95, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

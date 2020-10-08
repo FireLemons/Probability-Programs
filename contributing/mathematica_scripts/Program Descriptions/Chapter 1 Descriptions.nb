@@ -1,0 +1,183 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7520,        134]*)
+(*NotebookOutlinePosition[      8628,        171]*)
+(*  CellTagsIndexPosition[      8584,        167]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox["CHAPTER 1 PROGRAM DESCRIPTIONS",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\n\n\nPROGRAM:  CoinTosses\nCALLING SEQUENCE:  CoinTosses[n, print]\n\
+PARAMETERS:  \n     n - an integer\n     print - a Boolean variable (True or \
+False)\nSYNOPSIS:   \n     - This program simulates n tosses of a fair coin, \
+and prints the proportion of tosses\n        that come up heads.  If print = \
+True,  then the outcomes of the tosses (H/T) are\n        also printed.\n\
+RETURNED VALUES:\n     -  none         \nLOCATION:\n     Folder:  Chapter 1\n \
+    File:       \"CoinTosses.Chpt1.mat\"\n     \n         \t\t                \
+   \nPROGRAM:  DeMere1\nCALLING SEQUENCE:   DeMere1[n, print] \nPARAMETERS: \n\
+     n - an integer\n     print - a Boolean variable (True or False)\n\
+SYNOPSIS:   \n     - This program simulates 4 rolls of a die, and determines \
+whether a six has\n        appeared (a \"success\").  It repeats this \
+experiment n times, and prints the number\n        of trials that resulted in \
+a success.  It also prints the proportion of trials that\n        resulted in \
+a success.   Finally, if print = True, then the rolls are printed out.\n \
+RETURNED VALUES:\n     -  none\nLOCATION:\n     Folder:  Chapter 1\n     \
+File:       \"DeMere1&2.Chpt1.mat\"\n        \n \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\
+\t\t\t\t\t\t\t\t\t\t\t\t\t  \nPROGRAM:  DeMere2\nCALLING SEQUENCE:   \
+DeMere2[n, m, print]\nPARAMETERS:  \n     n, m - integers\n\t\t   print - a \
+Boolean variable (True or False)\nSYNOPSIS:   \n     - This program simulates \
+m rolls of two dice, and determines whether a double 6 \t\n       has \
+appeared (a \"success\").  It repeats this experiment n times, and prints the\
+\n       number of trials that resulted in a success.  It also prints the \
+proportion of trials\n       that resulted in a success.   Finally, if print \
+= True, then the rolls are printed out.\nRETURNED VALUES:\n     -  none\n\
+LOCAT ION:\n     Folder:  Chapter 1\n     File:       \"DeMere1&2.Chpt1.mat\"\
+\n     \n     \nPROGRAM:  GeneralSimulation\nCALLING SEQUENCE:  \
+GeneralSimulation[n, plist, m, print]\nPARAMETERS:  \n     n, m - integers\n  \
+   plist - a probability list\n     print - a Boolean variable (True or \
+False)\nSYNOPSIS:\n     -  This program simulates a general experiment in \
+which the outcomes 1, 2, ..., n\n        occur with probabilties p(1), p(2), \
+..., p(n).  These probabilities are entered as a\n        list in plist.  The \
+experiment is repeated m times, and the observed frequencies of\n        the \
+outcomes are printed.  If print = True, the outcomes are printed, and spike\n \
+       graphs of the observed data frequencies and  plist data frequencies \
+are\n        displayed on the same set of axes;  the observed data spikes are \
+topped with\n        blue dots, and the plist data spikes are topped with \
+red.  Finally, the program\n        returns a list of the n observed \
+frequencies.\n      -  Note:  this program requires the programs \
+\"SimulateDiscreteVariable[plist]\" and\n         \
+\"SpikegraphWithDots[distributionlist, xmin, xmax, color, print]\" be \
+initialized.\nRETURNED VALUES:\n     -  a list of the n observed frequencies\n\
+LOCATION:\n     Folder:  Chapter 1\n     File:       \
+\"GeneralSimulation.Chpt1.mat\"   \n     \n     \nPROGRAM:  HorseRace\n\
+CALLING SEQUENCE:  HorseRace[n]\nPARAMETERS:  \n     n - an integer\n\
+SYNOPSIS:\n     - This program simulates n of the horse races described in \
+Chapter 1.  The\n       program prints each race winner, and returns a list \
+containing the percentage of\n       times each horse won. \nRETURNED VALUES:\
+\n     -  a list containing the number of times each horse won\nLOCATION:\n   \
+  Folder:  Chapter 1\n     File:       \"HorseRace.Chpt1.mat\"\n     \n     \n\
+FUNCTION:  HTSimulation\nCALLING SEQUENCE:  HTSimulation[n, m, print]\n\
+PARAMETERS:  \n     n, m - integers\n     print - a Boolean variable (True or \
+False)\n SYNOPSIS:\n     -  This program simulates an experiment in which a \
+fair coin is tossed m times. \n        The experiment is repeated n times.  \
+The program records the \"winnings\" in each\n        experiment, where the \
+winnings are defined to be the number of heads minus\n        the number of \
+tails.  It also keeps track of thenumber of times the winnings are\n        \
+\"positive\" in the course of an experiment (we count as \"positive\" a time \
+at which\n        the winnings are 0 but the previous winnings are positive). \
+  The program returns\n        a list whose first element is a list of the \
+winnings in each experiment\n        (winningslist), and whose second element \
+is a list of times in the lead in each\n        experiment (timesinleadlist). \
+ If print = True and n = 1, then a graph of the game\n        is displayed.  \
+If print = True and n > 1, then spike graphs of the winningslist\n        and \
+timesinleadlist are displayed. \n     -  Note:  this program requires the \
+program \"Spikegraph[distributionlist, xmin,\n        xmax, print]\" be \
+initialized.\nRETURNED VALUES:\n     -  a list whose first element is a list \
+of the winnings in each experiment, and whose\n        second element is a \
+list of times in the lead in each experiment\nLOCATION:\n     Folder:  \
+Chapter 1\n     File:       \"HTSimulation.Chpt1.mat\"\n     \n     \n\
+PROGRAM:   RandomNumbers\nCALLING SEQUENCE:   RandomNumbers[n] \nPARAMETERS:  \
+\n      n - an integer\nSYNOPSIS: \n      - This program generates and \
+displays n random real numbers between 0  and\n         1.\nRETURNED VALUES:\n\
+      - none\nLOCATION:\n     Folder:  Chapter 1\n     File:       \
+\"RandomNumbers.Chpt1.mat\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{28, Automatic}, {30, Automatic}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 5806, 82, 70, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

@@ -1,0 +1,289 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     14960,        240]*)
+(*NotebookOutlinePosition[     16068,        277]*)
+(*  CellTagsIndexPosition[     16024,        273]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox["IMPORTANT PROGRAMS DESCRIPTIONS",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\n\n\nPROGRAM:  Areabargraph\nCALLING SEQUENCE:  Areabargraph[data, xmin, \
+xmax, k]\nPARAMETERS:\n     data - a list of real numbers\n     xmin, xmax - \
+real numbers\n     k - an integer\nSYNOPSIS:\n     -  This program divides \
+the interval [xmin, xmax] on the x-axis into k subintervals\n        of equal \
+length.  Then, on each subinterval, a box is erected whose area is\n        \
+equal to the percentage of values in the list data which are in the \
+subinterval.\n        Important note:  only data values which fall in the \
+user-defined interval will be\n        included in\tthe bar graph.  If not \
+all data values are included, a warning is\n        displayed.  I f you wish \
+to be sure of including ",
+    FontFamily->"Helvetica"],
+  StyleBox["all",
+    FontFamily->"Helvetica",
+    FontVariations->{"Underline"->True}],
+  StyleBox[
+  " data values in the graph,\n        choose xmin = Min[data] and xmax = \
+Max[data].   (See also \"Bargraph.\")\nRETURNED VALUES:\n     -  none\n\
+LOCATION:\n     File:  \"Important Programs\"\n         \n         \nPROGRAM: \
+  Bargraph\nCALLING SEQUENCE:  Bargraph[data, xmin, xmax, k]\nPARAMETERS:\n   \
+  data - a list of real numbers\n     xmin, xmax - real numbers\n     k - an \
+integer\nSYNOPSIS:\n     -  This program divides the interval [xmin, xmax] on \
+the x-axis into k subintervals\n        of equal length.  Then, on each \
+subinterval, a box is erected whose height is\n        equal to the \
+percentage of values in the list data which are in the subinterval. \n        \
+Important note:  only data values which fall in the user-defined interval \
+will be\n        included in\tthe bar graph.  If not all data values are \
+included, a warning is\n        displayed.  I f you wish to be sure of \
+including ",
+    FontFamily->"Helvetica"],
+  StyleBox["all",
+    FontFamily->"Helvetica",
+    FontVariations->{"Underline"->True}],
+  StyleBox[
+  " data values in the graph,\n        choose xmin = Min[data] and xmax = \
+Max[data].     (See also \"Areabargraph.\")\nRETURNED VALUES:\n     -  none\n\
+LOCATION:\n     File:  \"Important Programs\"\n     \n     \nPROGRAM:  \
+BetaDensity\nCALLING SEQUENCE:  BetaDensity[alpha, beta, x]\nPARAMETERS:\n    \
+ alpha, beta - real numbers\n     x - an unassigned variable name\nSYNOPSIS:\n\
+     -  This gives the beta density function with parameters alpha and beta.\n\
+     -  Note:  this program requires the package \
+\"Statistics`ContinuousDistributions`\"\n         be loaded in.\nRETURNED \
+VALUES:\n     -  the beta density function with parameters alpha and beta\n\
+LOCATION:\n     Folder:  Chapter 4\n     File:       \"Important Programs\"\n \
+    \n     \nPROGRAM:  Bin\nCALLING SEQUENCE:  Bin[n, p, k]\nPARAMETERS:\n    \
+ n, k - integers\n     p - a real number\nSYNOPSIS:\n     -  This function \
+returns the probability of exactly k successes in n Bernoulli trials\n        \
+  with probability of success p on each experiment.\nRETURNED VALUES:\n     - \
+ the probability of exactly k successes in n Bernoulli trials with \
+probability of\n        success p on each experiment\nLOCATION:\n     File:  \
+\"Important Programs\"\n        \nPROGRAM:  ConsolidateList\nCALLING \
+SEQUENCE:  ConsolidateList[inputlist]\nPARAMETERS:\n     inputlist - a list \
+of ordered pairs of real numbers\nSYNOPSIS:\n     -  This program takes as \
+its input a list of ordered pairs, which is assumed to be\n        sorted in \
+lexicographic order, and produces a list of ordered pairs in which each\n     \
+   pair's second element is the sum of all second elements of inputlist \
+ordered pairs\n        with the same first coordinate.\n    -  Example:  \
+ConsolidateList[{{1,1}, {1,5}, {2,3}, {5,6}, {5,2}}] = {{1,6}, {2,3}, {5,8}} \
+.\nRETURNED VALUES:\n     -  the list described above\nLOCATION:\n       \
+File:       \"ImportantPrograms\"\n  \nPROGRAM:  ContinuousMean\nCALLING \
+SEQUENCE:  ContinuousMean[f, a, b]\nPARAMETERS:\n     f -  the name of a \
+pre-defined function of one variable\n     a, b - real numbers (or +/- \
+Infinity)\nSYNOPSIS:\n     -  This program calculates the mean of density \
+function f on [a, b].\n     -  Keep in mind that the function f[x] should be \
+defined before this program is\n        called, and  then the name of the \
+function, namely f (or some other name, like\n        Cos) should be given to \
+this program.  The expression for the function (such as\n        x^2, for \
+example) should not  be given as a parameter.\nRETURNED VALUES:\n     -  \
+mean(f)\nLOCATION:\n     File:  \"Important Programs\"\n     \n       \n\
+PROGRAM:  ContinuousVariance\nCALLING SEQUENCE:  ContinuousVariance[f, a, b]\n\
+PARAMETERS:\n     f -  the name of a pre-defined function of one variable\n   \
+  a, b - real numbers (or +/- Infinity)\nSYNOPSIS:\n     -  This program \
+calculates the variance of density function f on [a, b].\n     -  Keep in \
+mind that the function f[x] should be defined before this program is\n        \
+called, and  then the name of the function, namely f (or some other name, \
+like\n        Cos) should be given to this program.  The expression for the \
+function (such as\n        x^2, for example) should not  be given as a \
+parameter.\n     -  Note:  this program requires the program \
+\"ContinuousMean[f, a, b]\" be initialized.\nRETURNED VALUES:\n     -  \
+variance(f)\nLOCATION:\n     File:  \"Important Programs\"\n     \nPROGRAM:  \
+Convolution\nCALLING SEQUENCE:  Convolution[distributionlist1, \
+distributionlist2]\nPARAMETERS:\n     distributionlist1, distributionlist2 - \
+distribution lists\nSYNOPSIS:\n     -  This program returns the convolution \
+of the two discrete distributions given in\n        distributionlist1 and \
+distributionlist2.\n     -  Note:  this program requires the program \
+\"ConsolidateList[inputlist]\" be\n        initialized.\nRETURNED VALUES:\n   \
+  -  the convolution of the two distributions in distributionlist1 and \
+distributionlist2\nLOCATION:\n     File:      \"ImportantPrograms\"\n     \n\
+PROGRAM:  DiscreteMean\nCALLING SEQUENCE:  DiscreteMean[distributionlist]\n\
+PARAMETERS:\n     distributionlist - a distribution list\nSYNOPSIS:\n     -  \
+This program returns the mean of the distribution given in distributionlist.\n\
+RETURNED VALUES:\n     -  the mean of the distribution given in \
+distributionlist\nLOCATION:\n     File:  \"Important Programs\"\n     \n     \
+\nPROGRAM:  DiscreteVariance\nCALLING SEQUENCE:  \
+DiscreteVariance[distributionlist]\nPARAMETERS:\n     distributionlist - a \
+distribution list\nSYNOPSIS:\n     -  This program returns the variance of \
+the distribution given in distributionlist.\n     -  Note:  this program \
+requires the program \"DiscreteMean[distributionlist]\" be\n        \
+initialized.\nRETURNED VALUES:\n     -  the variance of the distribution \
+given in distributionlist\nLOCATION:\n     File:  \"Important Programs\"\n    \
+ \n     \nPROGRAM:  LabelMatrix\nCALLING SEQUENCE:  LabelMatrix[M, rowlabels, \
+columnlabels]\nPARAMETERS:\n     M - a matrix of values\n     rowlabels, \
+columnlabels - lists of values\nSYNOPSIS:\n     -  This program labels M's \
+rows and columns by creating a new matrix, M2, which\n         contains M's \
+labels.  Since M2's rows and columns contain these labels, M2\n         \
+should not be used in performing computations with M; it should be used only \
+\n         for displaying M.\nRETURNED VALUES:\n     -  the labeled matrix \
+M2, in matrix form\nLOCATION:\n     File:  \"Important Programs\"\n\nPROGRAM: \
+ NFoldConvolution\nCALLING SEQUENCE:  NFoldConvolution[distributionlist, n]\n\
+PARAMETERS:\n     distributionlist - a distribution list\nSYNOPSIS:\n     -  \
+This program returns the n-fold convolution distribution of the distribution \
+given\n        in distributionlist.\n     -  Note:  this program requires the \
+program \"Convolution[distributionlist1,\n        distributionlist2]\" be \
+initialized.\nRETURNED VALUES:\n     -  the n-fold convolution of the \
+distribution in distributionlist with itself\nLOCATION:\n      File:      \
+\"ImportantPrograms\"\n\nPROGRAM:  NormalArea\nCALLING SEQUENCE:  \
+NormalArea[a, b]\nPARAMETERS:\n     a, b - real numbers\nSYNOPSIS:\n     -  \
+This function returns the area under the standard normal density curve on [a, \
+b].\n     -  Note:  this function requires the package \
+\"Statistics`ContinuousDistributions`\" be\n        loaded in.\nRETURNED \
+VALUES:\n     -  the area under the standard normal density curve on [a, b]\n\
+LOCATION:\n     File:  \"Important Programs\"\n     \n         \nPROGRAM:  \
+NormalDensity\nCALLING SEQUENCE:  NormalDensity[x, mu, sigma]\nPARAMETERS:\n  \
+   x - an unassigned variable\n     mu, sigma - real numbers\nSYNOPSIS:\n     \
+-  This program returns the normal density function with mean mu and standard\
+\n        deviation sigma.\nRETURNED VALUES:\n     -  the normal density \
+function with mean mu and standard deviation sigma\nLOCATION:\n     File:  \
+\"Important Programs\"\n     \n     \nPROGRAM:  SimulateDiscreteVariable\n\
+CALLING SEQUENCE:  SimulateDiscreteVariable[plist]\nPARAMETERS:\n     plist - \
+a probability list\nSYNOPSIS:\n     -  This program simulates an experiment \
+which has outcomes x_1, x_2, ...,\n        x_(Length[plist]) with \
+probabilties plist[[1]], plist[[2]], ..., plist[[Length[plist]]],\n        \
+respectively.  The program returns i, where x_i is the outcome of the \
+experiment.\nRETURNED VALUES:\n     -  i , where x_i is the outcome of the \
+experiment\nLOCATION:\n     File:  \"Important Programs\"\n     \n     \n\
+PROGRAM:  SpikeData\nCALLING SEQUENCE:  SpikeData[data]\nPARAMETERS:\n     \
+data - a list of real numbers\nSYNOPSIS:\n     -  This program takes a list \
+of data values representing the outcomes of a series of\n         \
+experiments, and returns the dstribution list representing these outcomes and\
+\n         the fraction of the time they occurred (e.g., their experimental \
+probabilities).  The\n         returned list is in a form acceptable as the \
+first parameter being passed to the\n         programs \
+\"Spikegraph[distributionlist, xmin, xmax]\" and \"SpikegraphWithDots\n       \
+  [distributionlist, xmin, xmax, color, print].\"  (See also \"Spikegraph\" \
+and\n         \"SpikegraphWithDots\".)\nRETURNED VALUES:\n     -  a \
+distribution list representing the outcomes, and their probabilities, in data\
+\nLOCATION:\n     File:  \"Important Programs\"\n     \n           \nPROGRAM: \
+ Spikegraph\nCALLING SEQUENCE:  Spikegraph[distributionlist, xmin, xmax, \
+print]\nPARAMETERS:\n     distributionlist - a distribution list\n     xmin, \
+xmax - real numbers\n     print - a Boolean variable (True or False)\n\
+SYNOPSIS:\n     -  This program displays a graph of the distribution of x \
+(where x has the\n        distribution given in distributionlist) by drawing \
+a spike of height p(x) at each x.  If\n        print = True, this graph is \
+displayed.  Otherwise, the display is (for the time being)\n        \
+supressed.   (If the graph has been supressed, to see it at a later time type\
+\n        \"Show[%#, DisplayFunction -> $DisplayFunction]\", where # is the \
+input number\n        of the original call to \"Spikegraph.\")  Important \
+note:  only values of x which fall in\n        the user-defined interval \
+[xmin,  xmax] will be included in the graph.   If not all\n        values of \
+x are included, and print = True, a warning is displayed.  If print = False,\n\
+        no such warning will be given, even if the graph is later displayed.  \
+ (See also\n        \"SpikeData\" and \"SpikegraphWithDots.\")\nRETURNED \
+VALUES:\n     -  none\nLOCATION:\n     File:  \"Important Programs\"\n        \
+\n       \:ffff\nPROGRAM:  SpikegraphWithDots\nCALLING SEQUENCE:  \
+SpikegraphWithDots[distributionlist, xmin, xmax, color, print]\nPARAMETERS:\n \
+    distributionlist - a distribution list\n     xmin, xmax - real numbers\n  \
+   color - a list of 3 color-specification real numbers\n     print - a \
+Boolean variable (True or False)\nSYNOPSIS:\n     -  This program displays a \
+graph of the distribution of x (where x has the\n        distribution given \
+in distributionlist) by drawing a spike of height p(x) at each x,\n        \
+and topping that spike with a dot of color color.  If print = True, this \
+graph is\n        displayed.  Otherwise,  the display is (for the time being) \
+supressed.   (If the\n        graph has been supressed, to see it at a later \
+time type \"Show[%#,\n        DisplayFunction -> $DisplayFunction]\", where # \
+is the input number of the\n        original call to SpikegraphWithDots.)  \
+Important note:  only values of x which fall\n        in the user-defined \
+interval [xmin, xmax] will be included in the graph.   If not all\n        \
+values of x are included, and print = True, a warning is displayed.  If print \
+= False,\n        no such warning will be given, even if the graph is later \
+displayed. \nRETURNED VALUES:\n     -  none\nLOCATION:\n     File:  \
+\"Important Programs\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{44, Automatic}, {Automatic, -2}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 13246, 188, 70, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

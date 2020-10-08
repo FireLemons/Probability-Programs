@@ -1,0 +1,285 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7126,        220]*)
+(*NotebookOutlinePosition[      7966,        247]*)
+(*  CellTagsIndexPosition[      7922,        243]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[TextData[StyleBox[
+"PROGRAM:  FixedVector\nCALLING SEQUENCE:  FixedVector[P, stateslist, print]\n\
+PARAMETERS:\n     P - a Markov chain transition matrix\n     stateslist - a \
+list of values, with Length[stateslist] = Length[P]\n     print - a Boolean \
+variable (True or False)\nSYNOPSIS:\n     -  This program returns the fixed \
+vector w for an ergodic Markov chain with\n        transition matrix P and \
+possible states in stateslist.  If print = True, the program\n        prints \
+out P and w.  This program is in ImportantPrograms.nb.\n     -  Note:  this \
+program requires the program \"LabelMatrix[M, rowlabels,\n        \
+columnlabels]\" be initialized.  (This is also in ImportantPrograms.nb.)\n\
+RETURNED VALUES:\n     -  P's fixed vector w\nLOCATION:\n    File:       \
+\"ImportantPrograms\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"The following commands are examples of how the above procedure is used.",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{
+
+Cell["P = {{.5,.25,.25},{.5,0,.5},{.25,.25,.5}}", "Input",
+  AspectRatioFixed->True],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{
+            StyleBox["0.5`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->1], ",", 
+            StyleBox["0.25`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->2], ",", 
+            StyleBox["0.25`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->2]}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{
+            StyleBox["0.5`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->1], ",", "0", ",", 
+            StyleBox["0.5`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->1]}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{
+            StyleBox["0.25`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->2], ",", 
+            StyleBox["0.25`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->2], ",", 
+            StyleBox["0.5`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->1]}], "}"}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Q = {{0,1,0,0,0},{.25,0,.75,0,0},{0,.5,0,.5,0}, 
+     {0,0,.75,0,.25}, {0,0,0,1,0}}\
+\>", "Input",
+  AspectRatioFixed->True],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{\({0, 1, 0, 0, 0}\), ",", 
+        RowBox[{"{", 
+          RowBox[{
+            StyleBox["0.25`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->2], ",", "0", ",", 
+            StyleBox["0.75`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->2], ",", "0", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"0", ",", 
+            StyleBox["0.5`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->1], ",", "0", ",", 
+            StyleBox["0.5`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->1], ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"0", ",", "0", ",", 
+            StyleBox["0.75`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->2], ",", "0", ",", 
+            StyleBox["0.25`",
+              StyleBoxAutoDelete->True,
+              PrintPrecision->2]}], "}"}], ",", \({0, 0, 0, 1, 0}\)}], "}"}]],
+   "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["FixedVector[Q, {0,1,2,3,4}, True]", "Input",
+  AspectRatioFixed->True],
+
+Cell[BoxData[
+    \("Transition matrix P:"\)], "Print"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", GridBox[{
+            {\(" "\), "0", "1", "2", "3", "4"},
+            {"0", "0", "1", "0", "0", "0"},
+            {"1", 
+              StyleBox["0.25`",
+                StyleBoxAutoDelete->True,
+                PrintPrecision->2], "0", 
+              StyleBox["0.75`",
+                StyleBoxAutoDelete->True,
+                PrintPrecision->2], "0", "0"},
+            {"2", "0", 
+              StyleBox["0.5`",
+                StyleBoxAutoDelete->True,
+                PrintPrecision->1], "0", 
+              StyleBox["0.5`",
+                StyleBoxAutoDelete->True,
+                PrintPrecision->1], "0"},
+            {"3", "0", "0", 
+              StyleBox["0.75`",
+                StyleBoxAutoDelete->True,
+                PrintPrecision->2], "0", 
+              StyleBox["0.25`",
+                StyleBoxAutoDelete->True,
+                PrintPrecision->2]},
+            {"4", "0", "0", "0", "1", "0"}
+            }], ")"}],
+      (MatrixForm[ #]&)]], "Print"],
+
+Cell[BoxData[
+    \("Fixed vector W:"\)], "Print"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", GridBox[{
+            {"0", "1", "2", "3", "4"},
+           
+             {"0.0625000000000000532`", "0.249999999999999777`", 
+              "0.375000000000000044`", "0.25`", "0.0625`"}
+            }], ")"}],
+      (MatrixForm[ #]&)]], "Print"],
+
+Cell[BoxData[
+    \({0.0625000000000000532`, 0.249999999999999777`, 0.375000000000000044`, 
+      0.25`, 0.0625`}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["FixedVector[P, {\"R\",\"N\",\"S\"}, False]", "Input",
+  AspectRatioFixed->True],
+
+Cell[OutputFormData["\<\
+{0.4, 0.2, 0.4}\
+\>", 
+"\<\
+{0.4, 0.2, 0.4}\
+\>"], "Output",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+}, Open  ]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+WindowSize->{520, 365},
+WindowMargins->{{Automatic, 32}, {35, Automatic}},
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1709, 49, 899, 14, 286, "Text"],
+Cell[2611, 65, 183, 4, 31, "Text"],
+
+Cell[CellGroupData[{
+Cell[2819, 73, 84, 1, 26, "Input"],
+Cell[2906, 76, 1096, 32, 26, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4039, 113, 134, 4, 40, "Input"],
+Cell[4176, 119, 1013, 27, 41, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5226, 151, 76, 1, 26, "Input"],
+Cell[5305, 154, 55, 1, 22, "Print"],
+Cell[5363, 157, 1014, 28, 100, "Print"],
+Cell[6380, 187, 50, 1, 22, "Print"],
+Cell[6433, 190, 289, 8, 36, "Print"],
+Cell[6725, 200, 127, 2, 26, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6889, 207, 85, 1, 26, "Input"],
+Cell[6977, 210, 133, 7, 25, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

@@ -1,0 +1,618 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     10923,        547]*)
+(*NotebookOutlinePosition[     12064,        585]*)
+(*  CellTagsIndexPosition[     12020,        581]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[StyleBox[
+"PROGRAM:  A\nCALLING SEQUENCE:  A[n, r]\nPARAMETERS:\n     n, r - integers\n\
+SYNOPSIS:\n     -  This program calculates the Eulerian number A(n, r) (i.e., \
+the number of\n        orderings of {1, 2, ..., n} with r falls).\nRETURNED \
+VALUES:\n     -  the Eulerian number A(n, r)\nLOCATION:\n     Folder:  \
+Chapter 3\n     File:       \"ShuffleCalculations.Chpt3.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[A];\nA[n_, r_] := A[n,r] = r^n - \n   Sum[Binomial[n + r - j, n] \
+A[n,j],{j, 1, r-1}]"], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  VariationDistance\nCALLING SEQUENCE:  VariationDistance[n, k]\n\
+PARAMETERS:\n     n, k - integers\nSYNOPSIS:\n     -  This program calculates \
+the variation distance, v(k), between a process which\n        produces \
+random orderings of n cards,  and the process consisting of\n        one \
+(2^k)-shuffle (or, equivalently, of k successive riffle shuffles) of those \
+cards. \n        The distance will be between 0 and 1: the greater the \
+distance, the less random\n        the orderings produced by the second \
+process.\n     -  Note:  this program requires the program \"A[n, r]\" be \
+initialized.\nRETURNED VALUES:\n     -  v(k)\nLOCATION:\n     Folder:  \
+Chapter 3\n     File:       \"ShuffleCalculations.Chpt3.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[VariationDistance];\nVariationDistance[n_, k_] :=\n   (1/2) Sum[A[n, \
+r]*Abs[(Binomial[2^k + n - r, n]/2^(n k)) - \n                          \
+1/n!],\n             {r, 1, n}]//N"], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData["VariationDistance[100,7]"], "Input",
+  AspectRatioFixed->True],
+
+Cell[OutputFormData["\<\
+0.7473474645967676\
+\>", 
+"\<\
+0.7473474645967676\
+\>"], "Output",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]],
+
+Cell[TextData[{
+  StyleBox[
+  "PROGRAM:  VariationList\nCALLING SEQUENCE:  VariationList[n, m]\n\
+PARAMETERS:\n     n, m - integers\nSYNOPSIS:\n     -  For k = 1 to m, this \
+program calculates and displays the variation distance, v(k),\n        \
+between a process which produces random orderings of n cards,  and the\n      \
+  process consisting of one (2^k)-shuffle of those cards.  It also provides a \
+plot of\n        the points (k, v(k)) for k = 1 to m.  The number n \
+represents the number of cards\n        in the deck.\n    -  Note:  this \
+program requires the program \"VariationDistance[n, k]\" be initialized.\n\
+RETURNED VALUES:\n     -  a list whose i'",
+    FontFamily->"Helvetica"],
+  StyleBox["th",
+    FontFamily->"Helvetica",
+    FontVariations->{"CompatibilityType"->"Superscript"}],
+  StyleBox[
+  " element is {i, v(i)}\nLOCATION:\n     Folder:  Chapter 3\n     File:      \
+ \"ShuffleCalculations.Chpt3.mat\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[VariationList];\nVariationList[n_, m_] := \nBlock[{vlist = {}},\n      \
+Print[\"k               VariationDistance\"];\n      Print[\"         \"];\n  \
+    For[k = 1, k <= m, k++,\n          vlist = Append[vlist, \n               \
+    {k, N[VariationDistance[n, k], 10]}\n                        ];\n         \
+ Print[TableForm[{vlist[[k]]},\n                          TableSpacing -> \
+{0,15}\n                         ]\n               ]\n         ];\n      \
+ListPlot[vlist];\n      Return[vlist]\n     ]"], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData["VariationList[52,20]"], "Input",
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"k               VariationDistance\n         \n1               1.\n2          \
+     1.\n3               1.\n4               0.9999995334\n5               \
+0.9237329294\n6               0.6135495966\n7               0.3340609995\n8   \
+            0.1671586419\n9               0.08542019341\n10               \
+0.04294554892\n11               0.02150237595\n12               0.0107548935\n\
+13               0.005377910105\n14               0.002689012977\n15          \
+     0.001344513729\n16               0.0006722577698\n17               \
+0.000336128998\n18               0.0001680645132\n19               \
+0.00008403225835\n20               0.0000420161294"], "Print",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.0238095 0.047619 0.0147151 0.588604 [
+[(5)] .2619 .01472 0 2 Msboxa
+[(10)] .5 .01472 0 2 Msboxa
+[(15)] .7381 .01472 0 2 Msboxa
+[(20)] .97619 .01472 0 2 Msboxa
+[(0.2)] .01131 .13244 1 0 Msboxa
+[(0.4)] .01131 .25016 1 0 Msboxa
+[(0.6)] .01131 .36788 1 0 Msboxa
+[(0.8)] .01131 .4856 1 0 Msboxa
+[(1)] .01131 .60332 1 0 Msboxa
+[ -0.001 -0.001 0 0 ]
+[ 1.001 .61903 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+p
+.002 w
+.2619 .01472 m
+.2619 .02097 L
+s
+P
+[(5)] .2619 .01472 0 2 Mshowa
+p
+.002 w
+.5 .01472 m
+.5 .02097 L
+s
+P
+[(10)] .5 .01472 0 2 Mshowa
+p
+.002 w
+.7381 .01472 m
+.7381 .02097 L
+s
+P
+[(15)] .7381 .01472 0 2 Mshowa
+p
+.002 w
+.97619 .01472 m
+.97619 .02097 L
+s
+P
+[(20)] .97619 .01472 0 2 Mshowa
+p
+.001 w
+.07143 .01472 m
+.07143 .01847 L
+s
+P
+p
+.001 w
+.11905 .01472 m
+.11905 .01847 L
+s
+P
+p
+.001 w
+.16667 .01472 m
+.16667 .01847 L
+s
+P
+p
+.001 w
+.21429 .01472 m
+.21429 .01847 L
+s
+P
+p
+.001 w
+.30952 .01472 m
+.30952 .01847 L
+s
+P
+p
+.001 w
+.35714 .01472 m
+.35714 .01847 L
+s
+P
+p
+.001 w
+.40476 .01472 m
+.40476 .01847 L
+s
+P
+p
+.001 w
+.45238 .01472 m
+.45238 .01847 L
+s
+P
+p
+.001 w
+.54762 .01472 m
+.54762 .01847 L
+s
+P
+p
+.001 w
+.59524 .01472 m
+.59524 .01847 L
+s
+P
+p
+.001 w
+.64286 .01472 m
+.64286 .01847 L
+s
+P
+p
+.001 w
+.69048 .01472 m
+.69048 .01847 L
+s
+P
+p
+.001 w
+.78571 .01472 m
+.78571 .01847 L
+s
+P
+p
+.001 w
+.83333 .01472 m
+.83333 .01847 L
+s
+P
+p
+.001 w
+.88095 .01472 m
+.88095 .01847 L
+s
+P
+p
+.001 w
+.92857 .01472 m
+.92857 .01847 L
+s
+P
+p
+.002 w
+0 .01472 m
+1 .01472 L
+s
+P
+p
+.002 w
+.02381 .13244 m
+.03006 .13244 L
+s
+P
+[(0.2)] .01131 .13244 1 0 Mshowa
+p
+.002 w
+.02381 .25016 m
+.03006 .25016 L
+s
+P
+[(0.4)] .01131 .25016 1 0 Mshowa
+p
+.002 w
+.02381 .36788 m
+.03006 .36788 L
+s
+P
+[(0.6)] .01131 .36788 1 0 Mshowa
+p
+.002 w
+.02381 .4856 m
+.03006 .4856 L
+s
+P
+[(0.8)] .01131 .4856 1 0 Mshowa
+p
+.002 w
+.02381 .60332 m
+.03006 .60332 L
+s
+P
+[(1)] .01131 .60332 1 0 Mshowa
+p
+.001 w
+.02381 .03826 m
+.02756 .03826 L
+s
+P
+p
+.001 w
+.02381 .0618 m
+.02756 .0618 L
+s
+P
+p
+.001 w
+.02381 .08535 m
+.02756 .08535 L
+s
+P
+p
+.001 w
+.02381 .10889 m
+.02756 .10889 L
+s
+P
+p
+.001 w
+.02381 .15598 m
+.02756 .15598 L
+s
+P
+p
+.001 w
+.02381 .17952 m
+.02756 .17952 L
+s
+P
+p
+.001 w
+.02381 .20307 m
+.02756 .20307 L
+s
+P
+p
+.001 w
+.02381 .22661 m
+.02756 .22661 L
+s
+P
+p
+.001 w
+.02381 .2737 m
+.02756 .2737 L
+s
+P
+p
+.001 w
+.02381 .29724 m
+.02756 .29724 L
+s
+P
+p
+.001 w
+.02381 .32079 m
+.02756 .32079 L
+s
+P
+p
+.001 w
+.02381 .34433 m
+.02756 .34433 L
+s
+P
+p
+.001 w
+.02381 .39142 m
+.02756 .39142 L
+s
+P
+p
+.001 w
+.02381 .41497 m
+.02756 .41497 L
+s
+P
+p
+.001 w
+.02381 .43851 m
+.02756 .43851 L
+s
+P
+p
+.001 w
+.02381 .46205 m
+.02756 .46205 L
+s
+P
+p
+.001 w
+.02381 .50914 m
+.02756 .50914 L
+s
+P
+p
+.001 w
+.02381 .53269 m
+.02756 .53269 L
+s
+P
+p
+.001 w
+.02381 .55623 m
+.02756 .55623 L
+s
+P
+p
+.001 w
+.02381 .57977 m
+.02756 .57977 L
+s
+P
+p
+.002 w
+.02381 0 m
+.02381 .61803 L
+s
+P
+P
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+p
+.008 w
+.07143 .60332 Mdot
+.11905 .60332 Mdot
+.16667 .60332 Mdot
+.21429 .60332 Mdot
+.2619 .55843 Mdot
+.30952 .37585 Mdot
+.35714 .21134 Mdot
+.40476 .11311 Mdot
+.45238 .06499 Mdot
+.5 .03999 Mdot
+.54762 .02737 Mdot
+.59524 .02105 Mdot
+.64286 .01788 Mdot
+.69048 .0163 Mdot
+.7381 .01551 Mdot
+.78571 .01511 Mdot
+.83333 .01491 Mdot
+.88095 .01481 Mdot
+.92857 .01476 Mdot
+.97619 .01474 Mdot
+P
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 174},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCacheValid->False],
+
+Cell[OutputFormData["\<\
+{{1, 1.}, {2, 1.}, {3, 1.}, {4, 0.999999533431375}, 
+ 
+  {5, 0.923732929396294}, {6, 0.6135495965656285}, 
+ 
+  {7, 0.3340609994681515}, {8, 0.1671586419269574}, 
+ 
+  {9, 0.0854201934090618}, {10, 0.04294554892103503}, 
+ 
+  {11, 0.02150237594923543}, {12, 0.01075489349566995}, 
+ 
+  {13, 0.005377910104869558}, {14, 0.002689012977281273}, 
+ 
+  {15, 0.001344513729409496}, {16, 0.0006722577698059508}, 
+ 
+  {17, 0.000336128998040785}, {18, 0.0001680645131626236}, 
+ 
+  {19, 0.0000840322583490909}, {20, 0.00004201612939551783}}\
+\>", 
+"\<\
+{{1, 1.}, {2, 1.}, {3, 1.}, {4, 0.9999995334}, {5, 0.9237329294}, 
+ 
+  {6, 0.6135495966}, {7, 0.3340609995}, {8, 0.1671586419}, 
+ 
+  {9, 0.08542019341}, {10, 0.04294554892}, {11, 0.02150237595}, 
+ 
+  {12, 0.0107548935}, {13, 0.005377910105}, {14, 0.002689012977}, 
+ 
+  {15, 0.001344513729}, {16, 0.0006722577698}, 
+ 
+  {17, 0.000336128998}, {18, 0.0001680645132}, 
+ 
+  {19, 0.00008403225835}, {20, 0.0000420161294}}\
+\>"], "Output",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{44, Automatic}, {30, Automatic}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 482, 8, 70, "Text"],
+Cell[2196, 61, 174, 4, 70, "Input",
+  InitializationCell->True],
+Cell[2373, 67, 850, 13, 70, "Text"],
+Cell[3226, 82, 267, 5, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[3516, 89, 77, 1, 70, "Input"],
+Cell[3596, 92, 139, 7, 70, "Output"]
+}, Open  ]],
+Cell[3747, 101, 1025, 21, 70, "Text"],
+Cell[4775, 124, 597, 9, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[5395, 135, 73, 1, 70, "Input"],
+Cell[5471, 138, 741, 11, 70, "Print"],
+Cell[6215, 151, 3650, 358, 70, 3492, 353, "GraphicsData", 
+"PostScript", "Graphics"],
+Cell[9868, 511, 1043, 35, 70, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

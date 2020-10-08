@@ -1,0 +1,778 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     13159,        712]*)
+(*NotebookOutlinePosition[     14299,        750]*)
+(*  CellTagsIndexPosition[     14255,        746]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[StyleBox[
+"PROGRAM:  BertrandsParadox\nCALLING SEQUENCE:  BertrandsParadox[n, print]\n\
+PARAMETERS:\n     n - an integer\n     print - a Boolean variable (True or \
+False)\nSYNOPSIS:\n     -  This program illustrates Bertrand's Paradox by \
+choosing n random chords of a\n        circle three times, each time using a \
+different one of the three coordinatizations\n        described in the book.  \
+For each coordinatization, the program prints the\n        proportion of \
+chosen chords with length greater than Sqrt[3] and, if print = True,\n        \
+displays a picture of the experiment, drawing  every one-hundredth chord.\n\
+RETURNED VALUES:\n     -  none\nLOCATION:\n     Folder:  Chapter 2\n     \
+File:       \"BertrandsParadox.Chpt2.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[BertrandsParadox];\nBertrandsParadox[n_, print_] :=\nBlock[{s, t1, t2, \
+q, theta, x0, x1, y0, y1, \n       r, l2, alpha, l3,\n       list1 = {}, \
+list2 = {}, list3 = {},\n       total1 = 0, total2 = 0, total3 = 0\n      },\n\
+(*  circ produces the circle on which the experiments are displayed *)\n      \
+circ=Graphics[Circle[{0,0},1]];\n      For[i = 1, i <= n , i++,\n          s \
+= True;\n          While[s,\n                t1 = Random[Real, {-1,1}];\n     \
+           t2 = Random[Real, {-1,1}];\n                If[(t1^2)+(t2^2) <= 1, \
+s = False]\n               ];\n          If[(Mod[i, 100] == 0)&&(print),\n    \
+         q = Sqrt[(t1^2)+(t2^2)];\n             If[Random[Integer, {0,1}] == \
+0,\n                theta = ArcTan[t2/t1],\n                theta = \
+ArcTan[t2/t1] + Pi//N\n               ];\n             x0 = Cos[theta - \
+ArcCos[q]];\n             x1 = Cos[theta + ArcCos[q]];\n             y0 = \
+Sin[theta - ArcCos[q]];\n             y1 = Sin[theta + ArcCos[q]];\n          \
+   list1 = Append[list1, \n                            Graphics[Line[{{x0, \
+y0},\n                                           {x1, y1}\n                   \
+                       }\n                                         ]\n        \
+                            ]\n                           ]\n            ];\n \
+         l1 = 2*Sqrt[1-((t1^2)+(t2^2))];\n          If[l1 > Sqrt[3]//N, \
+total1++];\n          \n          r = Random[Real, {-1,1}];\n          \
+If[(Mod[i, 100] == 0)&&(print),\n             list2 = Append[list2, \n        \
+                    Graphics[Line[{{Sqrt[1-(r^2)],r},\n                       \
+                    {-Sqrt[1-(r^2)],r}\n                                      \
+    }\n                                         ]\n                           \
+         ]\n                           ]\n            ];\n          l2 = \
+2*Sqrt[1-(r^2)];\n          If[l2 > Sqrt[3]//N, total2++];\n          \n      \
+    alpha = Random[Real, {0, 2*Pi//N}];\n          If[(Mod[i, 100] == \
+0)&&(print),\n             list3 = Append[list3, \n                           \
+ Graphics[Line[{{1,0},\n                                           \
+{Cos[alpha], Sin[alpha]}\n                                          }\n       \
+                                  ]\n                                    ]\n  \
+                         ]\n            ];\n          l3 = Sqrt[2 - \
+(2*Cos[alpha])];\n          If[l3 > Sqrt[3]//N, total3++]\n         ];\n      \
+Print[\"Case 1:  Probability (chord length > Sqrt[3]) = \", total1/n//N];\n   \
+   Print[\"Case 2:  Probability (chord length > Sqrt[3]) = \", total2/n//N];\n\
+      Print[\"Case 3:  Probability (chord length > Sqrt[3]) = \", \
+total3/n//N];\n      If[print,\n         Show[circ, list1, AspectRatio->.95, \
+PlotLabel->\"Case 1\"];\n         Show[circ, list2, AspectRatio->.95, \
+PlotLabel->\"Case 2\"];\n         Show[circ, list3, AspectRatio->.95, \
+PlotLabel->\"Case 3\"]\n        ]\n     ]"], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData["BertrandsParadox[5000,True];"], "Input",
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Case 1:  Probability chord length > Sqrt[3] = 0.265\nCase 2:  Probability \
+chord length > Sqrt[3] = 0.511\nCase 3:  Probability chord length > Sqrt[3] = \
+0.3266"], "Print",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .95 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.5 0.47619 0.475 0.452381 [
+[(Case 1)] .5 .95 0 -2 Msboxa
+[ 0 0 0 0 ]
+[ 1 .95 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+[(Case 1)] .5 .95 0 -2 Mshowa
+P
+0 0 m
+1 0 L
+1 .95 L
+0 .95 L
+closepath
+clip
+newpath
+p
+.004 w
+newpath
+matrix currentmatrix
+.47619 .45238 scale
+1.05 1.05 1 0 365.73 arc
+setmatrix
+s
+.80315 .82387 m
+.03935 .36038 L
+s
+.04543 .34022 m
+.26427 .08194 L
+s
+.02519 .44057 m
+.44506 .02564 L
+s
+.90125 .23139 m
+.96226 .36639 L
+s
+.02762 .41788 m
+.72042 .074 L
+s
+.07383 .27316 m
+.82733 .14645 L
+s
+.83046 .80072 m
+.03781 .5839 L
+s
+.82275 .80762 m
+.51211 .92723 L
+s
+.19972 .1239 m
+.70672 .06747 L
+s
+.91667 .256 m
+.94333 .30987 L
+s
+.9328 .66367 m
+.37021 .91025 L
+s
+.55969 .02619 m
+.88671 .73898 L
+s
+.02916 .5426 m
+.30732 .06131 L
+s
+.78685 .83609 m
+.0721 .2765 L
+s
+.92845 .67244 m
+.08228 .69219 L
+s
+.13957 .17935 m
+.26213 .0831 L
+s
+.95326 .33631 m
+.66793 .89832 L
+s
+.75865 .09517 m
+.48985 .92728 L
+s
+.47001 .92648 m
+.06185 .29782 L
+s
+.91741 .69272 m
+.04023 .59276 L
+s
+.02902 .40827 m
+.96621 .38287 L
+s
+.96455 .37557 m
+.97605 .46406 L
+s
+.61986 .91282 m
+.15369 .16449 L
+s
+.19443 .82196 m
+.28508 .07132 L
+s
+.8894 .21461 m
+.97592 .49037 L
+s
+.97499 .44285 m
+.64073 .90717 L
+s
+.80802 .13 m
+.39077 .91532 L
+s
+.50218 .02262 m
+.96992 .54815 L
+s
+.31782 .05703 m
+.57521 .0283 L
+s
+.06677 .66279 m
+.33571 .05039 L
+s
+.62846 .91061 m
+.06842 .66618 L
+s
+.65505 .04727 m
+.76108 .85333 L
+s
+.41648 .02963 m
+.83167 .15039 L
+s
+.03423 .38087 m
+.45209 .02491 L
+s
+.16072 .79243 m
+.04228 .59978 L
+s
+.55804 .02599 m
+.85642 .175 L
+s
+.77462 .84458 m
+.09672 .71557 L
+s
+.59905 .91749 m
+.13019 .76 L
+s
+.96981 .54883 m
+.10199 .72336 L
+s
+.28483 .07144 m
+.946 .31648 L
+s
+.19226 .12978 m
+.77502 .1057 L
+s
+.93468 .29028 m
+.97596 .46104 L
+s
+.85364 .77795 m
+.03065 .39857 L
+s
+.70444 .88357 m
+.33088 .89789 L
+s
+.14505 .77657 m
+.69831 .06372 L
+s
+.08664 .25041 m
+.79015 .11629 L
+s
+.0433 .60311 m
+.31935 .05644 L
+s
+.19562 .8229 m
+.16662 .15198 L
+s
+.2001 .8264 m
+.08029 .26131 L
+s
+.87487 .19604 m
+.53201 .92636 L
+s
+P
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 267},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCacheValid->False],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .95 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.5 0.47619 0.475 0.452381 [
+[(Case 2)] .5 .95 0 -2 Msboxa
+[ 0 0 0 0 ]
+[ 1 .95 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+[(Case 2)] .5 .95 0 -2 Mshowa
+P
+0 0 m
+1 0 L
+1 .95 L
+0 .95 L
+closepath
+clip
+newpath
+p
+.004 w
+newpath
+matrix currentmatrix
+.47619 .45238 scale
+1.05 1.05 1 0 365.73 arc
+setmatrix
+s
+.93085 .28234 m
+.06915 .28234 L
+s
+.87497 .19615 m
+.12503 .19615 L
+s
+.97265 .41993 m
+.02735 .41993 L
+s
+.9737 .42878 m
+.0263 .42878 L
+s
+.95156 .33139 m
+.04844 .33139 L
+s
+.81949 .81045 m
+.18051 .81045 L
+s
+.90083 .71923 m
+.09917 .71923 L
+s
+.9759 .45926 m
+.0241 .45926 L
+s
+.72753 .0776 m
+.27247 .0776 L
+s
+.90806 .70817 m
+.09194 .70817 L
+s
+.9506 .32871 m
+.0494 .32871 L
+s
+.96767 .56017 m
+.03233 .56017 L
+s
+.72987 .07882 m
+.27013 .07882 L
+s
+.88795 .21267 m
+.11205 .21267 L
+s
+.90062 .71954 m
+.09938 .71954 L
+s
+.97617 .4793 m
+.02383 .4793 L
+s
+.91336 .25041 m
+.08664 .25041 L
+s
+.97455 .5125 m
+.02545 .5125 L
+s
+.76171 .85293 m
+.23829 .85293 L
+s
+.9759 .49072 m
+.0241 .49072 L
+s
+.6752 .89565 m
+.3248 .89565 L
+s
+.94845 .62714 m
+.05155 .62714 L
+s
+.97372 .429 m
+.02628 .429 L
+s
+.96361 .3717 m
+.03639 .3717 L
+s
+.97301 .4228 m
+.02699 .4228 L
+s
+.89083 .21656 m
+.10917 .21656 L
+s
+.72649 .87294 m
+.27351 .87294 L
+s
+.58316 .02957 m
+.41684 .02957 L
+s
+.94372 .31081 m
+.05628 .31081 L
+s
+.94336 .64007 m
+.05664 .64007 L
+s
+.57114 .9223 m
+.42886 .9223 L
+s
+.89687 .725 m
+.10313 .725 L
+s
+.96788 .39087 m
+.03212 .39087 L
+s
+.93348 .66225 m
+.06652 .66225 L
+s
+.89418 .72881 m
+.10582 .72881 L
+s
+.97051 .40531 m
+.02949 .40531 L
+s
+.91426 .6981 m
+.08574 .6981 L
+s
+.96019 .35872 m
+.03981 .35872 L
+s
+.89405 .72899 m
+.10595 .72899 L
+s
+.94279 .30857 m
+.05721 .30857 L
+s
+.73074 .87072 m
+.26926 .87072 L
+s
+.63176 .90972 m
+.36824 .90972 L
+s
+.95678 .60286 m
+.04322 .60286 L
+s
+.97431 .51519 m
+.02569 .51519 L
+s
+.96489 .37702 m
+.03511 .37702 L
+s
+.97113 .40926 m
+.02887 .40926 L
+s
+.96187 .36491 m
+.03813 .36491 L
+s
+.8806 .74687 m
+.1194 .74687 L
+s
+.9751 .44445 m
+.0249 .44445 L
+s
+.93026 .28116 m
+.06974 .28116 L
+s
+P
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 267},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCacheValid->False],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .95 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.5 0.47619 0.475 0.452381 [
+[(Case 3)] .5 .95 0 -2 Msboxa
+[ 0 0 0 0 ]
+[ 1 .95 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+[(Case 3)] .5 .95 0 -2 Mshowa
+P
+0 0 m
+1 0 L
+1 .95 L
+0 .95 L
+closepath
+clip
+newpath
+p
+.004 w
+newpath
+matrix currentmatrix
+.47619 .45238 scale
+1.05 1.05 1 0 365.73 arc
+setmatrix
+s
+.97619 .475 m
+.31312 .89109 L
+s
+.97619 .475 m
+.63727 .04182 L
+s
+.97619 .475 m
+.0834 .25588 L
+s
+.97619 .475 m
+.97445 .43637 L
+s
+.97619 .475 m
+.17313 .80397 L
+s
+.97619 .475 m
+.37513 .03845 L
+s
+.97619 .475 m
+.76437 .85126 L
+s
+.97619 .475 m
+.87755 .19931 L
+s
+.97619 .475 m
+.95152 .61873 L
+s
+.97619 .475 m
+.80653 .12881 L
+s
+.97619 .475 m
+.19572 .82298 L
+s
+.97619 .475 m
+.22642 .84527 L
+s
+.97619 .475 m
+.08934 .70402 L
+s
+.97619 .475 m
+.24839 .85907 L
+s
+.97619 .475 m
+.11051 .73526 L
+s
+.97619 .475 m
+.13692 .1823 L
+s
+.97619 .475 m
+.74104 .86515 L
+s
+.97619 .475 m
+.81751 .81214 L
+s
+.97619 .475 m
+.31886 .89337 L
+s
+.97619 .475 m
+.82257 .14222 L
+s
+.97619 .475 m
+.2429 .85578 L
+s
+.97619 .475 m
+.0501 .62323 L
+s
+.97619 .475 m
+.94954 .32579 L
+s
+.97619 .475 m
+.75605 .09358 L
+s
+.97619 .475 m
+.95294 .33537 L
+s
+.97619 .475 m
+.58636 .03012 L
+s
+.97619 .475 m
+.05466 .63518 L
+s
+.97619 .475 m
+.71826 .07294 L
+s
+.97619 .475 m
+.93541 .65817 L
+s
+.97619 .475 m
+.87573 .19708 L
+s
+.97619 .475 m
+.75762 .09454 L
+s
+.97619 .475 m
+.75514 .85697 L
+s
+.97619 .475 m
+.02523 .50988 L
+s
+.97619 .475 m
+.24603 .09233 L
+s
+.97619 .475 m
+.57344 .02803 L
+s
+.97619 .475 m
+.04203 .59893 L
+s
+.97619 .475 m
+.27149 .07811 L
+s
+.97619 .475 m
+.11937 .74684 L
+s
+.97619 .475 m
+.33018 .89764 L
+s
+.97619 .475 m
+.49156 .02269 L
+s
+.97619 .475 m
+.27112 .8717 L
+s
+.97619 .475 m
+.21862 .83995 L
+s
+.97619 .475 m
+.05257 .62984 L
+s
+.97619 .475 m
+.97617 .47907 L
+s
+.97619 .475 m
+.74729 .0884 L
+s
+.97619 .475 m
+.61716 .91347 L
+s
+.97619 .475 m
+.04334 .34677 L
+s
+.97619 .475 m
+.97551 .49909 L
+s
+.97619 .475 m
+.76251 .09757 L
+s
+.97619 .475 m
+.02414 .49178 L
+s
+P
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 267},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCacheValid->False]}, Open]]}, Open]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{4, Automatic}, {Automatic, 31}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 850, 13, 70, "Text"],
+Cell[2564, 66, 3056, 41, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[5643, 109, 81, 1, 70, "Input"],
+Cell[5727, 112, 238, 5, 70, "Print"],
+
+Cell[CellGroupData[{
+Cell[5988, 119, 2410, 196, 70, 2252, 191, "GraphicsData", 
+"PostScript", "Graphics"],
+Cell[8401, 317, 2402, 196, 70, 2244, 191, "GraphicsData", 
+"PostScript", "Graphics"],
+Cell[10806, 515, 2332, 196, 70, 2174, 191, "GraphicsData", 
+"PostScript", "Graphics"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

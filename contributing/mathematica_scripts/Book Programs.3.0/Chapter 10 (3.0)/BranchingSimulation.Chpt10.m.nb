@@ -1,0 +1,711 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     11080,        648]*)
+(*NotebookOutlinePosition[     12220,        686]*)
+(*  CellTagsIndexPosition[     12176,        682]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[StyleBox[
+"PROGRAM:  BranchingSimulation\nCALLING SEQUENCE:  BranchingSimulation[n, \
+gmax, plist, changepoint]\nPARAMETERS:\n     n, gmax, changepoint - integers\n\
+     plist - a a probability list\nSYNOPSIS:\n     -  This program simulates \
+the branching process designated by plist (which states\n        that a \
+parent will produce at most Length[plist] offspring, and will produce i\n     \
+   offspring with probability plist[[i]]), until generation gmax.  When the \
+size of a\n        generation becomes greater than changepoint, the size of \
+the next generation is\n        determined by the normal density.  The \
+program does n such simulations, and\n        plots the branching processes \
+with the x-axis indicating number of generations,\n        and the lines y = \
+f(x) indicating the sizes of the generations at time x.\n     -  Note:  this \
+program requires the programs \"DiscreteMean[distributionlist],\"\n        \
+\"DiscreteVariance[distributionlist],\" and \"SimulateDiscreteVariable[plist]\
+\" be\n        initialized.\nRETURNED VALUES:\n     -  none\nLOCATION:\n     \
+Folder:  Chapter 10\n     File:       \"BranchingSimulation.Chpt10.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[BranchingSimulation];\nBranchingSimulation[n_, gmax_, plist_, \
+changepoint_] :=\nBlock[{mean, var, g, gsize, glist,\n       offspring, \
+gmean, gstdev, finallist = {}\n      },\n      pdistlist = Table[{i-1, \
+plist[[i]]}, {i, 1, Length[plist]}];\n      mean = DiscreteMean[pdistlist];\n \
+     var = DiscreteVariance[pdistlist];\n      Do[glist = {};\n         g = \
+0; \n         gsize = 1;\n         While[(gsize > 0) && (g < gmax),\n         \
+      glist = Append[glist, {g, gsize/(mean^g)}];\n               g++;\n      \
+         If[gsize < changepoint,\n                  offspring = 0;\n          \
+        For[i = 1, i <= gsize, i++,\n                      offspring = \n     \
+                   offspring + \n                        \
+SimulateDiscreteVariable[plist] - 1\n                     ];\n                \
+  gsize = offspring,\n                  gmean = gsize * mean;\n               \
+   gstdev = Sqrt[gsize * var];\n                  gsize = gstdev * Sqrt[-2 * \
+Log[Random[]]]\n                                 * Cos[2*Pi*Random[]]\n       \
+                          + gmean//N\n                 ]\n              ];\n  \
+        glist = Append[glist, {g, gsize/(mean^g)}];\n          finallist = \
+Append[finallist, \n                             ListPlot[glist, PlotJoined \
+-> True,\n                             DisplayFunction -> Identity]\n         \
+                   ]\n          , \n          {n}\n         ];\n      \
+Show[finallist,\n           DisplayFunction -> $DisplayFunction\n          ]\n\
+     ]"], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData[
+"kp = {.20917, .25838, .23595, .15933, .08275, .03567,\n      .01331, .00420, \
+.00106, .00016, .00002}"], "Input",
+  AspectRatioFixed->True],
+
+Cell[OutputFormData[
+"\<\
+{0.20917, 0.25838, 0.23595, 0.15933, 0.08275, 0.03567, 0.01331, 0.0042, 
+ 
+  0.00106, 0.00016, 0.00002}\
+\>", 
+"\<\
+{0.20917, 0.25838, 0.23595, 0.15933, 0.08275, 0.03567, 0.01331, 0.0042, 
+ 
+  0.00106, 0.00016, 0.00002}\
+\>"], "Output",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]],
+
+Cell[CellGroupData[{Cell[TextData["BranchingSimulation[10, 25, kp, 500];"], "Input",
+  AspectRatioFixed->True],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.0238095 0.0380952 0.0147151 0.22805 [
+[(5)] .21429 .01472 0 2 Msboxa
+[(10)] .40476 .01472 0 2 Msboxa
+[(15)] .59524 .01472 0 2 Msboxa
+[(20)] .78571 .01472 0 2 Msboxa
+[(25)] .97619 .01472 0 2 Msboxa
+[(0.5)] .01131 .12874 1 0 Msboxa
+[(1)] .01131 .24277 1 0 Msboxa
+[(1.5)] .01131 .35679 1 0 Msboxa
+[(2)] .01131 .47082 1 0 Msboxa
+[(2.5)] .01131 .58484 1 0 Msboxa
+[ -0.001 -0.001 0 0 ]
+[ 1.001 .61903 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+p
+.002 w
+.21429 .01472 m
+.21429 .02097 L
+s
+P
+[(5)] .21429 .01472 0 2 Mshowa
+p
+.002 w
+.40476 .01472 m
+.40476 .02097 L
+s
+P
+[(10)] .40476 .01472 0 2 Mshowa
+p
+.002 w
+.59524 .01472 m
+.59524 .02097 L
+s
+P
+[(15)] .59524 .01472 0 2 Mshowa
+p
+.002 w
+.78571 .01472 m
+.78571 .02097 L
+s
+P
+[(20)] .78571 .01472 0 2 Mshowa
+p
+.002 w
+.97619 .01472 m
+.97619 .02097 L
+s
+P
+[(25)] .97619 .01472 0 2 Mshowa
+p
+.001 w
+.0619 .01472 m
+.0619 .01847 L
+s
+P
+p
+.001 w
+.1 .01472 m
+.1 .01847 L
+s
+P
+p
+.001 w
+.1381 .01472 m
+.1381 .01847 L
+s
+P
+p
+.001 w
+.17619 .01472 m
+.17619 .01847 L
+s
+P
+p
+.001 w
+.25238 .01472 m
+.25238 .01847 L
+s
+P
+p
+.001 w
+.29048 .01472 m
+.29048 .01847 L
+s
+P
+p
+.001 w
+.32857 .01472 m
+.32857 .01847 L
+s
+P
+p
+.001 w
+.36667 .01472 m
+.36667 .01847 L
+s
+P
+p
+.001 w
+.44286 .01472 m
+.44286 .01847 L
+s
+P
+p
+.001 w
+.48095 .01472 m
+.48095 .01847 L
+s
+P
+p
+.001 w
+.51905 .01472 m
+.51905 .01847 L
+s
+P
+p
+.001 w
+.55714 .01472 m
+.55714 .01847 L
+s
+P
+p
+.001 w
+.63333 .01472 m
+.63333 .01847 L
+s
+P
+p
+.001 w
+.67143 .01472 m
+.67143 .01847 L
+s
+P
+p
+.001 w
+.70952 .01472 m
+.70952 .01847 L
+s
+P
+p
+.001 w
+.74762 .01472 m
+.74762 .01847 L
+s
+P
+p
+.001 w
+.82381 .01472 m
+.82381 .01847 L
+s
+P
+p
+.001 w
+.8619 .01472 m
+.8619 .01847 L
+s
+P
+p
+.001 w
+.9 .01472 m
+.9 .01847 L
+s
+P
+p
+.001 w
+.9381 .01472 m
+.9381 .01847 L
+s
+P
+p
+.002 w
+0 .01472 m
+1 .01472 L
+s
+P
+p
+.002 w
+.02381 .12874 m
+.03006 .12874 L
+s
+P
+[(0.5)] .01131 .12874 1 0 Mshowa
+p
+.002 w
+.02381 .24277 m
+.03006 .24277 L
+s
+P
+[(1)] .01131 .24277 1 0 Mshowa
+p
+.002 w
+.02381 .35679 m
+.03006 .35679 L
+s
+P
+[(1.5)] .01131 .35679 1 0 Mshowa
+p
+.002 w
+.02381 .47082 m
+.03006 .47082 L
+s
+P
+[(2)] .01131 .47082 1 0 Mshowa
+p
+.002 w
+.02381 .58484 m
+.03006 .58484 L
+s
+P
+[(2.5)] .01131 .58484 1 0 Mshowa
+p
+.001 w
+.02381 .03752 m
+.02756 .03752 L
+s
+P
+p
+.001 w
+.02381 .06033 m
+.02756 .06033 L
+s
+P
+p
+.001 w
+.02381 .08313 m
+.02756 .08313 L
+s
+P
+p
+.001 w
+.02381 .10594 m
+.02756 .10594 L
+s
+P
+p
+.001 w
+.02381 .15155 m
+.02756 .15155 L
+s
+P
+p
+.001 w
+.02381 .17435 m
+.02756 .17435 L
+s
+P
+p
+.001 w
+.02381 .19716 m
+.02756 .19716 L
+s
+P
+p
+.001 w
+.02381 .21996 m
+.02756 .21996 L
+s
+P
+p
+.001 w
+.02381 .26557 m
+.02756 .26557 L
+s
+P
+p
+.001 w
+.02381 .28838 m
+.02756 .28838 L
+s
+P
+p
+.001 w
+.02381 .31118 m
+.02756 .31118 L
+s
+P
+p
+.001 w
+.02381 .33399 m
+.02756 .33399 L
+s
+P
+p
+.001 w
+.02381 .3796 m
+.02756 .3796 L
+s
+P
+p
+.001 w
+.02381 .4024 m
+.02756 .4024 L
+s
+P
+p
+.001 w
+.02381 .42521 m
+.02756 .42521 L
+s
+P
+p
+.001 w
+.02381 .44801 m
+.02756 .44801 L
+s
+P
+p
+.001 w
+.02381 .49362 m
+.02756 .49362 L
+s
+P
+p
+.001 w
+.02381 .51643 m
+.02756 .51643 L
+s
+P
+p
+.001 w
+.02381 .53923 m
+.02756 .53923 L
+s
+P
+p
+.001 w
+.02381 .56204 m
+.02756 .56204 L
+s
+P
+p
+.001 w
+.02381 .60765 m
+.02756 .60765 L
+s
+P
+p
+.002 w
+.02381 0 m
+.02381 .61803 L
+s
+P
+P
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+p
+.004 w
+.02381 .24277 m
+.0619 .13886 L
+.1 .08229 L
+.1381 .0515 L
+.17619 .03474 L
+.21429 .05832 L
+.25238 .03845 L
+.29048 .0341 L
+.32857 .02527 L
+.36667 .02046 L
+.40476 .01993 L
+.44286 .02039 L
+.48095 .02074 L
+.51905 .02136 L
+.55714 .02167 L
+.59524 .02172 L
+.63333 .02228 L
+.67143 .02203 L
+.70952 .02195 L
+.74762 .02188 L
+.78571 .02177 L
+.82381 .02175 L
+.8619 .02182 L
+.9 .02184 L
+.9381 .02184 L
+.97619 .02188 L
+s
+.02381 .24277 m
+.0619 .01472 L
+s
+.02381 .24277 m
+.0619 .01472 L
+s
+.02381 .24277 m
+.0619 .263 L
+.1 .28503 L
+.1381 .30902 L
+.17619 .29508 L
+.21429 .21094 L
+.25238 .20462 L
+.29048 .20208 L
+.32857 .22574 L
+.36667 .22532 L
+.40476 .24297 L
+.44286 .23967 L
+.48095 .2443 L
+.51905 .24179 L
+.55714 .25407 L
+.59524 .25902 L
+.63333 .26234 L
+.67143 .26222 L
+.70952 .25958 L
+.74762 .25898 L
+.78571 .25926 L
+.82381 .25907 L
+.8619 .25862 L
+.9 .25868 L
+.9381 .25849 L
+.97619 .25863 L
+s
+.02381 .24277 m
+.0619 .263 L
+.1 .14987 L
+.1381 .0515 L
+.17619 .05477 L
+.21429 .04742 L
+.25238 .05626 L
+.29048 .05025 L
+.32857 .03406 L
+.36667 .04056 L
+.40476 .04286 L
+.44286 .04507 L
+.48095 .04143 L
+.51905 .04229 L
+.55714 .0424 L
+.59524 .04205 L
+.63333 .04209 L
+.67143 .04171 L
+.70952 .04188 L
+.74762 .04194 L
+.78571 .04183 L
+.82381 .04177 L
+.8619 .04194 L
+.9 .04183 L
+.9381 .04189 L
+.97619 .04185 L
+s
+.02381 .24277 m
+.0619 .263 L
+.1 .08229 L
+.1381 .0515 L
+.17619 .01472 L
+s
+.02381 .24277 m
+.0619 .38714 L
+.1 .55535 L
+.1381 .60332 L
+.17619 .45529 L
+.21429 .31996 L
+.25238 .36484 L
+.29048 .32161 L
+.32857 .31367 L
+.36667 .33637 L
+.40476 .32582 L
+.44286 .31558 L
+.48095 .31639 L
+.51905 .31676 L
+.55714 .31196 L
+.59524 .31222 L
+.63333 .31014 L
+.67143 .31268 L
+.70952 .31154 L
+.74762 .31117 L
+.78571 .31239 L
+.82381 .31224 L
+.8619 .31244 L
+.9 .31284 L
+.9381 .31267 L
+.97619 .31282 L
+s
+.02381 .24277 m
+.0619 .01472 L
+s
+.02381 .24277 m
+.0619 .51129 L
+.1 .48777 L
+.1381 .30902 L
+.17619 .25503 L
+.21429 .21094 L
+.25238 .17494 L
+.29048 .15686 L
+.32857 .15012 L
+.36667 .13342 L
+.40476 .13978 L
+.44286 .13812 L
+.48095 .13625 L
+.51905 .13647 L
+.55714 .13195 L
+.59524 .13449 L
+.63333 .13406 L
+.67143 .13473 L
+.70952 .13393 L
+.74762 .13485 L
+.78571 .13451 L
+.82381 .13422 L
+.8619 .13397 L
+.9 .13375 L
+.9381 .13395 L
+.97619 .13371 L
+s
+.02381 .24277 m
+.0619 .01472 L
+s
+P
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 174},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCacheValid->False]}, Open]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{4, Automatic}, {Automatic, 31}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 1272, 18, 70, "Text"],
+Cell[2986, 71, 1628, 23, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[4637, 96, 156, 3, 70, "Input"],
+Cell[4796, 101, 310, 12, 70, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5138, 115, 90, 1, 70, "Input"],
+Cell[5231, 118, 5837, 529, 70, 5679, 524, "GraphicsData", 
+"PostScript", "Graphics"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

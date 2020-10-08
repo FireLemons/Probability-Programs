@@ -1,0 +1,172 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      6681,        123]*)
+(*NotebookOutlinePosition[      7790,        160]*)
+(*  CellTagsIndexPosition[      7746,        156]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox["CHAPTER 11 PROGRAM DESCRIPTIONS",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\n\n\nPROGRAM:  AbsorbingChain\nCALLING SEQUENCE:  AbsorbingChain[P, \
+stateslist, print]\nPARAMETERS:\n     P - a Markov chain transition matrix\n  \
+   stateslist - a list of values, with Length[stateslist] = Length[P]\n     \
+print - a Boolean variable (True or False)\nSYNOPSIS:\n     -  This program \
+takes as its parameters P, a Markov chain transition matrix, and\n        \
+stateslist, the list of possible states in the Markov chain, and finds and \
+returns the\n        matrices Q, R, N, B, and vector t, as defined in the \
+book.   If print = True, then the\n        program also displays these \
+matrices and vector, with rows and columns\n        labeled.\n    -  Note:  \
+this program requires the program \"LabelMatrix[M, rowlabels,\n       \
+columnlabels]\" be initialized.\n   RETURN VALUES:\n        -  the list {Q, \
+R, N, t, B}\n  LOCATION:\n       Folder:  Chapter 11\n       File:       \
+\"AbsorbingChain.Chpt11.mat\"\n        \n     \nPROGRAM:  EhrenfestUrn\n\
+CALLING SEQUENCE:  EhrenfestUrn[seconds, balls]\nPARAMETERS:\n     seconds - \
+an integer\n     balls - an even integer\nSYNOPSIS:\n     -  This program \
+simulates the Ehrenfest model for gas diffusion by simulating the\n        \
+urn-ball experiment described in the book, with the number of balls = balls, \
+and\n        the number of time units being tested = seconds.  The program \
+displays a plot\n        of the experiment, with  the x-axis showing time and \
+the graph y = f(x) showing\n        how many balls are in the first urn at \
+each second x.  (Note:  the program actually\n        plots points only for \
+integer values of x, since the distribution of f(x) is discrete;\n        \
+however, for the sake of aesthetics, the computer joins these points with \
+lines.)\nRETURNED VALUES:\n     -  a list of the number of balls in Urn 1 \
+after each second\nLOCATION:\n     Folder:  Chapter 11\n     File:       \
+\"EhrenfestUrn.Chpt11.mat\"\n     \n     \nPROGRAM:  ErgodicChain\nCALLING \
+SEQUENCE:  ErgodicChain[P, stateslist, print]\nPARAMETERS:\n     P - a Markov \
+chain transition matrix\n     stateslist - a list of values, with \
+Length[stateslist] = Length[P]\n     print - a Boolean variable (True or \
+False)\nSYNOPSIS:\n     -  This program returns a list consisting of the mean \
+recurrence times, and mean\n         first passage matrix, for the ergodic \
+chain with transition matrix P and possible\n         states in statelist.  \
+If print = True, the program displays P, along with the chain's\n         \
+fixed vector w,  list of mean recurrence times r, and mean first passage \
+matrix M.\n     -  Note:  this program requires the programs \"LabelMatrix[M, \
+rowlabels,\n         columnlabels]\" and \"FixedVector[P, stateslist]\", be \
+initialized.\nRETURNED VALUES:\n     -  the list {r, M}\nLOCATION:\n     \
+Folder:  Chapter 11\n     File:       \"ErgodicChain.Chpt11.mat\"\n     \n  \n\
+PROGRAM:  FixedVector\nCALLING SEQUENCE:  FixedVector[P, stateslist, print]\n\
+PARAMETERS:\n     P - a Markov chain transition matrix\n     stateslist - a \
+list of values, with Length[stateslist] = Length[P]\n     print - a Boolean \
+variable (True or False)\nSYNOPSIS:\n     -  This program returns the fixed \
+vector w for an ergodic Markov chain with\n        transition matrix P and \
+possible states in stateslist.  If print = True, the program\n        prints \
+out P and w.\n     -  Note:  this program requires the program \
+\"LabelMatrix[M, rowlabels,\n        columnlabels]\" be initialized.\n\
+RETURNED VALUES:\n     -  P's fixed vector w\nLOCATION:\n     Folder:  \
+Chapter 11\n     File:       \"FixedVector.Chpt11.mat\"\n     \n     \n\
+PROGRAM:  SimulateChain\nCALLING SEQUENCE:  SimulateChain[n, P, stateslist, \
+startstate, print]\nPARAMETERS:\n     n - an integer\n     P - a Markov chain \
+transition matrix\n     stateslist - a list of values, with \
+Length[stateslist] = Length[P]\n     startstate - a value found in stateslist\
+\n     print - a Boolean variable (True or False)\nSYNOPSIS:\n     -  This \
+progam simulates n steps of a Markov chain with transition matrix P and\n     \
+    states in stateslist, that begins in state startstate.  For each state, \
+the program\n         prints out the number of times that state was reached, \
+and the fraction of the time\n         this occurred.  The program returns a \
+list whose i'th element is the fraction of the\n         time state \
+stateslist[[i]] was reached.  If print = True, the program also prints out\n  \
+       each state as it is reached.\nRETURNED VALUES:\n     -  a list whose \
+i'th element is the fraction of the time state stateslist[[i]] was reached\n\
+LOCATION:\n     Folder:  Chapter 11\n     File:       \
+\"SimulateChain.Chpt11.mat\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{124, Automatic}, {Automatic, -2}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 4967, 71, 70, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

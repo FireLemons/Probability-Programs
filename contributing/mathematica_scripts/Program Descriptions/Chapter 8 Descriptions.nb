@@ -1,0 +1,131 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      3567,         82]*)
+(*NotebookOutlinePosition[      4675,        119]*)
+(*  CellTagsIndexPosition[      4631,        115]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox["CHAPTER 8 PROGRAM DESCRIPTIONS",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\n\n\nPROGRAM:  Law\nCALLING SEQUENCE:  Law[nmin, nmax, inc, p, e]\n\
+PARAMETERS:\n     nmin, nmax, inc - integers\n     p, e - real numbers\n\
+SYNOPSIS:\n     -  For n = nmin to nmax, in steps of size inc,  this program \
+computes and displays\n         (1)  the exact probability P(|A_n - p| >= e), \
+where A_n is the average outcome of\n         n Bernoulli trials with \
+probability p of success, and (2)  the Chebyshev estimate\n         \
+p(1-p)/(n(e^2)) for this probability.\n     -  Note:  this program requires \
+the function \"Bin[n, p, k]\" be initialized.\nRETURNED VALUES:\n     -  a \
+list whose elements are {n, P(|A_n - p| >= e),  Chebyshev estimate\n        \
+p(1-p)/(n(2^2))},  for n = nmin to nmax, in steps of size inc\nLOCATION:\n    \
+ Folder:  Chapter 8\n     File:        \"Law.Chpt8.mat\"\n     \n     \n\
+PROGRAM:  LawContinuous\nCALLING SEQUENCE:  LawContinuous[nmin, nmax, inc, e]\
+\nPARAMETERS:\n     nmin, nmax, inc - integers\n     e -  a real number\n\
+SYNOPSIS:\n     -  For n = nmin to nmax, in steps of size inc, this program \
+computes and displays\n        (1)  the exact probability P(|S_n/n| >= e), \
+where S_n is a sum of n standard\n        normally-distributed random \
+variables, and (2) the Chebyshev estimate 1/n*(e^2)\n        for this \
+probability.\n     -  Note:  this program requires the program \
+\"NormalArea[a, b]\" be initialized.\nRETURNED VALUES:\n     -  a list whose \
+elements are {n, P(|S_n/n| >= e),  Chebyshev estimate 1/n*(e^2)},\n        \
+for n = nmin to nmax, in steps of size inc\nLOCATION:\n     Folder:  Chapter \
+8\n     File:       \"LawContinuous.Chpt8.mat\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{76, Automatic}, {15, Automatic}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 1853, 30, 70, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

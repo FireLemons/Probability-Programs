@@ -1,0 +1,156 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5519,        107]*)
+(*NotebookOutlinePosition[      6627,        144]*)
+(*  CellTagsIndexPosition[      6583,        140]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox["CHAPTER 2 PROGRAM DESCRIPTIONS",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\n\n\nPROGRAM:  BertrandsParadox\nCALLING SEQUENCE:  BertrandsParadox[n, \
+print]\nPARAMETERS:\n     n - an integer\n     print - a Boolean variable \
+(True or False)\nSYNOPSIS:\n     -  This program illustrates Bertrand's \
+Paradox by choosing n random chords of a\n        circle three times, each \
+time using a different one of the three coordinatizations\n        described \
+in the book.  For each coordinatization, the program prints the\n        \
+proportion of chosen chords with length greater than Sqrt[3] and, if print = \
+True,\n        displays a picture of the experiment, drawing  every \
+one-hundredth chord.\nRETURNED VALUES:\n     -  none\nLOCATION:\n     Folder: \
+ Chapter 2\n     File:       \"BertrandsParadox.Chpt2.mat\"\n     \n         \
+\nPROGRAM:  BuffonsNeedle\nCALLING SEQUENCE:  BuffonsNeedle[n, print]\n\
+PARAMETERS:\n     n - an integer\n     print - a Boolean variable (True or \
+False)\nSYNOPSIS:\n     -  This program simulates the Buffon needle \
+experiment described in the book,\n        dropping n pins on a 10 x 10 grid. \
+ The program returns an estimate for Pi, using\n        the book's method.  \
+If print = True, a graphical display of the experiment is\n        produced, \
+showing every one-hundredth pin. \nRETURNED VALUES:\n     -  a simulated \
+estimate for Pi\nLOCATION:\n     Folder:  Chapter 2\n     File:       \
+\"BuffonsNeedle.Chpt2.mat\"\n         \n\nPROGRAM:   Darts\nCALLING SEQUENCE: \
+ Darts[n, print]\nPARAMETERS:\n     n - an integer\n     print - a Boolean \
+variable (True or False)\nSYNOPSIS:  \n     -  This program simulates n \
+throws of a dart at a circular dartboard of radius 1.  The\n        program \
+displays a bar graph in which the area of the i'th bar is equal to the\n      \
+  fraction of the total falling in the i'th region.  If print = True, then \
+the program\n        returns a list of distances that the dart landed from \
+the center of the board.      \n    -  Note:  this program requires the \
+program \"Areabargraph[data, xmin, xmax, k]\" be \n       initialized.\n\
+RETURNED VALUES:\n     -  a list of distances that the dart landed from the \
+center of the board (if print = True)\nLOCATION:\n     Folder:  Chapter 2\n   \
+  File:       \"Darts.Chpt2.mat\"\n  \n\nPROGRAM:  MonteCarlo\nCALLING \
+SEQUENCE:  MonteCarlo[n, f, xmin, xmax, ymax]\nPARAMETERS:\n     n - an \
+integer\n     f - the name of a pre-defined function of one variable\n     \
+xmin, xmax, ymax - real numbers\nSYNOPSIS:\n     -  This program estimates  \
+the area under the input function f[x] and above the\n         interval \
+[xmin, xmax] by choosing n random points in the rectangle above the\n         \
+interval [xmin, xmax] and between the y-values 0 and ymax.  The function f[x] \
+is\n         assumed to be non-negative on the interval [xmin, xmax], and is \
+assumed to\n         have a maximum value which does not exceed ymax.   \
+(Note: it is not necessary\n         that the maximum value of f[x] = ymax.)  \
+The program returns its area estimate,\n         and also plots the random \
+points and the function f[x] on the interval  [xmin,\n         xmax].  \n     \
+-  Keep in mind that the function f[x] should be defined before this program \
+is\n        called, and  then the name of the function, namely f (or some \
+other name, like\n        Cos) should be given to this program.  The \
+expression for the function (such as\n        x^2, for example) should not  \
+be given as a parameter.\nRETURNED VALUES:\n     -  none\nLOCATION:\n     \
+Folder:  Chapter 2\n     File:       \"MonteCarlo.Chpt2.mat\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{12, Automatic}, {Automatic, 13}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 3805, 55, 70, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

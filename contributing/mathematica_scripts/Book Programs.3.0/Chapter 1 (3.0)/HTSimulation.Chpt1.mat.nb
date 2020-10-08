@@ -1,0 +1,2252 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     23405,       2176]*)
+(*NotebookOutlinePosition[     24546,       2214]*)
+(*  CellTagsIndexPosition[     24502,       2210]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[StyleBox[
+"FUNCTION:  HTSimulation\nCALLING SEQUENCE:  HTSimulation[n, m, print]\n\
+PARAMETERS:  \n     n, m - integers\n     print - a Boolean variable (True or \
+False)\n SYNOPSIS:\n     -  This program simulates an experiment in which a \
+fair coin is tossed m times. \n        The experiment is repeated n times.  \
+The program records the \"winnings\" in each\n        experiment, where the \
+winnings are defined to be the number of heads minus\n        the number of \
+tails.  It also keeps track of thenumber of times the winnings are\n        \
+\"positive\" in the course of an experiment (we count as \"positive\" a time \
+at which\n        the winnings are 0 but the previous winnings are positive). \
+  The program returns\n        a list whose first element is a list of the \
+winnings in each experiment\n        (winningslist), and whose second element \
+is a list of times in the lead in each\n        experiment (timesinleadlist). \
+ If print = True and n = 1, then a graph of the game\n        is displayed.  \
+If print = True and n > 1, then spike graphs of the winningslist\n        and \
+timesinleadlist are displayed. \n     -  Note:  this program requires the \
+program \"Spikegraph[distributionlist, xmin,\n        xmax, print]\" be \
+initialized.\nRETURNED VALUES:\n     -  a list whose first element is a list \
+of the winnings in each experiment, and whose\n        second element is a \
+list of times in the lead in each experiment\nLOCATION:\n     Folder:  \
+Chapter 1\n     File:       \"HTSimulation.Chpt1.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[HTSimulation];\nHTSimulation[n_, m_, print_] :=\nBlock[{winningslist = \
+{},\n       timesinleadlist = {},\n       currentwinnings,\n       \
+previouscurrentwinnings,\n       tosslist = {{0, 0}}\n      },\n      For[i = \
+1, i <= n, i++,\n          currentwinnings = 0;\n          previouswinnings = \
+0;\n          lead = 0;\n          For[j = 1, j <= m, j++,\n              \
+If[(Random[] < .5),\n                 currentwinnings++,\n                 \
+currentwinnings--\n                ];\n              If[((n == 1)&&(print)),\n\
+                 tosslist =\n                   Append[tosslist, \n           \
+               {j, currentwinnings}]\n                ];\n              \
+If[((currentwinnings > 0)||\n                  ((currentwinnings == 0)&&\n    \
+              (previouswinnings > 0))\n                 ),\n                 \
+lead++;\n                ];\n              previouswinnings = \
+currentwinnings;\n             ];\n          winningslist =\n            \
+Append[winningslist, currentwinnings];\n          timesinleadlist = \n        \
+    Append[timesinleadlist, lead];\n         ];\n      If[((n == \
+1)&&(print)),\n         ListPlot[tosslist, \n                  PlotJoined -> \
+True,\n                  AxesOrigin -> {0, 0}\n                 ],\n         \
+If[print,\n            Print[\"The first spike graph below shows the\"];\n    \
+        Print[\"distribution of winnings.  The second\"];\n            Print[\
+\"spike graph shows the distribution of\"];\n            Print[\"the number \
+of times in the lead.\"];\n            Spikegraph[SpikeData[winningslist], \n \
+                      Min[winningslist],\n                       \
+Max[winningslist],\n                       True\n                      ];\n   \
+         Spikegraph[SpikeData[timesinleadlist],\n                       \
+Min[timesinleadlist],\n                       Max[timesinleadlist],\n         \
+              True\n                      ]\n           ]\n        ];\n      \
+Return[{winningslist, timesinleadlist}]\n     ]"], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData["HTSimulation[1, 10, True]\n"], "Input",
+  AspectRatioFixed->True],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.0238095 0.0952381 0.407118 0.196201 [
+[(2)] .21429 .40712 0 2 Msboxa
+[(4)] .40476 .40712 0 2 Msboxa
+[(6)] .59524 .40712 0 2 Msboxa
+[(8)] .78571 .40712 0 2 Msboxa
+[(10)] .97619 .40712 0 2 Msboxa
+[(-2)] .01131 .01472 1 0 Msboxa
+[(-1.5)] .01131 .11282 1 0 Msboxa
+[(-1)] .01131 .21092 1 0 Msboxa
+[(-0.5)] .01131 .30902 1 0 Msboxa
+[(0.5)] .01131 .50522 1 0 Msboxa
+[(1)] .01131 .60332 1 0 Msboxa
+[ -0.001 -0.001 0 0 ]
+[ 1.001 .61903 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+p
+.002 w
+.21429 .40712 m
+.21429 .41337 L
+s
+P
+[(2)] .21429 .40712 0 2 Mshowa
+p
+.002 w
+.40476 .40712 m
+.40476 .41337 L
+s
+P
+[(4)] .40476 .40712 0 2 Mshowa
+p
+.002 w
+.59524 .40712 m
+.59524 .41337 L
+s
+P
+[(6)] .59524 .40712 0 2 Mshowa
+p
+.002 w
+.78571 .40712 m
+.78571 .41337 L
+s
+P
+[(8)] .78571 .40712 0 2 Mshowa
+p
+.002 w
+.97619 .40712 m
+.97619 .41337 L
+s
+P
+[(10)] .97619 .40712 0 2 Mshowa
+p
+.001 w
+.0619 .40712 m
+.0619 .41087 L
+s
+P
+p
+.001 w
+.1 .40712 m
+.1 .41087 L
+s
+P
+p
+.001 w
+.1381 .40712 m
+.1381 .41087 L
+s
+P
+p
+.001 w
+.17619 .40712 m
+.17619 .41087 L
+s
+P
+p
+.001 w
+.25238 .40712 m
+.25238 .41087 L
+s
+P
+p
+.001 w
+.29048 .40712 m
+.29048 .41087 L
+s
+P
+p
+.001 w
+.32857 .40712 m
+.32857 .41087 L
+s
+P
+p
+.001 w
+.36667 .40712 m
+.36667 .41087 L
+s
+P
+p
+.001 w
+.44286 .40712 m
+.44286 .41087 L
+s
+P
+p
+.001 w
+.48095 .40712 m
+.48095 .41087 L
+s
+P
+p
+.001 w
+.51905 .40712 m
+.51905 .41087 L
+s
+P
+p
+.001 w
+.55714 .40712 m
+.55714 .41087 L
+s
+P
+p
+.001 w
+.63333 .40712 m
+.63333 .41087 L
+s
+P
+p
+.001 w
+.67143 .40712 m
+.67143 .41087 L
+s
+P
+p
+.001 w
+.70952 .40712 m
+.70952 .41087 L
+s
+P
+p
+.001 w
+.74762 .40712 m
+.74762 .41087 L
+s
+P
+p
+.001 w
+.82381 .40712 m
+.82381 .41087 L
+s
+P
+p
+.001 w
+.8619 .40712 m
+.8619 .41087 L
+s
+P
+p
+.001 w
+.9 .40712 m
+.9 .41087 L
+s
+P
+p
+.001 w
+.9381 .40712 m
+.9381 .41087 L
+s
+P
+p
+.002 w
+0 .40712 m
+1 .40712 L
+s
+P
+p
+.002 w
+.02381 .01472 m
+.03006 .01472 L
+s
+P
+[(-2)] .01131 .01472 1 0 Mshowa
+p
+.002 w
+.02381 .11282 m
+.03006 .11282 L
+s
+P
+[(-1.5)] .01131 .11282 1 0 Mshowa
+p
+.002 w
+.02381 .21092 m
+.03006 .21092 L
+s
+P
+[(-1)] .01131 .21092 1 0 Mshowa
+p
+.002 w
+.02381 .30902 m
+.03006 .30902 L
+s
+P
+[(-0.5)] .01131 .30902 1 0 Mshowa
+p
+.002 w
+.02381 .50522 m
+.03006 .50522 L
+s
+P
+[(0.5)] .01131 .50522 1 0 Mshowa
+p
+.002 w
+.02381 .60332 m
+.03006 .60332 L
+s
+P
+[(1)] .01131 .60332 1 0 Mshowa
+p
+.001 w
+.02381 .03434 m
+.02756 .03434 L
+s
+P
+p
+.001 w
+.02381 .05396 m
+.02756 .05396 L
+s
+P
+p
+.001 w
+.02381 .07358 m
+.02756 .07358 L
+s
+P
+p
+.001 w
+.02381 .0932 m
+.02756 .0932 L
+s
+P
+p
+.001 w
+.02381 .13244 m
+.02756 .13244 L
+s
+P
+p
+.001 w
+.02381 .15206 m
+.02756 .15206 L
+s
+P
+p
+.001 w
+.02381 .17168 m
+.02756 .17168 L
+s
+P
+p
+.001 w
+.02381 .1913 m
+.02756 .1913 L
+s
+P
+p
+.001 w
+.02381 .23054 m
+.02756 .23054 L
+s
+P
+p
+.001 w
+.02381 .25016 m
+.02756 .25016 L
+s
+P
+p
+.001 w
+.02381 .26978 m
+.02756 .26978 L
+s
+P
+p
+.001 w
+.02381 .2894 m
+.02756 .2894 L
+s
+P
+p
+.001 w
+.02381 .32864 m
+.02756 .32864 L
+s
+P
+p
+.001 w
+.02381 .34826 m
+.02756 .34826 L
+s
+P
+p
+.001 w
+.02381 .36788 m
+.02756 .36788 L
+s
+P
+p
+.001 w
+.02381 .3875 m
+.02756 .3875 L
+s
+P
+p
+.001 w
+.02381 .42674 m
+.02756 .42674 L
+s
+P
+p
+.001 w
+.02381 .44636 m
+.02756 .44636 L
+s
+P
+p
+.001 w
+.02381 .46598 m
+.02756 .46598 L
+s
+P
+p
+.001 w
+.02381 .4856 m
+.02756 .4856 L
+s
+P
+p
+.001 w
+.02381 .52484 m
+.02756 .52484 L
+s
+P
+p
+.001 w
+.02381 .54446 m
+.02756 .54446 L
+s
+P
+p
+.001 w
+.02381 .56408 m
+.02756 .56408 L
+s
+P
+p
+.001 w
+.02381 .5837 m
+.02756 .5837 L
+s
+P
+p
+.002 w
+.02381 0 m
+.02381 .61803 L
+s
+P
+P
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+.004 w
+.02381 .40712 m
+.11905 .21092 L
+.21429 .01472 L
+.30952 .21092 L
+.40476 .01472 L
+.5 .21092 L
+.59524 .40712 L
+.69048 .21092 L
+.78571 .40712 L
+.88095 .60332 L
+.97619 .40712 L
+s
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 174},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCacheValid->False],
+
+Cell[OutputFormData["\<\
+{{0}, {2}}\
+\>", "\<\
+{{0}, {2}}\
+\>"], "Output",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]],
+
+Cell[CellGroupData[{Cell[TextData["HTSimulation[5, 10, False]\n"], "Input",
+  AspectRatioFixed->True],
+
+Cell[OutputFormData["\<\
+{{6, 0, -2, 0, 6}, {10, 2, 2, 0, 10}}\
+\>", 
+"\<\
+{{6, 0, -2, 0, 6}, {10, 2, 2, 0, 10}}\
+\>"], "Output",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]],
+
+Cell[CellGroupData[{Cell[TextData["HTSimulation[500, 10, True];"], "Input",
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"The first spike graph below shows the\ndistribution of winnings.  The second\
+\nspike graph shows the distribution of\nthe number of times in the lead."], 
+  "Print",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.5 0.0595238 0.0147151 2.2128 [
+[(-7.5)] .05357 0 0 2 Msboxa
+[(-5)] .20238 0 0 2 Msboxa
+[(-2.5)] .35119 0 0 2 Msboxa
+[(0)] .5 0 0 2 Msboxa
+[(2.5)] .64881 0 0 2 Msboxa
+[(5)] .79762 0 0 2 Msboxa
+[(7.5)] .94643 0 0 2 Msboxa
+[(0)] -0.0125 .01472 1 0 Msboxa
+[(0.05)] -0.0125 .12535 1 0 Msboxa
+[(0.1)] -0.0125 .23599 1 0 Msboxa
+[(0.15)] -0.0125 .34663 1 0 Msboxa
+[(0.2)] -0.0125 .45727 1 0 Msboxa
+[(0.25)] -0.0125 .56791 1 0 Msboxa
+[ -0.001 -0.001 0 0 ]
+[ 1.001 .61903 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+p
+.002 w
+.05357 0 m
+.05357 .00625 L
+s
+P
+[(-7.5)] .05357 0 0 2 Mshowa
+p
+.002 w
+.20238 0 m
+.20238 .00625 L
+s
+P
+[(-5)] .20238 0 0 2 Mshowa
+p
+.002 w
+.35119 0 m
+.35119 .00625 L
+s
+P
+[(-2.5)] .35119 0 0 2 Mshowa
+p
+.002 w
+.5 0 m
+.5 .00625 L
+s
+P
+[(0)] .5 0 0 2 Mshowa
+p
+.002 w
+.64881 0 m
+.64881 .00625 L
+s
+P
+[(2.5)] .64881 0 0 2 Mshowa
+p
+.002 w
+.79762 0 m
+.79762 .00625 L
+s
+P
+[(5)] .79762 0 0 2 Mshowa
+p
+.002 w
+.94643 0 m
+.94643 .00625 L
+s
+P
+[(7.5)] .94643 0 0 2 Mshowa
+p
+.001 w
+.08333 0 m
+.08333 .00375 L
+s
+P
+p
+.001 w
+.1131 0 m
+.1131 .00375 L
+s
+P
+p
+.001 w
+.14286 0 m
+.14286 .00375 L
+s
+P
+p
+.001 w
+.17262 0 m
+.17262 .00375 L
+s
+P
+p
+.001 w
+.23214 0 m
+.23214 .00375 L
+s
+P
+p
+.001 w
+.2619 0 m
+.2619 .00375 L
+s
+P
+p
+.001 w
+.29167 0 m
+.29167 .00375 L
+s
+P
+p
+.001 w
+.32143 0 m
+.32143 .00375 L
+s
+P
+p
+.001 w
+.38095 0 m
+.38095 .00375 L
+s
+P
+p
+.001 w
+.41071 0 m
+.41071 .00375 L
+s
+P
+p
+.001 w
+.44048 0 m
+.44048 .00375 L
+s
+P
+p
+.001 w
+.47024 0 m
+.47024 .00375 L
+s
+P
+p
+.001 w
+.52976 0 m
+.52976 .00375 L
+s
+P
+p
+.001 w
+.55952 0 m
+.55952 .00375 L
+s
+P
+p
+.001 w
+.58929 0 m
+.58929 .00375 L
+s
+P
+p
+.001 w
+.61905 0 m
+.61905 .00375 L
+s
+P
+p
+.001 w
+.67857 0 m
+.67857 .00375 L
+s
+P
+p
+.001 w
+.70833 0 m
+.70833 .00375 L
+s
+P
+p
+.001 w
+.7381 0 m
+.7381 .00375 L
+s
+P
+p
+.001 w
+.76786 0 m
+.76786 .00375 L
+s
+P
+p
+.001 w
+.82738 0 m
+.82738 .00375 L
+s
+P
+p
+.001 w
+.85714 0 m
+.85714 .00375 L
+s
+P
+p
+.001 w
+.8869 0 m
+.8869 .00375 L
+s
+P
+p
+.001 w
+.91667 0 m
+.91667 .00375 L
+s
+P
+p
+.001 w
+.02381 0 m
+.02381 .00375 L
+s
+P
+p
+.001 w
+.97619 0 m
+.97619 .00375 L
+s
+P
+p
+.002 w
+0 0 m
+1 0 L
+s
+P
+p
+.002 w
+0 .01472 m
+.00625 .01472 L
+s
+P
+[(0)] -0.0125 .01472 1 0 Mshowa
+p
+.002 w
+0 .12535 m
+.00625 .12535 L
+s
+P
+[(0.05)] -0.0125 .12535 1 0 Mshowa
+p
+.002 w
+0 .23599 m
+.00625 .23599 L
+s
+P
+[(0.1)] -0.0125 .23599 1 0 Mshowa
+p
+.002 w
+0 .34663 m
+.00625 .34663 L
+s
+P
+[(0.15)] -0.0125 .34663 1 0 Mshowa
+p
+.002 w
+0 .45727 m
+.00625 .45727 L
+s
+P
+[(0.2)] -0.0125 .45727 1 0 Mshowa
+p
+.002 w
+0 .56791 m
+.00625 .56791 L
+s
+P
+[(0.25)] -0.0125 .56791 1 0 Mshowa
+p
+.001 w
+0 .03684 m
+.00375 .03684 L
+s
+P
+p
+.001 w
+0 .05897 m
+.00375 .05897 L
+s
+P
+p
+.001 w
+0 .0811 m
+.00375 .0811 L
+s
+P
+p
+.001 w
+0 .10323 m
+.00375 .10323 L
+s
+P
+p
+.001 w
+0 .14748 m
+.00375 .14748 L
+s
+P
+p
+.001 w
+0 .16961 m
+.00375 .16961 L
+s
+P
+p
+.001 w
+0 .19174 m
+.00375 .19174 L
+s
+P
+p
+.001 w
+0 .21387 m
+.00375 .21387 L
+s
+P
+p
+.001 w
+0 .25812 m
+.00375 .25812 L
+s
+P
+p
+.001 w
+0 .28025 m
+.00375 .28025 L
+s
+P
+p
+.001 w
+0 .30238 m
+.00375 .30238 L
+s
+P
+p
+.001 w
+0 .32451 m
+.00375 .32451 L
+s
+P
+p
+.001 w
+0 .36876 m
+.00375 .36876 L
+s
+P
+p
+.001 w
+0 .39089 m
+.00375 .39089 L
+s
+P
+p
+.001 w
+0 .41302 m
+.00375 .41302 L
+s
+P
+p
+.001 w
+0 .43515 m
+.00375 .43515 L
+s
+P
+p
+.001 w
+0 .4794 m
+.00375 .4794 L
+s
+P
+p
+.001 w
+0 .50153 m
+.00375 .50153 L
+s
+P
+p
+.001 w
+0 .52366 m
+.00375 .52366 L
+s
+P
+p
+.001 w
+0 .54579 m
+.00375 .54579 L
+s
+P
+p
+.001 w
+0 .59004 m
+.00375 .59004 L
+s
+P
+p
+.001 w
+0 .61217 m
+.00375 .61217 L
+s
+P
+p
+.002 w
+0 0 m
+0 .61803 L
+s
+P
+P
+p
+p
+.002 w
+.05357 .61178 m
+.05357 .61803 L
+s
+P
+p
+.002 w
+.20238 .61178 m
+.20238 .61803 L
+s
+P
+p
+.002 w
+.35119 .61178 m
+.35119 .61803 L
+s
+P
+p
+.002 w
+.5 .61178 m
+.5 .61803 L
+s
+P
+p
+.002 w
+.64881 .61178 m
+.64881 .61803 L
+s
+P
+p
+.002 w
+.79762 .61178 m
+.79762 .61803 L
+s
+P
+p
+.002 w
+.94643 .61178 m
+.94643 .61803 L
+s
+P
+p
+.001 w
+.08333 .61428 m
+.08333 .61803 L
+s
+P
+p
+.001 w
+.1131 .61428 m
+.1131 .61803 L
+s
+P
+p
+.001 w
+.14286 .61428 m
+.14286 .61803 L
+s
+P
+p
+.001 w
+.17262 .61428 m
+.17262 .61803 L
+s
+P
+p
+.001 w
+.23214 .61428 m
+.23214 .61803 L
+s
+P
+p
+.001 w
+.2619 .61428 m
+.2619 .61803 L
+s
+P
+p
+.001 w
+.29167 .61428 m
+.29167 .61803 L
+s
+P
+p
+.001 w
+.32143 .61428 m
+.32143 .61803 L
+s
+P
+p
+.001 w
+.38095 .61428 m
+.38095 .61803 L
+s
+P
+p
+.001 w
+.41071 .61428 m
+.41071 .61803 L
+s
+P
+p
+.001 w
+.44048 .61428 m
+.44048 .61803 L
+s
+P
+p
+.001 w
+.47024 .61428 m
+.47024 .61803 L
+s
+P
+p
+.001 w
+.52976 .61428 m
+.52976 .61803 L
+s
+P
+p
+.001 w
+.55952 .61428 m
+.55952 .61803 L
+s
+P
+p
+.001 w
+.58929 .61428 m
+.58929 .61803 L
+s
+P
+p
+.001 w
+.61905 .61428 m
+.61905 .61803 L
+s
+P
+p
+.001 w
+.67857 .61428 m
+.67857 .61803 L
+s
+P
+p
+.001 w
+.70833 .61428 m
+.70833 .61803 L
+s
+P
+p
+.001 w
+.7381 .61428 m
+.7381 .61803 L
+s
+P
+p
+.001 w
+.76786 .61428 m
+.76786 .61803 L
+s
+P
+p
+.001 w
+.82738 .61428 m
+.82738 .61803 L
+s
+P
+p
+.001 w
+.85714 .61428 m
+.85714 .61803 L
+s
+P
+p
+.001 w
+.8869 .61428 m
+.8869 .61803 L
+s
+P
+p
+.001 w
+.91667 .61428 m
+.91667 .61803 L
+s
+P
+p
+.001 w
+.02381 .61428 m
+.02381 .61803 L
+s
+P
+p
+.001 w
+.97619 .61428 m
+.97619 .61803 L
+s
+P
+p
+.002 w
+0 .61803 m
+1 .61803 L
+s
+P
+p
+.002 w
+.99375 .01472 m
+1 .01472 L
+s
+P
+p
+.002 w
+.99375 .12535 m
+1 .12535 L
+s
+P
+p
+.002 w
+.99375 .23599 m
+1 .23599 L
+s
+P
+p
+.002 w
+.99375 .34663 m
+1 .34663 L
+s
+P
+p
+.002 w
+.99375 .45727 m
+1 .45727 L
+s
+P
+p
+.002 w
+.99375 .56791 m
+1 .56791 L
+s
+P
+p
+.001 w
+.99625 .03684 m
+1 .03684 L
+s
+P
+p
+.001 w
+.99625 .05897 m
+1 .05897 L
+s
+P
+p
+.001 w
+.99625 .0811 m
+1 .0811 L
+s
+P
+p
+.001 w
+.99625 .10323 m
+1 .10323 L
+s
+P
+p
+.001 w
+.99625 .14748 m
+1 .14748 L
+s
+P
+p
+.001 w
+.99625 .16961 m
+1 .16961 L
+s
+P
+p
+.001 w
+.99625 .19174 m
+1 .19174 L
+s
+P
+p
+.001 w
+.99625 .21387 m
+1 .21387 L
+s
+P
+p
+.001 w
+.99625 .25812 m
+1 .25812 L
+s
+P
+p
+.001 w
+.99625 .28025 m
+1 .28025 L
+s
+P
+p
+.001 w
+.99625 .30238 m
+1 .30238 L
+s
+P
+p
+.001 w
+.99625 .32451 m
+1 .32451 L
+s
+P
+p
+.001 w
+.99625 .36876 m
+1 .36876 L
+s
+P
+p
+.001 w
+.99625 .39089 m
+1 .39089 L
+s
+P
+p
+.001 w
+.99625 .41302 m
+1 .41302 L
+s
+P
+p
+.001 w
+.99625 .43515 m
+1 .43515 L
+s
+P
+p
+.001 w
+.99625 .4794 m
+1 .4794 L
+s
+P
+p
+.001 w
+.99625 .50153 m
+1 .50153 L
+s
+P
+p
+.001 w
+.99625 .52366 m
+1 .52366 L
+s
+P
+p
+.001 w
+.99625 .54579 m
+1 .54579 L
+s
+P
+p
+.001 w
+.99625 .59004 m
+1 .59004 L
+s
+P
+p
+.001 w
+.99625 .61217 m
+1 .61217 L
+s
+P
+p
+.002 w
+1 0 m
+1 .61803 L
+s
+P
+P
+p
+P
+p
+.004 w
+.02381 .03242 m
+.02381 .01472 L
+s
+.14286 .09438 m
+.14286 .01472 L
+s
+.2619 .29353 m
+.2619 .01472 L
+s
+.38095 .53694 m
+.38095 .01472 L
+s
+.5 .60332 m
+.5 .01472 L
+s
+.61905 .41302 m
+.61905 .01472 L
+s
+.7381 .24485 m
+.7381 .01472 L
+s
+.85714 .10765 m
+.85714 .01472 L
+s
+.97619 .01914 m
+.97619 .01472 L
+s
+P
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 174},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCacheValid->False],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.0238095 0.0952381 0.0147151 2.08725 [
+[(0)] .02381 0 0 2 Msboxa
+[(2)] .21429 0 0 2 Msboxa
+[(4)] .40476 0 0 2 Msboxa
+[(6)] .59524 0 0 2 Msboxa
+[(8)] .78571 0 0 2 Msboxa
+[(10)] .97619 0 0 2 Msboxa
+[(0)] -0.0125 .01472 1 0 Msboxa
+[(0.05)] -0.0125 .11908 1 0 Msboxa
+[(0.1)] -0.0125 .22344 1 0 Msboxa
+[(0.15)] -0.0125 .3278 1 0 Msboxa
+[(0.2)] -0.0125 .43216 1 0 Msboxa
+[(0.25)] -0.0125 .53653 1 0 Msboxa
+[ -0.001 -0.001 0 0 ]
+[ 1.001 .61903 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+p
+.002 w
+.02381 0 m
+.02381 .00625 L
+s
+P
+[(0)] .02381 0 0 2 Mshowa
+p
+.002 w
+.21429 0 m
+.21429 .00625 L
+s
+P
+[(2)] .21429 0 0 2 Mshowa
+p
+.002 w
+.40476 0 m
+.40476 .00625 L
+s
+P
+[(4)] .40476 0 0 2 Mshowa
+p
+.002 w
+.59524 0 m
+.59524 .00625 L
+s
+P
+[(6)] .59524 0 0 2 Mshowa
+p
+.002 w
+.78571 0 m
+.78571 .00625 L
+s
+P
+[(8)] .78571 0 0 2 Mshowa
+p
+.002 w
+.97619 0 m
+.97619 .00625 L
+s
+P
+[(10)] .97619 0 0 2 Mshowa
+p
+.001 w
+.0619 0 m
+.0619 .00375 L
+s
+P
+p
+.001 w
+.1 0 m
+.1 .00375 L
+s
+P
+p
+.001 w
+.1381 0 m
+.1381 .00375 L
+s
+P
+p
+.001 w
+.17619 0 m
+.17619 .00375 L
+s
+P
+p
+.001 w
+.25238 0 m
+.25238 .00375 L
+s
+P
+p
+.001 w
+.29048 0 m
+.29048 .00375 L
+s
+P
+p
+.001 w
+.32857 0 m
+.32857 .00375 L
+s
+P
+p
+.001 w
+.36667 0 m
+.36667 .00375 L
+s
+P
+p
+.001 w
+.44286 0 m
+.44286 .00375 L
+s
+P
+p
+.001 w
+.48095 0 m
+.48095 .00375 L
+s
+P
+p
+.001 w
+.51905 0 m
+.51905 .00375 L
+s
+P
+p
+.001 w
+.55714 0 m
+.55714 .00375 L
+s
+P
+p
+.001 w
+.63333 0 m
+.63333 .00375 L
+s
+P
+p
+.001 w
+.67143 0 m
+.67143 .00375 L
+s
+P
+p
+.001 w
+.70952 0 m
+.70952 .00375 L
+s
+P
+p
+.001 w
+.74762 0 m
+.74762 .00375 L
+s
+P
+p
+.001 w
+.82381 0 m
+.82381 .00375 L
+s
+P
+p
+.001 w
+.8619 0 m
+.8619 .00375 L
+s
+P
+p
+.001 w
+.9 0 m
+.9 .00375 L
+s
+P
+p
+.001 w
+.9381 0 m
+.9381 .00375 L
+s
+P
+p
+.002 w
+0 0 m
+1 0 L
+s
+P
+p
+.002 w
+0 .01472 m
+.00625 .01472 L
+s
+P
+[(0)] -0.0125 .01472 1 0 Mshowa
+p
+.002 w
+0 .11908 m
+.00625 .11908 L
+s
+P
+[(0.05)] -0.0125 .11908 1 0 Mshowa
+p
+.002 w
+0 .22344 m
+.00625 .22344 L
+s
+P
+[(0.1)] -0.0125 .22344 1 0 Mshowa
+p
+.002 w
+0 .3278 m
+.00625 .3278 L
+s
+P
+[(0.15)] -0.0125 .3278 1 0 Mshowa
+p
+.002 w
+0 .43216 m
+.00625 .43216 L
+s
+P
+[(0.2)] -0.0125 .43216 1 0 Mshowa
+p
+.002 w
+0 .53653 m
+.00625 .53653 L
+s
+P
+[(0.25)] -0.0125 .53653 1 0 Mshowa
+p
+.001 w
+0 .03559 m
+.00375 .03559 L
+s
+P
+p
+.001 w
+0 .05646 m
+.00375 .05646 L
+s
+P
+p
+.001 w
+0 .07733 m
+.00375 .07733 L
+s
+P
+p
+.001 w
+0 .0982 m
+.00375 .0982 L
+s
+P
+p
+.001 w
+0 .13995 m
+.00375 .13995 L
+s
+P
+p
+.001 w
+0 .16082 m
+.00375 .16082 L
+s
+P
+p
+.001 w
+0 .18169 m
+.00375 .18169 L
+s
+P
+p
+.001 w
+0 .20257 m
+.00375 .20257 L
+s
+P
+p
+.001 w
+0 .24431 m
+.00375 .24431 L
+s
+P
+p
+.001 w
+0 .26518 m
+.00375 .26518 L
+s
+P
+p
+.001 w
+0 .28606 m
+.00375 .28606 L
+s
+P
+p
+.001 w
+0 .30693 m
+.00375 .30693 L
+s
+P
+p
+.001 w
+0 .34867 m
+.00375 .34867 L
+s
+P
+p
+.001 w
+0 .36955 m
+.00375 .36955 L
+s
+P
+p
+.001 w
+0 .39042 m
+.00375 .39042 L
+s
+P
+p
+.001 w
+0 .41129 m
+.00375 .41129 L
+s
+P
+p
+.001 w
+0 .45304 m
+.00375 .45304 L
+s
+P
+p
+.001 w
+0 .47391 m
+.00375 .47391 L
+s
+P
+p
+.001 w
+0 .49478 m
+.00375 .49478 L
+s
+P
+p
+.001 w
+0 .51565 m
+.00375 .51565 L
+s
+P
+p
+.001 w
+0 .5574 m
+.00375 .5574 L
+s
+P
+p
+.001 w
+0 .57827 m
+.00375 .57827 L
+s
+P
+p
+.001 w
+0 .59914 m
+.00375 .59914 L
+s
+P
+p
+.002 w
+0 0 m
+0 .61803 L
+s
+P
+P
+p
+p
+.002 w
+.02381 .61178 m
+.02381 .61803 L
+s
+P
+p
+.002 w
+.21429 .61178 m
+.21429 .61803 L
+s
+P
+p
+.002 w
+.40476 .61178 m
+.40476 .61803 L
+s
+P
+p
+.002 w
+.59524 .61178 m
+.59524 .61803 L
+s
+P
+p
+.002 w
+.78571 .61178 m
+.78571 .61803 L
+s
+P
+p
+.002 w
+.97619 .61178 m
+.97619 .61803 L
+s
+P
+p
+.001 w
+.0619 .61428 m
+.0619 .61803 L
+s
+P
+p
+.001 w
+.1 .61428 m
+.1 .61803 L
+s
+P
+p
+.001 w
+.1381 .61428 m
+.1381 .61803 L
+s
+P
+p
+.001 w
+.17619 .61428 m
+.17619 .61803 L
+s
+P
+p
+.001 w
+.25238 .61428 m
+.25238 .61803 L
+s
+P
+p
+.001 w
+.29048 .61428 m
+.29048 .61803 L
+s
+P
+p
+.001 w
+.32857 .61428 m
+.32857 .61803 L
+s
+P
+p
+.001 w
+.36667 .61428 m
+.36667 .61803 L
+s
+P
+p
+.001 w
+.44286 .61428 m
+.44286 .61803 L
+s
+P
+p
+.001 w
+.48095 .61428 m
+.48095 .61803 L
+s
+P
+p
+.001 w
+.51905 .61428 m
+.51905 .61803 L
+s
+P
+p
+.001 w
+.55714 .61428 m
+.55714 .61803 L
+s
+P
+p
+.001 w
+.63333 .61428 m
+.63333 .61803 L
+s
+P
+p
+.001 w
+.67143 .61428 m
+.67143 .61803 L
+s
+P
+p
+.001 w
+.70952 .61428 m
+.70952 .61803 L
+s
+P
+p
+.001 w
+.74762 .61428 m
+.74762 .61803 L
+s
+P
+p
+.001 w
+.82381 .61428 m
+.82381 .61803 L
+s
+P
+p
+.001 w
+.8619 .61428 m
+.8619 .61803 L
+s
+P
+p
+.001 w
+.9 .61428 m
+.9 .61803 L
+s
+P
+p
+.001 w
+.9381 .61428 m
+.9381 .61803 L
+s
+P
+p
+.002 w
+0 .61803 m
+1 .61803 L
+s
+P
+p
+.002 w
+.99375 .01472 m
+1 .01472 L
+s
+P
+p
+.002 w
+.99375 .11908 m
+1 .11908 L
+s
+P
+p
+.002 w
+.99375 .22344 m
+1 .22344 L
+s
+P
+p
+.002 w
+.99375 .3278 m
+1 .3278 L
+s
+P
+p
+.002 w
+.99375 .43216 m
+1 .43216 L
+s
+P
+p
+.002 w
+.99375 .53653 m
+1 .53653 L
+s
+P
+p
+.001 w
+.99625 .03559 m
+1 .03559 L
+s
+P
+p
+.001 w
+.99625 .05646 m
+1 .05646 L
+s
+P
+p
+.001 w
+.99625 .07733 m
+1 .07733 L
+s
+P
+p
+.001 w
+.99625 .0982 m
+1 .0982 L
+s
+P
+p
+.001 w
+.99625 .13995 m
+1 .13995 L
+s
+P
+p
+.001 w
+.99625 .16082 m
+1 .16082 L
+s
+P
+p
+.001 w
+.99625 .18169 m
+1 .18169 L
+s
+P
+p
+.001 w
+.99625 .20257 m
+1 .20257 L
+s
+P
+p
+.001 w
+.99625 .24431 m
+1 .24431 L
+s
+P
+p
+.001 w
+.99625 .26518 m
+1 .26518 L
+s
+P
+p
+.001 w
+.99625 .28606 m
+1 .28606 L
+s
+P
+p
+.001 w
+.99625 .30693 m
+1 .30693 L
+s
+P
+p
+.001 w
+.99625 .34867 m
+1 .34867 L
+s
+P
+p
+.001 w
+.99625 .36955 m
+1 .36955 L
+s
+P
+p
+.001 w
+.99625 .39042 m
+1 .39042 L
+s
+P
+p
+.001 w
+.99625 .41129 m
+1 .41129 L
+s
+P
+p
+.001 w
+.99625 .45304 m
+1 .45304 L
+s
+P
+p
+.001 w
+.99625 .47391 m
+1 .47391 L
+s
+P
+p
+.001 w
+.99625 .49478 m
+1 .49478 L
+s
+P
+p
+.001 w
+.99625 .51565 m
+1 .51565 L
+s
+P
+p
+.001 w
+.99625 .5574 m
+1 .5574 L
+s
+P
+p
+.001 w
+.99625 .57827 m
+1 .57827 L
+s
+P
+p
+.001 w
+.99625 .59914 m
+1 .59914 L
+s
+P
+p
+.002 w
+1 0 m
+1 .61803 L
+s
+P
+P
+p
+P
+p
+.004 w
+.02381 .60332 m
+.02381 .01472 L
+s
+.21429 .26936 m
+.21429 .01472 L
+s
+.40476 .28606 m
+.40476 .01472 L
+s
+.59524 .33198 m
+.59524 .01472 L
+s
+.78571 .24431 m
+.78571 .01472 L
+s
+.97619 .44051 m
+.97619 .01472 L
+s
+P
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 174},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCacheValid->False]}, Open]]}, Open]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{28, Automatic}, {30, Automatic}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 1643, 23, 70, "Text"],
+Cell[3357, 76, 2124, 29, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[5504, 107, 80, 1, 70, "Input"],
+Cell[5587, 110, 4017, 412, 70, 3859, 407, "GraphicsData", 
+"PostScript", "Graphics"],
+Cell[9607, 524, 122, 6, 70, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9761, 532, 81, 1, 70, "Input"],
+Cell[9845, 535, 177, 7, 70, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10054, 544, 81, 1, 70, "Input"],
+Cell[10138, 547, 230, 5, 70, "Print"],
+
+Cell[CellGroupData[{
+Cell[10391, 554, 6837, 851, 70, 6679, 846, "GraphicsData", 
+"PostScript", "Graphics"],
+Cell[17231, 1407, 6153, 768, 70, 5995, 763, "GraphicsData", 
+"PostScript", "Graphics"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

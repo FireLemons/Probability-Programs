@@ -1,0 +1,169 @@
+(*^
+
+::[	frontEndVersion = "Macintosh Mathematica Notebook Front End Version 2.1";
+	macintoshStandardFontEncoding; 
+	paletteColors = 128; automaticGrouping; currentKernel; 
+	fontset = title, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeTitle, center, M7, bold, e8,  24, "Times"; ;
+	fontset = subtitle, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeTitle, center, M7, bold, e6,  18, "Times"; ;
+	fontset = subsubtitle, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeTitle, center, M7, italic, e6,  14, "Times"; ;
+	fontset = section, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeSection, grayBox, M22, bold, a20,  18, "Times"; ;
+	fontset = subsection, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeSection, blackBox, M19, bold, a15,  14, "Times"; ;
+	fontset = subsubsection, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeSection, whiteBox, M18, bold, a12,  12, "Times"; ;
+	fontset = text, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; ;
+	fontset = smalltext, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  10, "Times"; ;
+	fontset = input, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeInput, M42, N23, bold, L-5,  12, "Courier"; ;
+	fontset = output, output, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23, L-5,  12, "Courier"; ;
+	fontset = message, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23, R65535, L-5,  12, "Courier"; ;
+	fontset = print, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23, L-5,  12, "Courier"; ;
+	fontset = info, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23, B65535, L-5,  12, "Courier"; ;
+	fontset = postscript, PostScript, formatAsPostScript, output, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeGraphics, M7, l34, w282, h287,  12, "Courier"; ;
+	fontset = name, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7, italic,  10, "Geneva"; ;
+	fontset = header, inactive, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; ;
+	fontset = leftheader, inactive, L2,  12, "Times"; ;
+	fontset = footer, inactive, noKeepOnOnePage, preserveAspect, center, M7,  12, "Times"; ;
+	fontset = leftfooter, inactive, L2,  12, "Times"; ;
+	fontset = help, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  10, "Times"; ;
+	fontset = clipboard, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; ;
+	fontset = completions, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; ;
+	fontset = special1, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; ;
+	fontset = special2, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; ;
+	fontset = special3, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; ;
+	fontset = special4, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; ;
+	fontset = special5, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; ;
+]
+:[font = text; inactive; preserveAspect; ]
+CHAPTER 1 PROGRAM DESCRIPTIONS
+
+
+PROGRAM:  CoinTosses
+CALLING SEQUENCE:  CoinTosses[n, print]
+PARAMETERS:  
+     n - an integer
+     print - a Boolean variable (True or False)
+SYNOPSIS:   
+     - This program simulates n tosses of a fair coin, and prints the proportion of tosses
+        that come up heads.  If print = True,  then the outcomes of the tosses (H/T) are
+        also printed.
+RETURNED VALUES:
+     -  none         
+LOCATION:
+     Folder:  Chapter 1
+     File:       "CoinTosses.Chpt1.mat"
+     
+         		                   
+PROGRAM:  DeMere1
+CALLING SEQUENCE:   DeMere1[n, print] 
+PARAMETERS: 
+     n - an integer
+     print - a Boolean variable (True or False)
+SYNOPSIS:   
+     - This program simulates 4 rolls of a die, and determines whether a six has
+        appeared (a "success").  It repeats this experiment n times, and prints the number
+        of trials that resulted in a success.  It also prints the proportion of trials that
+        resulted in a success.   Finally, if print = True, then the rolls are printed out.
+ RETURNED VALUES:
+     -  none
+LOCATION:
+     Folder:  Chapter 1
+     File:       "DeMere1&2.Chpt1.mat"
+        
+ 																												  
+PROGRAM:  DeMere2
+CALLING SEQUENCE:   DeMere2[n, m, print]
+PARAMETERS:  
+     n, m - integers
+		   print - a Boolean variable (True or False)
+SYNOPSIS:   
+     - This program simulates m rolls of two dice, and determines whether a double 6 	
+       has appeared (a "success").  It repeats this experiment n times, and prints the
+       number of trials that resulted in a success.  It also prints the proportion of trials
+       that resulted in a success.   Finally, if print = True, then the rolls are printed out.
+RETURNED VALUES:
+     -  none
+LOCAT ION:
+     Folder:  Chapter 1
+     File:       "DeMere1&2.Chpt1.mat"
+     
+     
+PROGRAM:  GeneralSimulation
+CALLING SEQUENCE:  GeneralSimulation[n, plist, m, print]
+PARAMETERS:  
+     n, m - integers
+     plist - a probability list
+     print - a Boolean variable (True or False)
+SYNOPSIS:
+     -  This program simulates a general experiment in which the outcomes 1, 2, ..., n
+        occur with probabilties p(1), p(2), ..., p(n).  These probabilities are entered as a
+        list in plist.  The experiment is repeated m times, and the observed frequencies of
+        the outcomes are printed.  If print = True, the outcomes are printed, and spike
+        graphs of the observed data frequencies and  plist data frequencies are
+        displayed on the same set of axes;  the observed data spikes are topped with
+        blue dots, and the plist data spikes are topped with red.  Finally, the program
+        returns a list of the n observed frequencies.
+      -  Note:  this program requires the programs "SimulateDiscreteVariable[plist]" and
+         "SpikegraphWithDots[distributionlist, xmin, xmax, color, print]" be initialized.
+RETURNED VALUES:
+     -  a list of the n observed frequencies
+LOCATION:
+     Folder:  Chapter 1
+     File:       "GeneralSimulation.Chpt1.mat"   
+     
+     
+PROGRAM:  HorseRace
+CALLING SEQUENCE:  HorseRace[n]
+PARAMETERS:  
+     n - an integer
+SYNOPSIS:
+     - This program simulates n of the horse races described in Chapter 1.  The
+       program prints each race winner, and returns a list containing the percentage of
+       times each horse won. 
+RETURNED VALUES:
+     -  a list containing the number of times each horse won
+LOCATION:
+     Folder:  Chapter 1
+     File:       "HorseRace.Chpt1.mat"
+     
+     
+FUNCTION:  HTSimulation
+CALLING SEQUENCE:  HTSimulation[n, m, print]
+PARAMETERS:  
+     n, m - integers
+     print - a Boolean variable (True or False)
+ SYNOPSIS:
+     -  This program simulates an experiment in which a fair coin is tossed m times. 
+        The experiment is repeated n times.  The program records the "winnings" in each
+        experiment, where the winnings are defined to be the number of heads minus
+        the number of tails.  It also keeps track of thenumber of times the winnings are
+        "positive" in the course of an experiment (we count as "positive" a time at which
+        the winnings are 0 but the previous winnings are positive).   The program returns
+        a list whose first element is a list of the winnings in each experiment
+        (winningslist), and whose second element is a list of times in the lead in each
+        experiment (timesinleadlist).  If print = True and n = 1, then a graph of the game
+        is displayed.  If print = True and n > 1, then spike graphs of the winningslist
+        and timesinleadlist are displayed. 
+     -  Note:  this program requires the program "Spikegraph[distributionlist, xmin,
+        xmax, print]" be initialized.
+RETURNED VALUES:
+     -  a list whose first element is a list of the winnings in each experiment, and whose
+        second element is a list of times in the lead in each experiment
+LOCATION:
+     Folder:  Chapter 1
+     File:       "HTSimulation.Chpt1.mat"
+     
+     
+PROGRAM:   RandomNumbers
+CALLING SEQUENCE:   RandomNumbers[n] 
+PARAMETERS:  
+      n - an integer
+SYNOPSIS: 
+      - This program generates and displays n random real numbers between 0  and
+         1.
+RETURNED VALUES:
+      - none
+LOCATION:
+     Folder:  Chapter 1
+     File:       "RandomNumbers.Chpt1.mat"
+;[s]
+2:0,2;30,1;5277,-1;
+3:0,13,9,Times,0,12,0,0,0;1,14,10,Helvetica,0,12,0,0,0;1,14,10,Helvetica,1,12,0,0,0;
+^*)

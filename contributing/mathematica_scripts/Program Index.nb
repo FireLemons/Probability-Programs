@@ -1,0 +1,215 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      9371,        163]*)
+(*NotebookOutlinePosition[     10477,        198]*)
+(*  CellTagsIndexPosition[     10433,        194]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+  StyleBox["PROGRAM INDEX",
+    FontFamily->"Helvetica"],
+  StyleBox["",
+    FontWeight->"Plain"]
+}], "Title",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  FontSize->14],
+
+Cell[TextData[StyleBox[
+"PROGRAM                             FOLDER                                   \
+         FILE\n\nA                                             Chapter 3      \
+              \"ShuffleCalculations.Chpt3.mat\"\n\nAbsorbingChain             \
+     Chapter 11                  \"AbsorbingChain.Chpt11.mat\"\n\n\
+AllPermutations                   Chapter 3                      \
+\"AllPermutations.Chpt3.mat\"\n\nAreabargraph                              -- \
+                                 \"Important Programs\"\n\nAShuffle           \
+                     Chapter 3                          \
+\"AShuffle.Chpt3.mat\"\n\nBargraph                                      --    \
+                               \"Important Programs\"\n\nBayes                \
+                    Chapter 4                             \"Bayes.Chpt4.mat\"\
+\n\nBertrandsParadox              Chapter 2                     \
+\"BertrandsParadox.Chpt2.mat\"\n\nBetaDensity                                 \
+--                                   \"Important Programs\"\n\nBin            \
+                                     --                                   \
+\"Important Programs\"\n\nBinomialPlot                         Chapter 3      \
+                  \"BinomialPlot.Chpt3.mat\"\n\nBinomialProbabilities         \
+Chapter 3                    \"BinomialProbabilities.Chpt3.mat\"\n\nBirthday  \
+                               Chapter 3                           \
+\"Birthday.Chpt3.mat\"\n\nBranch                                   Chapter 10 \
+                        \"Branch.Chpt10.mat\"\n\nBranchingSimulation         \
+Chapter 10               \"BranchingSimulation.Chpt10.mat\"\n\nBuffonsNeedle  \
+                   Chapter 2                       \
+\"BuffonsNeedle.Chpt2.mat\"\n\nCLTBernoulliGlobal            Chapter 9        \
+          \"CLTBernoulliGlobal.Chpt9.mat\"\n\nCLTBernoulliLocal              \
+Chapter 9                    \"CLTBernoulliLocal.Chpt9.mat\"\n\n\
+CLTBernoulliPlot                 Chapter 9                      \
+\"CLTBernoulliPlot.Chpt9.mat\"\n\nCLTGeneral                         Chapter \
+9                          \"CLTGeneral.Chpt9.mat\"\n\nCLTIndTrialsGlobal     \
+       Chapter 9                    \"CLTIndTrialsGlobal.Chpt9.mat\"\n\n\
+CLTIndTrialsLocal              Chapter 9                     \
+\"CLTIndTrialsLocal.Chpt9.mat\"\n\nCLTIndTrialsPlot                 Chapter 9 \
+                      \"CLTIndTrialsPlot.Chpt9.mat\"\n\nCoinTosses            \
+              Chapter 1                          \"CoinTosses.Chpt1.mat\"\n\n\
+ConsolidateList                          --                                   \
+    \"Important Programs\"\n\nContinuousMean                       --         \
+                              \"Important Programs\"\n\nContinuousVariance    \
+             --                                       \"Important Programs\"\n\
+\nConvolution                                --                               \
+         \"Important Programs\"\n\nCraps                                     \
+Chapter 6                               \"Craps.Chpt6.mat\"\n\nDarts          \
+                            Chapter 2                                \
+\"Darts.Chpt2.mat\"\n\nDeMere1                               Chapter 1        \
+                  \"DeMere1&2.Chpt1.mat\"\n\nDeMere2                          \
+     Chapter 1                          \"DeMere1&2.Chpt1.mat\"\n\nDie        \
+                                  Chapter 6                                 \
+\"Die.Chpt6.mat\"\n\nDieTest                                  Chapter 7       \
+                       \"DieTest.Chpt7.mat\"\n\nDiscreteMean                  \
+          --                                       \"Important Programs\"\n\n\
+DiscreteVariance                      --                                      \
+ \"Important Programs\"\n\nEhrenfestUrn                       Chapter 11      \
+                 \"EhrenfestUrn.Chpt11.mat\"\n\nErgodicChain                  \
+    Chapter 11                      \"ErgodicChain.Chpt11.mat\"\n\n\
+FixedPoints                          Chapter 3                           \
+\"FixedPoints.Chpt3.mat\"\n\nFixedVector                               --     \
+                                   \"ImportantPrograms\"\n\nGaltonBoard       \
+                 Chapter 3                          \"GaltonBoard.Chpt3.mat\"\
+\n\nGeneralSimulation             Chapter 1                     \
+\"GeneralSimulation.Chpt1.mat\"\n\nGeometricPlot                      Chapter \
+5                         \"GeometricPlot.Chpt5.mat\"\n\nHTSimulation         \
+             Chapter 1                          \"HTSimulation.Chpt1.mat\"\n\n\
+HorseRace\t                         Chapter 1                             \
+\"HorseRace.Chpt1.mat\"\n\nLabelMatrix                                --      \
+                                  \"Important Programs\"\n\nLaw               \
+                        Chapter 8                                    \
+\"Law.Chpt8.mat\"\n\nLawContinuous                  Chapter 8                 \
+          \"LawContinuous.Chpt8.mat\"\n\nLondonBombs                    \
+Chapter 5                            \"LondonBombs.Chpt5.mat\"\n\n\
+MakeDistribution                Chapter 9                             \
+\"CLTGeneral.Chpt9.mat\"\n\nMonteCarlo                         Chapter 2      \
+                        \"MonteCarlo.Chpt2.mat\"\n\nNFoldConvolution          \
+            --                                       \"Important Programs\"\n\
+\nNormalArea                                 --                               \
+        \"Important Programs\"\n\nNormalDensity                            -- \
+                                      \"Important Programs\"\n\nQueue         \
+                         Chapter 5                                  \
+\"Queue.Chpt5.mat\"\n\nPowerCurve                       Chapter 3             \
+                 \"PowerCurve.Chpt3.mat\"\n\nRandomNumbers   \t          \
+Chapter 1   \t                     \"RandomNumbers.Chpt1.mat\"\n\nRecords     \
+                          Chapter 3                                 \
+\"Records.Chpt3.mat\"\n\nSimulateChain                   Chapter 11           \
+            \"SimulateChain.Chpt11.mat\"\n\nSimulateDiscreteVariable         \
+--                                       \"Important Programs\"\n\nSpikeData  \
+                                  --                                       \
+\"Important Programs\"\n\nSpikegraph                                  --      \
+                                 \"Important Programs\"\n\nSpikegraphWithDots \
+                 --                                       \"Important \
+Programs\"\n\nSteppingStone\t                  Chapter 11\t                   \
+      A stand-alone TrueBasic program\n\nStirlingApproximations     Chapter 3 \
+                            \"StirlingApprox.Chpt3.mat\"\n\nStockSystem       \
+               Chapter 6                             \
+\"StockSystem.Chpt6.mat\"\n\nTwoArm                               Chapter 4   \
+                                \"TwoArm.Chpt4.mat\"\n\nVariationDistance     \
+        Chapter 3                         \"ShuffleCalculations.Chpt3.mat\"\n\
+\nVariationList                       Chapter 3                        \
+\"ShuffleCalculations.Chpt3.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+}, Open  ]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{28, Automatic}, {30, Automatic}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1731, 51, 190, 8, 76, "Title"],
+Cell[1924, 61, 7431, 99, 2394, "Text"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

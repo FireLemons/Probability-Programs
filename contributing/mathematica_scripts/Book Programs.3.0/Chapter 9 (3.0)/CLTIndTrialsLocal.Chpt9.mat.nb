@@ -1,0 +1,206 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      4931,        137]*)
+(*NotebookOutlinePosition[      6072,        175]*)
+(*  CellTagsIndexPosition[      6028,        171]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[StyleBox[
+"PROGRAM:  CLTIndTrialsLocal\nCALLING SEQUENCE:  CLTIndTrialsLocal[n, \
+distributionlist, k]\nPARAMETERS:\n     n, k - integers\n     \
+distributionlist - a distribution list\nSYNOPSIS:\n     -  This program \
+computes and displays the exact calculation of P(S_n = k) and the\n         \
+normal approximation of the same, where S_n is a sum of n independent\n       \
+  variables with common distribution given in distributionlist.\n     -  \
+Note:  this program requires the programs \
+\"NFoldConvolution[distributionlist, n]\",\n        \
+\"DiscreteMean[distributionlist]\", and \
+\"DiscreteVariance[distributionlist]\" be\n        initialized.  The last two \
+of these are all in the file Important Programs; the first\n        is in the \
+file DiscreteConvolution.Chpt7.mat.\nRETURNED VALUES:\n     -  {P(S_n = k), \
+normal approximation P(S_n = k)}\nLOCATION:\n     Folder:  Chapter 9\n     \
+File:       \"CLTIndTrialsLocal.Chpt9.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[CLTIndTrialsLocal];\nCLTIndTrialsLocal[n_, distributionlist_, k_] :=\n\
+Block[{clist, c, mu, sigma2, xk, nxk, normalappx},\n      clist = \
+NFoldConvolution[distributionlist,n];\n      c = Select[clist, #[[1]]==k&];\n \
+     If[c == {}, c = 0,\n         c = Flatten[c][[2]]\n        ];\n      mu = \
+DiscreteMean[distributionlist];\n      sigma2 = \
+DiscreteVariance[distributionlist];\n      xk = (k - n * mu)/Sqrt[n * \
+sigma2];\n      nxk = (1/(Sqrt[2 * Pi])) * (E^((-(xk^2))/2)); \n      \
+normalappx = nxk/Sqrt[n * sigma2]//N;\n      Print[\"Exact P(S_n = k)     \
+Normal Approximation\"];\n      Print[\" \"];\n      Print[\"   \",N[c,5], \" \
+               \", N[normalappx,5]];\n      Return[{c, normalappx}]\n     ]"],
+   "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData["distlist = Table[{i, .166667}, {i, 1, 6}]"], "Input",
+  AspectRatioFixed->True],
+
+Cell[OutputFormData["\<\
+{{1, 0.166667}, {2, 0.166667}, {3, 0.166667}, 
+ 
+  {4, 0.166667}, {5, 0.166667}, {6, 0.166667}}\
+\>", 
+"\<\
+{{1, 0.166667}, {2, 0.166667}, {3, 0.166667}, 
+ 
+  {4, 0.166667}, {5, 0.166667}, {6, 0.166667}}\
+\>"], "Output",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]],
+
+Cell[CellGroupData[{Cell[TextData["CLTIndTrialsLocal[6, distlist, 21]"], "Input",
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Exact P(S_n = k)     Normal Approximation\n \n   0.092851                \
+0.095365"], "Print",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[OutputFormData["\<\
+{0.092850908441785, 0.0953653500308694}\
+\>", 
+"\<\
+{0.0928509, 0.0953654}\
+\>"], "Output",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]],
+
+Cell[CellGroupData[{Cell[TextData["CLTIndTrialsLocal[6, distlist, .3]"], "Input",
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Exact P(S_n = k)     Normal Approximation\n \n                             \
+-7\n   0                4.5973 10"], "Print",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[OutputFormData["\<\
+{0, 4.597253472854922*10^-7}\
+\>", 
+"\<\
+              -7
+{0, 4.59725 10  }\
+\>"], "Output",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{12, Automatic}, {Automatic, 16}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 1052, 17, 70, "Text"],
+Cell[2766, 70, 816, 13, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[3605, 85, 94, 1, 70, "Input"],
+Cell[3702, 88, 293, 11, 70, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4027, 101, 87, 1, 70, "Input"],
+Cell[4117, 104, 159, 4, 70, "Print"],
+Cell[4279, 110, 164, 7, 70, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4475, 119, 87, 1, 70, "Input"],
+Cell[4565, 122, 186, 4, 70, "Print"],
+Cell[4754, 128, 165, 8, 70, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
