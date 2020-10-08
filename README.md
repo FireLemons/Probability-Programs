@@ -43,6 +43,8 @@ This repo aims to port the wolfram mathematica programs found [here](http://www.
   
 When I first discovered the book, I went to download the programs and saw that they were all written in proprietary languages so I decided to prot the programs to python.  
   
+When creating a program, first copy contributing/template.py and edit from there.
+  
 When editing programs please keep in mind they may need to be modified by someone who may not have a background in programming.  
   
 For the near future I only plan to port standalone programs. In the future I would like to port the mathematica notebook files to jupyter notebook.
