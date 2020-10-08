@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 # Usage: python3 de_mere_1.py <n> <mute_output>
 #   n:                      The number of four dice roll experiments to simulate
 #   mute_output(optional):  If the value is "mute" or "m" the results of individual experiments are not printed
