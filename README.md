@@ -40,7 +40,7 @@ Clone the repo and extract it
 Install the project dependencies  
 `cd Probability-Programs`  
 `pipenv install`  
-Make sure you've the `"%AppData%\Python\Python3X\Scripts"` directory added to PATH env variable.
+`Make sure the `"%AppData%\Python\Python3X\Scripts" `directory added to PATH env variable.`
 **this may take several minutes**
 
 Tkinter comes bundled with Windows installer. Use `python -m tkinter` to check if Tkinter is installed properly
