@@ -65,4 +65,4 @@ When creating a program, first copy contributing/template.py and edit from there
   
 When editing programs please keep in mind they may need to be modified by someone who may not have a background in programming.  
   
-For the near future I only plan to port standalone programs. Eventually I would like to port the mathematica notebook files to jupyter notebook.
+For the near future I only plan to port standalone programs. Eventually I would like help to port the mathematica notebook files to jupyter notebook.
