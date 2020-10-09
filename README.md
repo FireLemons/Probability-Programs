@@ -29,7 +29,21 @@ Install tkinter to be able to display graphs
 `sudo apt install python3-tk`
 
 ### Windows  
-Help wanted  
+Make sure pip for python 3 is installed  
+`pip3 --version` should not print an error  
+  
+Install pipenv via pip  
+`pip install pipenv`  
+
+Clone the repo and extract it
+
+Install the project dependencies  
+`cd Probability-Programs`  
+`pipenv install`  
+Make sure the `"%AppData%\Python\Python3X\Scripts"` directory is added to PATH env variable.
+**this may take several minutes**
+
+Tkinter comes bundled with Windows installer. Use `python -m tkinter` to check if Tkinter is installed properly
   
 ### MacOS  
 Help Wanted  
