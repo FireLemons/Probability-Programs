@@ -1,0 +1,347 @@
+(*^
+::[	Information =
+
+	"This is a Mathematica Notebook file.  It contains ASCII text, and can be
+	transferred by email, ftp, or other text-file transfer utility.  It should
+	be read or edited using a copy of Mathematica or MathReader.  If you 
+	received this as email, use your mail application or copy/paste to save 
+	everything from the line containing (*^ down to the line containing ^*)
+	into a plain text file.  On some systems you may have to give the file a 
+	name ending with ".ma" to allow Mathematica to recognize it as a Notebook.
+	The line below identifies what version of Mathematica created this file,
+	but it can be opened using any other version as well.";
+
+	FrontEndVersion = "Macintosh Mathematica Notebook Front End Version 2.2";
+
+	MacintoshStandardFontEncoding; 
+	
+	fontset = title, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeTitle, center, M7, bold, e8,  24, "Times"; 
+	fontset = subtitle, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeTitle, center, M7, bold, e6,  18, "Times"; 
+	fontset = subsubtitle, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeTitle, center, M7, italic, e6,  14, "Times"; 
+	fontset = section, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeSection, grayBox, M22, bold, a20,  18, "Times"; 
+	fontset = subsection, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeSection, blackBox, M19, bold, a15,  14, "Times"; 
+	fontset = subsubsection, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeSection, whiteBox, M18, bold, a12,  12, "Times"; 
+	fontset = text, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; 
+	fontset = smalltext, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  10, "Times"; 
+	fontset = input, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeInput, M42, N23, bold, L-5,  12, "Courier"; 
+	fontset = output, output, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23, L-5,  12, "Courier"; 
+	fontset = message, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23, R65535, L-5,  12, "Courier"; 
+	fontset = print, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23, L-5,  12, "Courier"; 
+	fontset = info, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23, B65535, L-5,  12, "Courier"; 
+	fontset = postscript, PostScript, formatAsPostScript, output, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeGraphics, M7, l34, w282, h287,  12, "Courier"; 
+	fontset = name, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7, italic,  10, "Geneva"; 
+	fontset = header, inactive, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; 
+	fontset = leftheader, inactive, L2,  12, "Times"; 
+	fontset = footer, inactive, noKeepOnOnePage, preserveAspect, center, M7,  12, "Times"; 
+	fontset = leftfooter, inactive, L2,  12, "Times"; 
+	fontset = help, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  10, "Times"; 
+	fontset = clipboard, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; 
+	fontset = completions, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; 
+	fontset = special1, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; 
+	fontset = special2, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; 
+	fontset = special3, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; 
+	fontset = special4, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; 
+	fontset = special5, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, "Times"; 
+	paletteColors = 128; automaticGrouping; currentKernel; 
+]
+:[font = text; inactive; preserveAspect]
+IMPORTANT PROGRAMS DESCRIPTIONS
+
+
+PROGRAM:  Areabargraph
+CALLING SEQUENCE:  Areabargraph[data, xmin, xmax, k]
+PARAMETERS:
+     data - a list of real numbers
+     xmin, xmax - real numbers
+     k - an integer
+SYNOPSIS:
+     -  This program divides the interval [xmin, xmax] on the x-axis into k subintervals
+        of equal length.  Then, on each subinterval, a box is erected whose area is
+        equal to the percentage of values in the list data which are in the subinterval.
+        Important note:  only data values which fall in the user-defined interval will be
+        included in	the bar graph.  If not all data values are included, a warning is
+        displayed.  I f you wish to be sure of including all data values in the graph,
+        choose xmin = Min[data] and xmax = Max[data].   (See also "Bargraph.")
+RETURNED VALUES:
+     -  none
+LOCATION:
+     File:  "Important Programs"
+         
+         
+PROGRAM:   Bargraph
+CALLING SEQUENCE:  Bargraph[data, xmin, xmax, k]
+PARAMETERS:
+     data - a list of real numbers
+     xmin, xmax - real numbers
+     k - an integer
+SYNOPSIS:
+     -  This program divides the interval [xmin, xmax] on the x-axis into k subintervals
+        of equal length.  Then, on each subinterval, a box is erected whose height is
+        equal to the percentage of values in the list data which are in the subinterval. 
+        Important note:  only data values which fall in the user-defined interval will be
+        included in	the bar graph.  If not all data values are included, a warning is
+        displayed.  I f you wish to be sure of including all data values in the graph,
+        choose xmin = Min[data] and xmax = Max[data].     (See also "Areabargraph.")
+RETURNED VALUES:
+     -  none
+LOCATION:
+     File:  "Important Programs"
+     
+     
+PROGRAM:  BetaDensity
+CALLING SEQUENCE:  BetaDensity[alpha, beta, x]
+PARAMETERS:
+     alpha, beta - real numbers
+     x - an unassigned variable name
+SYNOPSIS:
+     -  This gives the beta density function with parameters alpha and beta.
+     -  Note:  this program requires the package "Statistics`ContinuousDistributions`"
+         be loaded in.
+RETURNED VALUES:
+     -  the beta density function with parameters alpha and beta
+LOCATION:
+     Folder:  Chapter 4
+     File:       "Important Programs"
+     
+     
+PROGRAM:  Bin
+CALLING SEQUENCE:  Bin[n, p, k]
+PARAMETERS:
+     n, k - integers
+     p - a real number
+SYNOPSIS:
+     -  This function returns the probability of exactly k successes in n Bernoulli trials
+          with probability of success p on each experiment.
+RETURNED VALUES:
+     -  the probability of exactly k successes in n Bernoulli trials with probability of
+        success p on each experiment
+LOCATION:
+     File:  "Important Programs"
+        
+PROGRAM:  ConsolidateList
+CALLING SEQUENCE:  ConsolidateList[inputlist]
+PARAMETERS:
+     inputlist - a list of ordered pairs of real numbers
+SYNOPSIS:
+     -  This program takes as its input a list of ordered pairs, which is assumed to be
+        sorted in lexicographic order, and produces a list of ordered pairs in which each
+        pair's second element is the sum of all second elements of inputlist ordered pairs
+        with the same first coordinate.
+    -  Example:  ConsolidateList[{{1,1}, {1,5}, {2,3}, {5,6}, {5,2}}] = {{1,6}, {2,3}, {5,8}} .
+RETURNED VALUES:
+     -  the list described above
+LOCATION:
+       File:       "ImportantPrograms"
+  
+PROGRAM:  ContinuousMean
+CALLING SEQUENCE:  ContinuousMean[f, a, b]
+PARAMETERS:
+     f -  the name of a pre-defined function of one variable
+     a, b - real numbers (or +/- Infinity)
+SYNOPSIS:
+     -  This program calculates the mean of density function f on [a, b].
+     -  Keep in mind that the function f[x] should be defined before this program is
+        called, and  then the name of the function, namely f (or some other name, like
+        Cos) should be given to this program.  The expression for the function (such as
+        x^2, for example) should not  be given as a parameter.
+RETURNED VALUES:
+     -  mean(f)
+LOCATION:
+     File:  "Important Programs"
+     
+       
+PROGRAM:  ContinuousVariance
+CALLING SEQUENCE:  ContinuousVariance[f, a, b]
+PARAMETERS:
+     f -  the name of a pre-defined function of one variable
+     a, b - real numbers (or +/- Infinity)
+SYNOPSIS:
+     -  This program calculates the variance of density function f on [a, b].
+     -  Keep in mind that the function f[x] should be defined before this program is
+        called, and  then the name of the function, namely f (or some other name, like
+        Cos) should be given to this program.  The expression for the function (such as
+        x^2, for example) should not  be given as a parameter.
+     -  Note:  this program requires the program "ContinuousMean[f, a, b]" be initialized.
+RETURNED VALUES:
+     -  variance(f)
+LOCATION:
+     File:  "Important Programs"
+     
+PROGRAM:  Convolution
+CALLING SEQUENCE:  Convolution[distributionlist1, distributionlist2]
+PARAMETERS:
+     distributionlist1, distributionlist2 - distribution lists
+SYNOPSIS:
+     -  This program returns the convolution of the two discrete distributions given in
+        distributionlist1 and distributionlist2.
+     -  Note:  this program requires the program "ConsolidateList[inputlist]" be
+        initialized.
+RETURNED VALUES:
+     -  the convolution of the two distributions in distributionlist1 and distributionlist2
+LOCATION:
+     File:      "ImportantPrograms"
+     
+PROGRAM:  DiscreteMean
+CALLING SEQUENCE:  DiscreteMean[distributionlist]
+PARAMETERS:
+     distributionlist - a distribution list
+SYNOPSIS:
+     -  This program returns the mean of the distribution given in distributionlist.
+RETURNED VALUES:
+     -  the mean of the distribution given in distributionlist
+LOCATION:
+     File:  "Important Programs"
+     
+     
+PROGRAM:  DiscreteVariance
+CALLING SEQUENCE:  DiscreteVariance[distributionlist]
+PARAMETERS:
+     distributionlist - a distribution list
+SYNOPSIS:
+     -  This program returns the variance of the distribution given in distributionlist.
+     -  Note:  this program requires the program "DiscreteMean[distributionlist]" be
+        initialized.
+RETURNED VALUES:
+     -  the variance of the distribution given in distributionlist
+LOCATION:
+     File:  "Important Programs"
+     
+     
+PROGRAM:  LabelMatrix
+CALLING SEQUENCE:  LabelMatrix[M, rowlabels, columnlabels]
+PARAMETERS:
+     M - a matrix of values
+     rowlabels, columnlabels - lists of values
+SYNOPSIS:
+     -  This program labels M's rows and columns by creating a new matrix, M2, which
+         contains M's labels.  Since M2's rows and columns contain these labels, M2
+         should not be used in performing computations with M; it should be used only 
+         for displaying M.
+RETURNED VALUES:
+     -  the labeled matrix M2, in matrix form
+LOCATION:
+     File:  "Important Programs"
+
+PROGRAM:  NFoldConvolution
+CALLING SEQUENCE:  NFoldConvolution[distributionlist, n]
+PARAMETERS:
+     distributionlist - a distribution list
+SYNOPSIS:
+     -  This program returns the n-fold convolution distribution of the distribution given
+        in distributionlist.
+     -  Note:  this program requires the program "Convolution[distributionlist1,
+        distributionlist2]" be initialized.
+RETURNED VALUES:
+     -  the n-fold convolution of the distribution in distributionlist with itself
+LOCATION:
+      File:      "ImportantPrograms"
+
+PROGRAM:  NormalArea
+CALLING SEQUENCE:  NormalArea[a, b]
+PARAMETERS:
+     a, b - real numbers
+SYNOPSIS:
+     -  This function returns the area under the standard normal density curve on [a, b].
+     -  Note:  this function requires the package "Statistics`ContinuousDistributions`" be
+        loaded in.
+RETURNED VALUES:
+     -  the area under the standard normal density curve on [a, b]
+LOCATION:
+     File:  "Important Programs"
+     
+         
+PROGRAM:  NormalDensity
+CALLING SEQUENCE:  NormalDensity[x, mu, sigma]
+PARAMETERS:
+     x - an unassigned variable
+     mu, sigma - real numbers
+SYNOPSIS:
+     -  This program returns the normal density function with mean mu and standard
+        deviation sigma.
+RETURNED VALUES:
+     -  the normal density function with mean mu and standard deviation sigma
+LOCATION:
+     File:  "Important Programs"
+     
+     
+PROGRAM:  SimulateDiscreteVariable
+CALLING SEQUENCE:  SimulateDiscreteVariable[plist]
+PARAMETERS:
+     plist - a probability list
+SYNOPSIS:
+     -  This program simulates an experiment which has outcomes x_1, x_2, ...,
+        x_(Length[plist]) with probabilties plist[[1]], plist[[2]], ..., plist[[Length[plist]]],
+        respectively.  The program returns i, where x_i is the outcome of the experiment.
+RETURNED VALUES:
+     -  i , where x_i is the outcome of the experiment
+LOCATION:
+     File:  "Important Programs"
+     
+     
+PROGRAM:  SpikeData
+CALLING SEQUENCE:  SpikeData[data]
+PARAMETERS:
+     data - a list of real numbers
+SYNOPSIS:
+     -  This program takes a list of data values representing the outcomes of a series of
+         experiments, and returns the dstribution list representing these outcomes and
+         the fraction of the time they occurred (e.g., their experimental probabilities).  The
+         returned list is in a form acceptable as the first parameter being passed to the
+         programs "Spikegraph[distributionlist, xmin, xmax]" and "SpikegraphWithDots
+         [distributionlist, xmin, xmax, color, print]."  (See also "Spikegraph" and
+         "SpikegraphWithDots".)
+RETURNED VALUES:
+     -  a distribution list representing the outcomes, and their probabilities, in data
+LOCATION:
+     File:  "Important Programs"
+     
+           
+PROGRAM:  Spikegraph
+CALLING SEQUENCE:  Spikegraph[distributionlist, xmin, xmax, print]
+PARAMETERS:
+     distributionlist - a distribution list
+     xmin, xmax - real numbers
+     print - a Boolean variable (True or False)
+SYNOPSIS:
+     -  This program displays a graph of the distribution of x (where x has the
+        distribution given in distributionlist) by drawing a spike of height p(x) at each x.  If
+        print = True, this graph is displayed.  Otherwise, the display is (for the time being)
+        supressed.   (If the graph has been supressed, to see it at a later time type
+        "Show[%#, DisplayFunction -> $DisplayFunction]", where # is the input number
+        of the original call to "Spikegraph.")  Important note:  only values of x which fall in
+        the user-defined interval [xmin,  xmax] will be included in the graph.   If not all
+        values of x are included, and print = True, a warning is displayed.  If print = False,
+        no such warning will be given, even if the graph is later displayed.   (See also
+        "SpikeData" and "SpikegraphWithDots.")
+RETURNED VALUES:
+     -  none
+LOCATION:
+     File:  "Important Programs"
+        
+        
+PROGRAM:  SpikegraphWithDots
+CALLING SEQUENCE:  SpikegraphWithDots[distributionlist, xmin, xmax, color, print]
+PARAMETERS:
+     distributionlist - a distribution list
+     xmin, xmax - real numbers
+     color - a list of 3 color-specification real numbers
+     print - a Boolean variable (True or False)
+SYNOPSIS:
+     -  This program displays a graph of the distribution of x (where x has the
+        distribution given in distributionlist) by drawing a spike of height p(x) at each x,
+        and topping that spike with a dot of color color.  If print = True, this graph is
+        displayed.  Otherwise,  the display is (for the time being) supressed.   (If the
+        graph has been supressed, to see it at a later time type "Show[%#,
+        DisplayFunction -> $DisplayFunction]", where # is the input number of the
+        original call to SpikegraphWithDots.)  Important note:  only values of x which fall
+        in the user-defined interval [xmin, xmax] will be included in the graph.   If not all
+        values of x are included, and print = True, a warning is displayed.  If print = False,
+        no such warning will be given, even if the graph is later displayed. 
+RETURNED VALUES:
+     -  none
+LOCATION:
+     File:  "Important Programs"
+;[s]
+6:0,3;31,1;713,2;716,1;1590,2;1593,1;12082,-1;
+4:0,13,9,Times,0,12,0,0,0;3,14,10,Helvetica,0,12,0,0,0;2,14,10,Helvetica,4,12,0,0,0;1,14,10,Helvetica,1,12,0,0,0;
+^*)

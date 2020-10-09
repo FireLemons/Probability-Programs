@@ -1,0 +1,126 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      3192,         77]*)
+(*NotebookOutlinePosition[      4300,        114]*)
+(*  CellTagsIndexPosition[      4256,        110]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox["CHAPTER 7 PROGRAM DESCRIPTIONS",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\n        \n     \nPROGRAM:  DieTest\nCALLING SEQUENCE:  \
+DieTest[numbtrials, numrolls, plist]\nPARAMETERS:\n     numbtrials, numrolls \
+- integers\n     plist - a probability list\nSYNOPSIS:  \n     -  This \
+program performs an experiment in which a die is rolled numrolls times, and\n \
+       computes Z, as defined in the text.  The die's faces are numbered 1 \
+through 6,\n        and the probability of  face i coming up is given by \
+plist[[i]].  If numbtrials = 1, the\n        program prints out Z, and its \
+corresponding p-value with 5 degrees of freedom .\n        If numbtrials > 1, \
+the experiment is carried out numbtrials times, and three graphs\n        are \
+output.  The first is an area bargraph of the Z values for each experiment. \n\
+        The second is the corresponding chi-square density.  The third \
+overlays the\n        chi-square density on the bargraph.  \n     -  Note:  \
+this program requires the packages \"Statistics`ContinuousDistributions`\"\n  \
+      and \"Statistics`HypothesisTests`\" be loaded in, and the program\n     \
+   \"Areabargraph[data, xmin, xmax, k]\" be initialized.\nRETURNED VALUES:  \n\
+     -  none\nLOCATION:\n     Folder:  Chapter 7\n     File:       \
+\"DieTest.Chpt7.mat\"\n     \n     \n",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{60, Automatic}, {Automatic, 28}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 1478, 25, 70, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

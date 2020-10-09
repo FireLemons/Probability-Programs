@@ -1,0 +1,145 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      4654,         96]*)
+(*NotebookOutlinePosition[      5762,        133]*)
+(*  CellTagsIndexPosition[      5718,        129]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox["CHAPTER 5 PROGRAM DESCRIPTIONS",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\n\n\nPROGRAM:  GeometricPlot\nCALLING SEQUENCE:  GeometricPlot[p, nmax]\n\
+PARAMETERS:\n     p - a real number\n     nmax - an integer\nSYNOPSIS:\n     \
+-  This program uses the program Spikegraph to graph  the geometric \
+distribution\n        function with p = p, for n = 1 to nmax.\n     -  Note:  \
+this program requires the program \"Spikegraph[distributionlist, xmin,\n      \
+  xmax, print]\" be initialized.\nRETURNED VALUES:\n     -  none\nLOCATION:\n \
+    Folder:  Chapter 5\n     File:       \"GeometricPlot.Chpt5.mat\"\n\n     \
+\nPROGRAM:  LondonBombs\nCALLING SEQUENCE:  LondonBombs[numbombs, numsquares, \
+xmin, xmax]\nPARAMETERS:\n     numbombs, numsquares - integers\n     xmin, \
+xmax - real numbers\nSYNOPSIS:\n     -  This program simulates the London \
+bombing situation described in the book,\n        with a district of \
+numsquares squares, and with numbombs bombs being\n        dropped.  For \
+integers x in [xmin, xmax], it draws spike graphs of (1) the observed\n       \
+ probability of x bombs falling in a single square, and (2) this same \
+probability\n        approximated using the Poisson density with m = numbombs \
+* (1/numsquares). \n        These spike graphs are displayed on the same set \
+of axes, with the observed\n        probability spikes topped with blue dots, \
+and the approximated probability spikes\n        topped with red.\n     -  \
+Note:  this program requires the program \
+\"SpikegraphWithDots[distributionlist,\n        xmin, xmax, color, print]\" \
+be initialized.\nRETURNED VALUES:\n     -  none\nLOCATION:\n     Folder:  \
+Chapter 5\n     File:       \"LondonBombs.Chpt5.mat\"\n          \n     \n\
+PROGRAM:  Queue\nCALLING SEQUENCE:  Queue[lambda, mu, tmax]\nPARAMETERS:\n    \
+ lambda, mu - real numbers\n     tmax - an integer\nSYNOPSIS:\n     -  This \
+program simulates the queue problem described in the book, for times  t = 0\n \
+       to tmax, where the interarrival times between successive customers are\
+\n        exponentially distributed with parameter lambda, and the service \
+times for\n        successive customers are exponentially distributed with \
+parameter mu.   The\n        program displays a list plot where the x-axis \
+represents time, and the point f(x)\n        represents the number of \
+customers in line at time x.  Actual points are plotted\n        only for \
+integer values of x, but these points are joined with lines to make\n        \
+viewing  the graph easier.   An area bargraph of the distribution of waiting \
+times\n        and a spike graph of the distribution of the queue lengths are \
+also shown.\nRETURNED VALUES:\n     -  none\nLOCATION:\n     Folder:  Chapter \
+5\n     File:       \"Queue.Chpt5.mat\"\n",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{28, Automatic}, {30, Automatic}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 2940, 44, 70, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

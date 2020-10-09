@@ -1,0 +1,1181 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     35817,        996]*)
+(*NotebookOutlinePosition[     36958,       1034]*)
+(*  CellTagsIndexPosition[     36914,       1030]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  "Areabargraph::usage = \"",
+  StyleBox[
+  "Areabargraph[data, xmin, xmax, k] divides the interval [xmin, xmax] on the \
+x-axis into k subintervals of equal length. Then, on each subinterval, a box \
+is erected whose area is equal to the percentage of values in the list data \
+which are in the subinterval. Important note: only data values which fall in \
+the user-defined interval will be included in\tthe bar graph. If not all data \
+values are included, a warning is displayed.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Bargraph::usage = \"",
+  StyleBox[
+  "Bargraph[data, xmin, xmax, k] divides the interval [xmin, xmax] on the \
+x-axis into k subintervals of equal length. Then, on each subinterval, a box \
+is erected whose height is equal to the percentage of values in the list data \
+which are in the subinterval. Important note: only data values which fall in \
+the user-defined interval will be included in\tthe bar graph. If not all data \
+values are included, a warning is displayed.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Bin::usage = \"",
+  StyleBox[
+  "Bin[n, p, k] returns the probability of exactly k successes in n Bernoulli \
+trials with probability of success p on each experiment.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "ContinuousMean::usage = \"",
+  StyleBox[
+  "ContinuousMean[f, a, b] calculates the mean of density function f on \
+[a,b].",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "ContinuousVariance::usage = \"",
+  StyleBox[
+  "ContinuousVariance[f, a, b] calculates the variance of density function f \
+on [a, b].",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "DiscreteMean::usage = \"",
+  StyleBox[
+  "DiscreteMean[distributionlist] returns the mean of the distribution given \
+in distributionlist.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "DiscreteVariance::usage = \"",
+  StyleBox[
+  "DiscreteVariance[distributionlist] returns the variance of the \
+distribution given in distributionlist.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "LabelMatrix::usage = \"",
+  StyleBox[
+  "LabelMatrix[M, rowlabels, columnlabels] labels M's rows and columns by \
+creating a new matrix, M2, which contains M's labels. Since M2's rows and \
+columns contain these labels, M2  should not be used in performing \
+computations with M; it should be used only  for displaying M.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "NormalArea::usage = \"",
+  StyleBox[
+  "NormalArea[x, mu, sigma] returns the area under the standard normal \
+density curve on [a, b].",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "NormalDensity::usage = \"",
+  StyleBox[
+  "NormalDensity[x, mu, sigma] returns the normal density function with mean \
+mu and standard deviation sigma.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "SimulateDiscreteVariable::usage = \"",
+  StyleBox[
+  "SimulateDiscreteVariable[plist] simulates an experiment which has outcomes \
+x_1, x_2, ..., x_(Length[plist]) with probabilties plist[[1]], plist[[2]], \
+..., plist[[Length[plist]]], respectively. The program returns i, where x_i \
+is the outcome of the experiment.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "SpikeData::usage = \"",
+  StyleBox[
+  "SpikeData[data] takes a list of data values representing the outcomes of a \
+series of experiments, and returns the dstribution list representing these \
+outcomes and the fraction of the time they occurred (e.g., their experimental \
+probabilities). The returned list is in a form acceptable as the first \
+parameter being passed to the programs 'Spikegraph[distributionlist, xmin, \
+xmax]' and 'SpikegraphWithDots[distributionlist, xmin, xmax, color, print].' \
+",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Spikegraph::usage = \"",
+  StyleBox[
+  "Spikegraph[distributionlist, xmin, xmax, print] displays a graph of the \
+distribution of x (where x has the distribution given in distributionlist) by \
+drawing a spike of height p(x) at each x. If print = True, this graph is \
+displayed. Otherwise, the display is (for the time being) supressed. \
+Important note:  only values of x which fall in the user-defined interval \
+[xmin,  xmax] will be included in the graph. If not all values of x are \
+included, and print = True, a warning is displayed.  If print = False, no \
+such warning will be given, even if the graph is later displayed.  ",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "SpikegraphWithDots::usage = \"",
+  StyleBox[
+  "SpikegraphWithDots[distributionlist, xmin, xmax, color, print] displays a \
+graph of the distribution of x (where x has the distribution given in \
+distributionlist) by drawing a spike of height p(x) at each x, and topping \
+that spike with a dot of color color. If print = True, this graph is  \
+displayed. Otherwise, the display is (for the time being) supressed. \
+Important note: only values of x which fall in the user-defined interval \
+[xmin, xmax] will be included in the graph. If not all values of x are \
+included, and print = True, a warning is displayed. If print = False, no such \
+warning will be given, even if the graph is later displayed. ",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "RandomNumbers::usage = \"",
+  StyleBox[
+  "RandomNumbers[n] displays n random real numbers between 0 and 1.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "CoinTosses::usage = \"",
+  StyleBox[
+  "CoinTosses[n, print] simulates n tosses of a fair coin, and prints the \
+proportion of tosses that come up heads. If print = True, then the outcomes \
+of the tosses (H/T) are also printed.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "DeMere1::usage = \"",
+  StyleBox["DeMere1[n, print]",
+    FontColor->RGBColor[0, 0, 1]],
+  StyleBox[" ",
+    FontFamily->"Helvetica",
+    FontWeight->"Plain",
+    FontColor->RGBColor[0, 0, 1]],
+  StyleBox[
+  "simulates 4 rolls of a die, and determines whether a six has appeared (a \
+'success'). It repeats this experiment n times, and prints the number of \
+trials that resulted in a success. It also prints the proportion of trials \
+that resulted in a success. Finally, if print = True, then the rolls are \
+printed out.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "DeMere2::usage = \"",
+  StyleBox[
+  "DeMere2[n, m, print] simulates m rolls of two dice, and determines whether \
+a double 6 has appeared (a 'success'). It repeats this experiment n times, \
+and prints the number of trials that resulted in a success. It also prints \
+the proportion of trials that resulted in a success. Finally, if print = \
+True, then the rolls are printed out.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "HTSimulation::usage = \"",
+  StyleBox[
+  "HTSimulation[n, m, print] simulates an experiment in which a fair coin is \
+tossed m times. The experiment is repeated n times. The program records the \
+'winnings' in each experiment, where the winnings are defined to be the \
+number of heads minus the number of tails. It also keeps track of the number \
+of times the winnings are 'positive' in the course of an experiment (we count \
+as 'positive' a time at which the winnings are 0 but the previous winnings \
+are positive). The program returns a list whose first element is a list of \
+the winnings in each experiment (winningslist), and whose second element is a \
+list of times in the lead in each experiment (timesinleadlist). If print = \
+True and n = 1, then a graph of the game is displayed. If print = True and n \
+> 1, then spike graphs of the winningslist and timesinleadlist are displayed. \
+",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "HorseRace::usage = \"",
+  StyleBox[
+  "HorseRace[n] simulates n of the horse races described in Chapter 1. The \
+program prints each race winner, and returns a list containing the percentage \
+of times each horse won.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "GeneralSimulation::usage = \"",
+  StyleBox[
+  "GeneralSimulation[n, plist, m, print]simulates m general experiments in \
+which the outcomes 1, 2, ..., n occur with probabilties plist[[1]], \
+plist[[2]], ..., plist[[n]]. The observed frequencies of the outcomes are \
+printed, and if print = True, the outcomes are printed, and spike graphs of \
+the observed data frequencies and plist data",
+    FontColor->RGBColor[0, 0, 1]],
+  StyleBox[" ",
+    FontFamily->"Helvetica",
+    FontWeight->"Plain"],
+  StyleBox[
+  "frequencies are displayed on the same set of axes (the observed data \
+spikes are topped with blue dots, the plist data spikes with red). Finally, \
+the program returns a list of the n observed frequencies.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "MonteCarlo::usage = \"",
+  StyleBox[
+  "MonteCarlo[n, f, xmin, xmax, ymax] estimates  the area under the input \
+function f[x] and above the interval [xmin, xmax] by choosing n random points \
+in the rectangle above the interval [xmin, xmax] and between the y-values 0 \
+and ymax. The program returns its area estimate,  and also plots the random \
+points and the function f[x] on the interval  [xmin, xmax].",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "BuffonsNeedle::usage = \"",
+  StyleBox[
+  "BuffonsNeedle[n, print] simulates the Buffon needle experiment described \
+in the book, dropping n pins on a 10 x 10 grid. The program returns an \
+estimate for Pi, using the book's method. If print = True, a graphical \
+display of the experiment is produced, showing every one-hundredth pin. ",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "BertrandsParadox::usage = \"",
+  StyleBox[
+  "BertrandsParadox[n, print] illustrates Bertrand's Paradox by choosing n \
+random chords of a circle three times, each time using a different one of the \
+three coordinatizations described in the book. For each coordinatization, the \
+program prints the proportion of chosen chords with length greater than \
+Sqrt[3] and, if print = True, displays a picture of the experiment, drawing  \
+every one-hundredth chord.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Darts::usage = \"",
+  StyleBox[
+  "Darts[n, print] simulates n throws of a dart at a circular dartboard of \
+radius 1. The program displays a bar graph in which the area of the i'th bar \
+is equal to the fraction of the total falling in the i'th region. If print = \
+True, then the program returns a list of distances that the dart landed from \
+the center of the board.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "GaltonBoard::usage = \"",
+  StyleBox[
+  "GaltonBoard[n, m, print] simulates n Galton board experiments, with m rows \
+of pins. Each simulation consists of choosing 0 or 1 m times, and summing the \
+chosen numbers. The program then displays an area bar graph of the experiment \
+results. If print = True, a list of all the final positions is returned.  ",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Birthday::usage = \"",
+  StyleBox[
+  "Birthday[rmin, rmax, inc] computes and displays the probabilities that no \
+two people in a group of size r have the same birthday, where r ranges from \
+rmin to rmax by increment inc.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "StirlingApproximations::usage = \"",
+  StyleBox[
+  "StirlingApproximations[nmin, nmax] calculates and displays n!, the \
+Stirling approximation of n!, and the ratio of these two numbers, for every \
+integer n between nmin and nmax.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "FixedPoints::usage = \"",
+  StyleBox[
+  "FixedPoints[n, m, significant] generates n random permutations of the \
+numbers 1, ..., m, and calculates the number of fixed points in each. For \
+each possible number of fixed points the proportion of simulations with that \
+number of fixed points is printed, if that proportion is greater than the \
+significant parameter of the program.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Records::usage = \"",
+  StyleBox[
+  "Records[num, n] counts the number of  'records,' as defined in the book, \
+in individual random permutations of {1, 2, ..., n}. The number of \
+permutations tested is num. The program returns the average number of records \
+per permutation.   ",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "AllPermutations::usage = \"",
+  StyleBox[
+  "AllPermutations[n] returns a list of all the permutations of the set {1, \
+2, ..., n}.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "BinomialPlot::usage = \"",
+  StyleBox[
+  "For each n in nlist, BinomialPlot[nlist, p] plots a spike graph of the \
+distribution for n Bernoulli trials with probability of success p. These \
+graphs are all plotted on the same set of axes.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "BinomialProbabilities::usage = \"",
+  StyleBox[
+  "BinomialProbabilities[n, p, kmin, kmax, print] returns the sum of the \
+binomial probabilities for k between kmin and kmax.  If print = True, the \
+individual probabilities are printed.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "PowerCurve::usage = \"",
+  StyleBox[
+  "The book defines, given m and n, alpha(p) = Sum[binomial(n, p, k)], k = m, \
+. . ., n. The user enters into PowerCurve nullp (the null hypthesis p-value) \
+and an altp (an alternative hypothesis p, greater than nullp). The program \
+then defines pmin = nullp - Abs[altp - nullp] and pmax = altp + Abs[altp - \
+nullp], and plots alpha(p) on the interval [pmin, pmax] for each value m in \
+mlist, with n equal to the parameter n. The program displays all of these \
+graphs together on a single set of axes, along with a dotted-line box. We \
+ultimately want each of the probabilities of a type 1or type 2 error \
+occurring to be <=  errormax. The box the program draws is such that a value \
+of m satisfies this requirement if and only if  the graph of alpha(p) enters \
+the box from the bottom and leaves from the top (see book for more details).",
+    
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "AShuffle::usage = \"",
+  StyleBox[
+  "AShuffle[a, deck, print] models an a-shuffle of a deck ordered as in the \
+list deck. (For instance:  if you want to a-shuffle a numerically-ordered \
+deck of length n, enter Table[i, {i, 1, n}] as the deck parameter.) If print \
+= True, then the program displays a list of places the cuts occurred, and a \
+list of the piles into which those cuts divided the original deck. The \
+program returns a list representing the shuffled deck.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "A::usage = \"",
+  StyleBox[
+  "A[n, r] calculates the Eulerian number A(n, r) (i.e., the number of \
+orderings of {1, 2, ...., n} with r falls).",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "VariationDistance::usage = \"",
+  StyleBox[
+  "VariationDistance[n, k] calculates the variation distance, v(k), between a \
+process which produces random orderings of n cards,  and the process \
+consisting of one (2^k)-shuffle of those cards.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "VariationList::usage = \"",
+  StyleBox[
+  "For k = 1 to m, VariationList[n, m] calculates and displays the variation \
+distance, v(k), between a process which produces random orderings of n cards, \
+ and the process consisting of one (2^k)-shuffle of those cards. It also \
+provides a plot of the points (k, v(k)) for k = 1 to m.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "BetaDensity::usage = \"",
+  StyleBox[
+  "BetaDensity[alpha, beta, x] gives the beta density function with \
+parameters alpha and beta.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Bayes::usage = \"",
+  StyleBox[
+  "Bayes[hlist, prior, elist, conditional] takes hlist, a list of an \
+experiment's hypotheses (i.e., the set of all H_i); prior, a list whose i'th \
+entry is the prior probability P(H_i); elist, a list of the experiment's \
+evidence events (i.e., the set of all E_i); and conditional, a matrix whose \
+ij'th entry is the conditional probability P(E_j | H_i). The program returns \
+post, a matrix whose ij'th entry is the posterior probability P(H_j | E_i). \
+The program also prints out post with its rows and columns labeled by the \
+elements of elist and hlist, respectively.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "TwoArm::usage = \"",
+  StyleBox[
+  "TwoArm[n, x, y, s] simulates the two strategies play-the-better-machine \
+and play-the-winner, in connection with the Two-Armed Bandit problem. The \
+variables x and y represent the respective probabilities that machines 1 and \
+2 pay off a dollar on a single play. If s = 1, the play-the-better-machine \
+strategy is used; otherwise, the play-the-winner strategy is used. The \
+variable n is the number of plays to be simulated. For each play, the program \
+prints out which machine was used, and what the results of the play were \
+(i.e., whether it was won or lost). Further, the program plots the final \
+expermimentally-determined densities for x and y, plotting that of x with a \
+solid line, and that of y with a dotted one.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "GeometricPlot::usage = \"",
+  StyleBox[
+  "GeometricPlot[p, nmax] draws a spike graph of the geometric distribution \
+function with p = p, for n = 1 to nmax.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Queue::usage = \"",
+  StyleBox[
+  "Queue[lambda, mu, tmax] simulates the queue problem described in the book, \
+for times  t = 0 to tmax, where the interarrival times between successive \
+cutsomers are exponentially distributed with parameter lambda, and the \
+service times for successive customers are exponentially distribued with \
+parameter mu.  The program displays a list plot where the x-axis represents \
+time, and the point f(x) represents the number of customers in line at time \
+x. Actual points are plotted only for integer values of x, but these points \
+are joined with lines to make viewing  the graph easier.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Craps::usage = \"",
+  StyleBox[
+  "Craps[n] simulates n plays of the game of craps, with a bet of one dollar \
+being made for each game. The average number of winnings per game is printed \
+out.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Die::usage = \"",
+  StyleBox[
+  "Die[n, s] simulates the following experiment n times: an s-sided die is \
+rolled. If an odd number turns up, an amount equal to that number is won; if \
+an even number turns up, an amount equal to that number is lost. The program \
+displays the frequency and the relative frequency with which each outcome \
+occurs, as well as displaying the average gain over the n trials.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "StockSystem::usage = \"",
+  StyleBox[
+  "StockSystem[n, print] simulates Mr. Ace's playing of the stock market, as \
+described in the book, where he must stop after n days. The program prints \
+out and returns Mr. Ace's net gain after the n days, and plots the points (x, \
+f(x)) for x = 0 to n, where x is the number of the day, and f(x) is the value \
+of V on day x. The points are connected with lines: dotted lines indicate \
+time during which Mr. Ace holds stock under his system",
+    FontColor->RGBColor[0, 0, 1]],
+  StyleBox["; unbroken ",
+    FontFamily->"Helvetica",
+    FontWeight->"Plain",
+    FontColor->RGBColor[0, 0, 1]],
+  StyleBox["lines indicate time during which he does not hold stock.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "ConsolidateList::usage = \"",
+  StyleBox[
+  "ConsolidateList[inputlist] takes as its input a list of ordered pairs, \
+which is assumed to be sorted in lexicographic order, and produces a list of \
+ordered pairs in which each pair's second element is the sum of all second \
+elements of inputlist ordered pairs  with the same first coordinate.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Convolution::usage = \"",
+  StyleBox[
+  "Convolution[distributionlist1, distributionlist2] returns the convolution \
+of the two discrete distributions given in distributionlist1 and \
+distributionlist2.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "NFoldConvolution::usage = \"",
+  StyleBox[
+  "NFoldConvolution[distributionlist, n] returns the n-fold convolution \
+distribution of the distribution given in distributionlist.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "DieTest::usage = \"",
+  StyleBox[
+  "DieTest[numbtrials, numbrolls, plist] performs an experiment in which a \
+die is rolled numrolls times, and computes Z, as defined in the text. The \
+die's faces are numbered 1 through 6, and the probability of  face i coming \
+up is given by plist[[i]]. If numbtrials = 1, the program prints out Z, and \
+its corresponding p-value with 5 degrees of freedom . If numbtrials > 1, the \
+experiment is carried out numbtrials times, and three graphs are output. The \
+first is an area bargraph of the Z values for each experiment. The second is \
+the corresponding chi-square density. The third overlays the chi-square \
+density on the bargraph.  ",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Law::usage = \"",
+  StyleBox[
+  "For n = nmin to nmax, in steps of size inc, Law[nmin, nmax, inc, p, e] \
+computes and displays (1) the exact probability P(|A_n - p| >= e), where A_n \
+is the average outcome of n Bernoulli trials with probability p of success, \
+and (2) the Chebyshev estimate p(1-p)/(n(e^2)) for this probability.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "LawContinuous::usage = \"",
+  StyleBox[
+  "For n = nmin to nmax, in steps of size inc, LawContinuous[nmin, nmax, inc, \
+e] computes and displays (1) the exact probability P(|S_n/n| >= e), where S_n \
+is a sum of n standard normally-distributed random variables, and (2) the \
+Chebyshev estimate 1/n*(e^2) for this probability.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "CLTBernoulliPlot::usage = \"",
+  StyleBox[
+  "CLTBernoulliPlot[n, p] displays the standard normal distribution curve, \
+and a spike graph of the standardized binomial probabilities binomial(i, p, \
+k), for i = 1 to n. It displays these two graphs on the interval [-4, 4], on \
+a single set of axes.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "CLTBernoulliLocal::usage = \"",
+  StyleBox[
+  "CLTBernoulliLocal[n, p, k] computes and displays the exact calculation of \
+binomial(n, p, k) and the normal approximation of the same.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "CLTBernoulliGlobal::usage = \"",
+  StyleBox[
+  "CLTBernoulliGlobal[n, p, kmin, kmax, half] uses the normal approximation \
+to approximate the probability that S_n, a sum of n Bernoulli trials with \
+probability p of success for each trial, lies in [kmin, kmax]. If half = \
+True, the program includes the 1/2 correction; otherwise, it doesn't.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "LondonBombs::usage = \"",
+  StyleBox[
+  "LondonBombs[numbombs, numsquares, xmin, xmax] simulates the London bombing \
+situation described in the book, with a district of numsquares squares, and \
+with numbombs bombs being  dropped. For integers x in [xmin, xmax], it draws \
+spike graphs of (1) the observed probability of x bombs falling in a single \
+square, and (2) this same probability approximated using the Poisson density \
+with m = numbombs * (1/numsquares). These spike graphs are displayed on the \
+same set of axes, with the observed probability spikes topped with blue dots, \
+and the approximated probability spikes topped with red.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "CLTIndTrialsPlot::usage = \"",
+  StyleBox[
+  "CLTIndTrialsPlot[n, distributionlist] displays the standard normal \
+distribution curve, and a scaled  spike graph of the standardizations of the \
+probabilities P(S_n = j), where S_n is a sum of n independent variables with \
+common distribution given in distributionlist. The program displays these two \
+graphs on the interval [-4, 4], on a single set of axes.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "CLTIndTrialsLocal::usage = \"",
+  StyleBox[
+  "CLTIndTrialsLocal[n, distributionlist, k] computes and displays the exact \
+calculation of P(S_n = k) and the normal approximation of the same, where S_n \
+is a sum of n independent variables with common distribution given in \
+distributionlist.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "CLTIndTrialsGlobal::usage = \"",
+  StyleBox[
+  "CLTIndTrialsGlobal[n, distributionlist, kmin, kmax] uses the normal \
+approximation to approximate the probability that S_n, a sum of n independent \
+trials with common distribution given in distributionlist, lies in [kmin, \
+kmax]. If half = True, the program includes the 1/2 correction; otherwise, it \
+doesn't.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "MakeDistribution::usage = \"",
+  StyleBox[
+  "MakeDistribution[a, b] returns a distribution list with outcome values are \
+integers in [a, b]",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "CLTGeneral::usage = \"",
+  StyleBox[
+  "CLTGeneral[n, a, b] generates n random discrete distributions on subsets \
+of [a, b], and convolutes them to find the distribution of S_n, the sum of n \
+experiments governed by these distributions. Now, the CLT asserts that the \
+distribution of S_n*, the standardized version of S_n, approaches the \
+standard normal as n approaches infinity. The program shows this by \
+displaying a spike graph of S_n*, along with a plot of the standard normal \
+density curve, on the interval [-4, 4].",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Branch::usage = \"",
+  StyleBox[
+  "Given that a parent will produce at most Length[plist] offspring, and will \
+produce i offspring with probability plist[[i]], Branch[gmax, plist] computes \
+and displays the probabilities that a branching process designated by this \
+information will die out by generation g, for g = 1 to gmax.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "BranchingSimulation::usage = \"",
+  StyleBox[
+  "BranchingSimulation[n, gmax, plist, changepoint] simulates the branching \
+process designated by plist, until generation gmax. The program does n such \
+simulations, and plots the branching processes with the x-axis indicating \
+number of generations, and the lines y = f(x) indicating the sizes of the \
+generations at time x.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "AbsorbingChain::usage = \"",
+  StyleBox[
+  "AbsorbingChain[P, stateslist, print] takes P, a Markov chain transition \
+matrix and stateslist, the list of possible states in the Markov chain, and \
+finds and returns the matrices Q, R, N, B, and vector t, as defined in the \
+book. If print = True, then the program also displays these matrices and \
+vector, with rows and columns labeled.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "SimulateChain::usage = \"",
+  StyleBox[
+  "SimulateChain[n, P, stateslist, startstate, print] simulates n steps of a \
+Markov chain with transition matrix P and possible states in stateslist, that \
+begins in state startstate. For each state, the program prints out the number \
+of times that state was reached, and the fraction of the time this occurred. \
+The program returns a list whose i'th element is the fraction of the time \
+state stateslist[[i]] was reached. If print = True, the program also prints \
+out each state as it is reached.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "FixedVector::usage = \"",
+  StyleBox[
+  "FixedVector[P, stateslist, print] returns the fixed vector w for an \
+ergodic Markov chain with transition matrix P and possible states in \
+stateslist. If print = True, the program prints out P and w.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "ErgodicChain::usage = \"",
+  StyleBox[
+  "ErgodicChain[P, stateslist, print] returns a list consisting of the mean \
+recurrence times, and mean first passage matrix, for the ergodic chain with \
+transition matrix P and possible states in statelist. If print = True, the \
+program displays P, along with the chain's fixed vector w,  list of mean \
+recurrence times r, and mean first passage matrix M.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "EhrenfestUrn::usage = \"",
+  StyleBox[
+  "EhrenfestUrn[seconds, balls] simulates the Ehrenfest model for gas \
+diffusion by simulating the urn-ball experiment described in the book, with \
+the number of balls = balls, and the number of time units being tested = \
+seconds. The program displays a plot of the experiment, with  the x-axis \
+showing time and the graph y = f(x) showing how many balls are in the first \
+urn at each second x. (Note: the program actually plots points only for \
+integer values of x, since the distribution of f(x) is discrete; however, for \
+the sake of aesthetics, the computer joins these points with lines.)",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{92, Automatic}, {Automatic, 13}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 610, 13, 70, "Input",
+  InitializationCell->True],
+Cell[2324, 66, 604, 13, 70, "Input",
+  InitializationCell->True],
+Cell[2931, 81, 297, 9, 70, "Input",
+  InitializationCell->True],
+Cell[3231, 92, 252, 9, 70, "Input",
+  InitializationCell->True],
+Cell[3486, 103, 265, 9, 70, "Input",
+  InitializationCell->True],
+Cell[3754, 114, 269, 9, 70, "Input",
+  InitializationCell->True],
+Cell[4026, 125, 281, 9, 70, "Input",
+  InitializationCell->True],
+Cell[4310, 136, 452, 11, 70, "Input",
+  InitializationCell->True],
+Cell[4765, 149, 265, 9, 70, "Input",
+  InitializationCell->True],
+Cell[5033, 160, 282, 9, 70, "Input",
+  InitializationCell->True],
+Cell[5318, 171, 450, 11, 70, "Input",
+  InitializationCell->True],
+Cell[5771, 184, 633, 14, 70, "Input",
+  InitializationCell->True],
+Cell[6407, 200, 764, 15, 70, "Input",
+  InitializationCell->True],
+Cell[7174, 217, 836, 16, 70, "Input",
+  InitializationCell->True],
+Cell[8013, 235, 238, 8, 70, "Input",
+  InitializationCell->True],
+Cell[8254, 245, 359, 10, 70, "Input",
+  InitializationCell->True],
+Cell[8616, 257, 654, 18, 70, "Input",
+  InitializationCell->True],
+Cell[9273, 277, 511, 12, 70, "Input",
+  InitializationCell->True],
+Cell[9787, 291, 1030, 19, 70, "Input",
+  InitializationCell->True],
+Cell[10820, 312, 348, 10, 70, "Input",
+  InitializationCell->True],
+Cell[11171, 324, 850, 20, 70, "Input",
+  InitializationCell->True],
+Cell[12024, 346, 539, 12, 70, "Input",
+  InitializationCell->True],
+Cell[12566, 360, 467, 11, 70, "Input",
+  InitializationCell->True],
+Cell[13036, 373, 590, 13, 70, "Input",
+  InitializationCell->True],
+Cell[13629, 388, 501, 12, 70, "Input",
+  InitializationCell->True],
+Cell[14133, 402, 483, 11, 70, "Input",
+  InitializationCell->True],
+Cell[14619, 415, 353, 10, 70, "Input",
+  InitializationCell->True],
+Cell[14975, 427, 362, 10, 70, "Input",
+  InitializationCell->True],
+Cell[15340, 439, 512, 12, 70, "Input",
+  InitializationCell->True],
+Cell[15855, 453, 411, 11, 70, "Input",
+  InitializationCell->True],
+Cell[16269, 466, 262, 9, 70, "Input",
+  InitializationCell->True],
+Cell[16534, 477, 368, 10, 70, "Input",
+  InitializationCell->True],
+Cell[16905, 489, 367, 10, 70, "Input",
+  InitializationCell->True],
+Cell[17275, 501, 1021, 19, 70, "Input",
+  InitializationCell->True],
+Cell[18299, 522, 604, 13, 70, "Input",
+  InitializationCell->True],
+Cell[18906, 537, 275, 9, 70, "Input",
+  InitializationCell->True],
+Cell[19184, 548, 373, 10, 70, "Input",
+  InitializationCell->True],
+Cell[19560, 560, 460, 11, 70, "Input",
+  InitializationCell->True],
+Cell[20023, 573, 265, 9, 70, "Input",
+  InitializationCell->True],
+Cell[20291, 584, 741, 15, 70, "Input",
+  InitializationCell->True],
+Cell[21035, 601, 898, 17, 70, "Input",
+  InitializationCell->True],
+Cell[21936, 620, 288, 9, 70, "Input",
+  InitializationCell->True],
+Cell[22227, 631, 757, 15, 70, "Input",
+  InitializationCell->True],
+Cell[22987, 648, 325, 10, 70, "Input",
+  InitializationCell->True],
+Cell[23315, 660, 537, 12, 70, "Input",
+  InitializationCell->True],
+Cell[23855, 674, 836, 19, 70, "Input",
+  InitializationCell->True],
+Cell[24694, 695, 473, 11, 70, "Input",
+  InitializationCell->True],
+Cell[25170, 708, 333, 10, 70, "Input",
+  InitializationCell->True],
+Cell[25506, 720, 307, 9, 70, "Input",
+  InitializationCell->True],
+Cell[25816, 731, 811, 16, 70, "Input",
+  InitializationCell->True],
+Cell[26630, 749, 462, 11, 70, "Input",
+  InitializationCell->True],
+Cell[27095, 762, 457, 11, 70, "Input",
+  InitializationCell->True],
+Cell[27555, 775, 429, 11, 70, "Input",
+  InitializationCell->True],
+Cell[27987, 788, 313, 9, 70, "Input",
+  InitializationCell->True],
+Cell[28303, 799, 474, 11, 70, "Input",
+  InitializationCell->True],
+Cell[28780, 812, 777, 15, 70, "Input",
+  InitializationCell->True],
+Cell[29560, 829, 540, 12, 70, "Input",
+  InitializationCell->True],
+Cell[30103, 843, 423, 11, 70, "Input",
+  InitializationCell->True],
+Cell[30529, 856, 493, 12, 70, "Input",
+  InitializationCell->True],
+Cell[31025, 870, 272, 9, 70, "Input",
+  InitializationCell->True],
+Cell[31300, 881, 660, 14, 70, "Input",
+  InitializationCell->True],
+Cell[31963, 897, 461, 11, 70, "Input",
+  InitializationCell->True],
+Cell[32427, 910, 507, 12, 70, "Input",
+  InitializationCell->True],
+Cell[32937, 924, 517, 12, 70, "Input",
+  InitializationCell->True],
+Cell[33457, 938, 675, 14, 70, "Input",
+  InitializationCell->True],
+Cell[34135, 954, 373, 10, 70, "Input",
+  InitializationCell->True],
+Cell[34511, 966, 530, 12, 70, "Input",
+  InitializationCell->True],
+Cell[35044, 980, 770, 15, 70, "Input",
+  InitializationCell->True]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

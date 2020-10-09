@@ -1,0 +1,1237 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     13058,       1179]*)
+(*NotebookOutlinePosition[     14199,       1217]*)
+(*  CellTagsIndexPosition[     14155,       1213]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[StyleBox[
+"PROGRAM:  GaltonBoard\nCALLING SEQUENCE:  GaltonBoard[n, m, print]\n\
+PARAMETERS:\n     n, m - integers\n     print - a Boolean variable (True or \
+False)\nSYNOPSIS:\n     -  This program simulates n Galton board experiments, \
+with m rows of pins.  Each \n        simulation consists of choosing 0 or 1 m \
+times, and summing the chosen\n        numbers (each distinct sum represents \
+a distinct final position of a dropped\n        BB-shot).  The program then \
+displays an area bar graph of the experiment\n        results.  If print = \
+True, a list of all the final positions is returned.  \n     -  Note:  this \
+program requires the program \"Areabargraph[data, xmin, xmax, k]\" be \n      \
+  initialized.\nRETURNED VALUES:\n     -  a list of all the final positions \
+of the shots (if print  = True)\nLOCATION:\n     Folder:  Chapter 3\n     \
+File:       \"GaltonBoard.Chpt3.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[GaltonBoard];\nGaltonBoard[n_, m_, print_] :=\nBlock[{result, \
+resultlist = {}},\n      For[i = 1, i <= n, i++,\n          result = 0;\n     \
+     For[j = 1, j <= m, j++,\n              result=result+Random[Integer, \
+{0,1}];\n             ];\n          resultlist = Append[resultlist, result]\n \
+        ];\n      Areabargraph[resultlist, 0, m, m];\n      If[print, \
+Return[resultlist]]\n     ]"], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData["data = GaltonBoard[1000, 20, False]"], "Input",
+  AspectRatioFixed->True],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.0238095 0.047619 0.0147151 3.19893 [
+[(0)] .02381 0 0 2 Msboxa
+[(5)] .2619 0 0 2 Msboxa
+[(10)] .5 0 0 2 Msboxa
+[(15)] .7381 0 0 2 Msboxa
+[(20)] .97619 0 0 2 Msboxa
+[(0)] -0.0125 .01472 1 0 Msboxa
+[(0.025)] -0.0125 .09469 1 0 Msboxa
+[(0.05)] -0.0125 .17466 1 0 Msboxa
+[(0.075)] -0.0125 .25464 1 0 Msboxa
+[(0.1)] -0.0125 .33461 1 0 Msboxa
+[(0.125)] -0.0125 .41458 1 0 Msboxa
+[(0.15)] -0.0125 .49456 1 0 Msboxa
+[(0.175)] -0.0125 .57453 1 0 Msboxa
+[ -0.001 -0.001 0 0 ]
+[ 1.001 .61903 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+p
+.002 w
+.02381 0 m
+.02381 .00625 L
+s
+P
+[(0)] .02381 0 0 2 Mshowa
+p
+.002 w
+.2619 0 m
+.2619 .00625 L
+s
+P
+[(5)] .2619 0 0 2 Mshowa
+p
+.002 w
+.5 0 m
+.5 .00625 L
+s
+P
+[(10)] .5 0 0 2 Mshowa
+p
+.002 w
+.7381 0 m
+.7381 .00625 L
+s
+P
+[(15)] .7381 0 0 2 Mshowa
+p
+.002 w
+.97619 0 m
+.97619 .00625 L
+s
+P
+[(20)] .97619 0 0 2 Mshowa
+p
+.001 w
+.07143 0 m
+.07143 .00375 L
+s
+P
+p
+.001 w
+.11905 0 m
+.11905 .00375 L
+s
+P
+p
+.001 w
+.16667 0 m
+.16667 .00375 L
+s
+P
+p
+.001 w
+.21429 0 m
+.21429 .00375 L
+s
+P
+p
+.001 w
+.30952 0 m
+.30952 .00375 L
+s
+P
+p
+.001 w
+.35714 0 m
+.35714 .00375 L
+s
+P
+p
+.001 w
+.40476 0 m
+.40476 .00375 L
+s
+P
+p
+.001 w
+.45238 0 m
+.45238 .00375 L
+s
+P
+p
+.001 w
+.54762 0 m
+.54762 .00375 L
+s
+P
+p
+.001 w
+.59524 0 m
+.59524 .00375 L
+s
+P
+p
+.001 w
+.64286 0 m
+.64286 .00375 L
+s
+P
+p
+.001 w
+.69048 0 m
+.69048 .00375 L
+s
+P
+p
+.001 w
+.78571 0 m
+.78571 .00375 L
+s
+P
+p
+.001 w
+.83333 0 m
+.83333 .00375 L
+s
+P
+p
+.001 w
+.88095 0 m
+.88095 .00375 L
+s
+P
+p
+.001 w
+.92857 0 m
+.92857 .00375 L
+s
+P
+p
+.002 w
+0 0 m
+1 0 L
+s
+P
+p
+.002 w
+0 .01472 m
+.00625 .01472 L
+s
+P
+[(0)] -0.0125 .01472 1 0 Mshowa
+p
+.002 w
+0 .09469 m
+.00625 .09469 L
+s
+P
+[(0.025)] -0.0125 .09469 1 0 Mshowa
+p
+.002 w
+0 .17466 m
+.00625 .17466 L
+s
+P
+[(0.05)] -0.0125 .17466 1 0 Mshowa
+p
+.002 w
+0 .25464 m
+.00625 .25464 L
+s
+P
+[(0.075)] -0.0125 .25464 1 0 Mshowa
+p
+.002 w
+0 .33461 m
+.00625 .33461 L
+s
+P
+[(0.1)] -0.0125 .33461 1 0 Mshowa
+p
+.002 w
+0 .41458 m
+.00625 .41458 L
+s
+P
+[(0.125)] -0.0125 .41458 1 0 Mshowa
+p
+.002 w
+0 .49456 m
+.00625 .49456 L
+s
+P
+[(0.15)] -0.0125 .49456 1 0 Mshowa
+p
+.002 w
+0 .57453 m
+.00625 .57453 L
+s
+P
+[(0.175)] -0.0125 .57453 1 0 Mshowa
+p
+.001 w
+0 .03071 m
+.00375 .03071 L
+s
+P
+p
+.001 w
+0 .0467 m
+.00375 .0467 L
+s
+P
+p
+.001 w
+0 .0627 m
+.00375 .0627 L
+s
+P
+p
+.001 w
+0 .07869 m
+.00375 .07869 L
+s
+P
+p
+.001 w
+0 .11068 m
+.00375 .11068 L
+s
+P
+p
+.001 w
+0 .12668 m
+.00375 .12668 L
+s
+P
+p
+.001 w
+0 .14267 m
+.00375 .14267 L
+s
+P
+p
+.001 w
+0 .15867 m
+.00375 .15867 L
+s
+P
+p
+.001 w
+0 .19066 m
+.00375 .19066 L
+s
+P
+p
+.001 w
+0 .20665 m
+.00375 .20665 L
+s
+P
+p
+.001 w
+0 .22265 m
+.00375 .22265 L
+s
+P
+p
+.001 w
+0 .23864 m
+.00375 .23864 L
+s
+P
+p
+.001 w
+0 .27063 m
+.00375 .27063 L
+s
+P
+p
+.001 w
+0 .28662 m
+.00375 .28662 L
+s
+P
+p
+.001 w
+0 .30262 m
+.00375 .30262 L
+s
+P
+p
+.001 w
+0 .31861 m
+.00375 .31861 L
+s
+P
+p
+.001 w
+0 .3506 m
+.00375 .3506 L
+s
+P
+p
+.001 w
+0 .3666 m
+.00375 .3666 L
+s
+P
+p
+.001 w
+0 .38259 m
+.00375 .38259 L
+s
+P
+p
+.001 w
+0 .39859 m
+.00375 .39859 L
+s
+P
+p
+.001 w
+0 .43058 m
+.00375 .43058 L
+s
+P
+p
+.001 w
+0 .44657 m
+.00375 .44657 L
+s
+P
+p
+.001 w
+0 .46257 m
+.00375 .46257 L
+s
+P
+p
+.001 w
+0 .47856 m
+.00375 .47856 L
+s
+P
+p
+.001 w
+0 .51055 m
+.00375 .51055 L
+s
+P
+p
+.001 w
+0 .52654 m
+.00375 .52654 L
+s
+P
+p
+.001 w
+0 .54254 m
+.00375 .54254 L
+s
+P
+p
+.001 w
+0 .55853 m
+.00375 .55853 L
+s
+P
+p
+.001 w
+0 .59052 m
+.00375 .59052 L
+s
+P
+p
+.001 w
+0 .60652 m
+.00375 .60652 L
+s
+P
+p
+.002 w
+0 0 m
+0 .61803 L
+s
+P
+P
+p
+p
+.002 w
+.02381 .61178 m
+.02381 .61803 L
+s
+P
+p
+.002 w
+.2619 .61178 m
+.2619 .61803 L
+s
+P
+p
+.002 w
+.5 .61178 m
+.5 .61803 L
+s
+P
+p
+.002 w
+.7381 .61178 m
+.7381 .61803 L
+s
+P
+p
+.002 w
+.97619 .61178 m
+.97619 .61803 L
+s
+P
+p
+.001 w
+.07143 .61428 m
+.07143 .61803 L
+s
+P
+p
+.001 w
+.11905 .61428 m
+.11905 .61803 L
+s
+P
+p
+.001 w
+.16667 .61428 m
+.16667 .61803 L
+s
+P
+p
+.001 w
+.21429 .61428 m
+.21429 .61803 L
+s
+P
+p
+.001 w
+.30952 .61428 m
+.30952 .61803 L
+s
+P
+p
+.001 w
+.35714 .61428 m
+.35714 .61803 L
+s
+P
+p
+.001 w
+.40476 .61428 m
+.40476 .61803 L
+s
+P
+p
+.001 w
+.45238 .61428 m
+.45238 .61803 L
+s
+P
+p
+.001 w
+.54762 .61428 m
+.54762 .61803 L
+s
+P
+p
+.001 w
+.59524 .61428 m
+.59524 .61803 L
+s
+P
+p
+.001 w
+.64286 .61428 m
+.64286 .61803 L
+s
+P
+p
+.001 w
+.69048 .61428 m
+.69048 .61803 L
+s
+P
+p
+.001 w
+.78571 .61428 m
+.78571 .61803 L
+s
+P
+p
+.001 w
+.83333 .61428 m
+.83333 .61803 L
+s
+P
+p
+.001 w
+.88095 .61428 m
+.88095 .61803 L
+s
+P
+p
+.001 w
+.92857 .61428 m
+.92857 .61803 L
+s
+P
+p
+.002 w
+0 .61803 m
+1 .61803 L
+s
+P
+p
+.002 w
+.99375 .01472 m
+1 .01472 L
+s
+P
+p
+.002 w
+.99375 .09469 m
+1 .09469 L
+s
+P
+p
+.002 w
+.99375 .17466 m
+1 .17466 L
+s
+P
+p
+.002 w
+.99375 .25464 m
+1 .25464 L
+s
+P
+p
+.002 w
+.99375 .33461 m
+1 .33461 L
+s
+P
+p
+.002 w
+.99375 .41458 m
+1 .41458 L
+s
+P
+p
+.002 w
+.99375 .49456 m
+1 .49456 L
+s
+P
+p
+.002 w
+.99375 .57453 m
+1 .57453 L
+s
+P
+p
+.001 w
+.99625 .03071 m
+1 .03071 L
+s
+P
+p
+.001 w
+.99625 .0467 m
+1 .0467 L
+s
+P
+p
+.001 w
+.99625 .0627 m
+1 .0627 L
+s
+P
+p
+.001 w
+.99625 .07869 m
+1 .07869 L
+s
+P
+p
+.001 w
+.99625 .11068 m
+1 .11068 L
+s
+P
+p
+.001 w
+.99625 .12668 m
+1 .12668 L
+s
+P
+p
+.001 w
+.99625 .14267 m
+1 .14267 L
+s
+P
+p
+.001 w
+.99625 .15867 m
+1 .15867 L
+s
+P
+p
+.001 w
+.99625 .19066 m
+1 .19066 L
+s
+P
+p
+.001 w
+.99625 .20665 m
+1 .20665 L
+s
+P
+p
+.001 w
+.99625 .22265 m
+1 .22265 L
+s
+P
+p
+.001 w
+.99625 .23864 m
+1 .23864 L
+s
+P
+p
+.001 w
+.99625 .27063 m
+1 .27063 L
+s
+P
+p
+.001 w
+.99625 .28662 m
+1 .28662 L
+s
+P
+p
+.001 w
+.99625 .30262 m
+1 .30262 L
+s
+P
+p
+.001 w
+.99625 .31861 m
+1 .31861 L
+s
+P
+p
+.001 w
+.99625 .3506 m
+1 .3506 L
+s
+P
+p
+.001 w
+.99625 .3666 m
+1 .3666 L
+s
+P
+p
+.001 w
+.99625 .38259 m
+1 .38259 L
+s
+P
+p
+.001 w
+.99625 .39859 m
+1 .39859 L
+s
+P
+p
+.001 w
+.99625 .43058 m
+1 .43058 L
+s
+P
+p
+.001 w
+.99625 .44657 m
+1 .44657 L
+s
+P
+p
+.001 w
+.99625 .46257 m
+1 .46257 L
+s
+P
+p
+.001 w
+.99625 .47856 m
+1 .47856 L
+s
+P
+p
+.001 w
+.99625 .51055 m
+1 .51055 L
+s
+P
+p
+.001 w
+.99625 .52654 m
+1 .52654 L
+s
+P
+p
+.001 w
+.99625 .54254 m
+1 .54254 L
+s
+P
+p
+.001 w
+.99625 .55853 m
+1 .55853 L
+s
+P
+p
+.001 w
+.99625 .59052 m
+1 .59052 L
+s
+P
+p
+.001 w
+.99625 .60652 m
+1 .60652 L
+s
+P
+p
+.002 w
+1 0 m
+1 .61803 L
+s
+P
+P
+p
+p
+.002 w
+0 .01472 m
+1 .01472 L
+s
+P
+p
+.002 w
+.02381 0 m
+.02381 .61803 L
+s
+P
+P
+p
+p
+0 0 1 r
+.02381 .01472 m
+.02381 .01472 L
+.07143 .01472 L
+.07143 .01472 L
+F
+.07143 .01472 m
+.07143 .01791 L
+.11905 .01791 L
+.11905 .01472 L
+F
+.11905 .01472 m
+.11905 .02431 L
+.16667 .02431 L
+.16667 .01472 L
+F
+.16667 .01472 m
+.16667 .02751 L
+.21429 .02751 L
+.21429 .01472 L
+F
+.21429 .01472 m
+.21429 .0723 L
+.2619 .0723 L
+.2619 .01472 L
+F
+.2619 .01472 m
+.2619 .11708 L
+.30952 .11708 L
+.30952 .01472 L
+F
+.30952 .01472 m
+.30952 .22904 L
+.35714 .22904 L
+.35714 .01472 L
+F
+.35714 .01472 m
+.35714 .41458 L
+.40476 .41458 L
+.40476 .01472 L
+F
+.40476 .01472 m
+.40476 .60332 L
+.45238 .60332 L
+.45238 .01472 L
+F
+.45238 .01472 m
+.45238 .56173 L
+.5 .56173 L
+.5 .01472 L
+F
+.5 .01472 m
+.5 .53934 L
+.54762 .53934 L
+.54762 .01472 L
+F
+.54762 .01472 m
+.54762 .3602 L
+.59524 .3602 L
+.59524 .01472 L
+F
+.59524 .01472 m
+.59524 .20985 L
+.64286 .20985 L
+.64286 .01472 L
+F
+.64286 .01472 m
+.64286 .14267 L
+.69048 .14267 L
+.69048 .01472 L
+F
+.69048 .01472 m
+.69048 .0595 L
+.7381 .0595 L
+.7381 .01472 L
+F
+.7381 .01472 m
+.7381 .03071 L
+.78571 .03071 L
+.78571 .01472 L
+F
+.78571 .01472 m
+.78571 .02111 L
+.83333 .02111 L
+.83333 .01472 L
+F
+.83333 .01472 m
+.83333 .01791 L
+.88095 .01791 L
+.88095 .01472 L
+F
+.88095 .01472 m
+.88095 .01472 L
+.92857 .01472 L
+.92857 .01472 L
+F
+.92857 .01472 m
+.92857 .01472 L
+.97619 .01472 L
+.97619 .01472 L
+F
+P
+p
+.004 w
+.02381 .01472 m
+.02381 .01472 L
+s
+.07143 .01472 m
+.07143 .01472 L
+s
+.02381 .01472 m
+.07143 .01472 L
+s
+.07143 .01472 m
+.07143 .01791 L
+s
+.11905 .01472 m
+.11905 .01791 L
+s
+.07143 .01791 m
+.11905 .01791 L
+s
+.11905 .01472 m
+.11905 .02431 L
+s
+.16667 .01472 m
+.16667 .02431 L
+s
+.11905 .02431 m
+.16667 .02431 L
+s
+.16667 .01472 m
+.16667 .02751 L
+s
+.21429 .01472 m
+.21429 .02751 L
+s
+.16667 .02751 m
+.21429 .02751 L
+s
+.21429 .01472 m
+.21429 .0723 L
+s
+.2619 .01472 m
+.2619 .0723 L
+s
+.21429 .0723 m
+.2619 .0723 L
+s
+.2619 .01472 m
+.2619 .11708 L
+s
+.30952 .01472 m
+.30952 .11708 L
+s
+.2619 .11708 m
+.30952 .11708 L
+s
+.30952 .01472 m
+.30952 .22904 L
+s
+.35714 .01472 m
+.35714 .22904 L
+s
+.30952 .22904 m
+.35714 .22904 L
+s
+.35714 .01472 m
+.35714 .41458 L
+s
+.40476 .01472 m
+.40476 .41458 L
+s
+.35714 .41458 m
+.40476 .41458 L
+s
+.40476 .01472 m
+.40476 .60332 L
+s
+.45238 .01472 m
+.45238 .60332 L
+s
+.40476 .60332 m
+.45238 .60332 L
+s
+.45238 .01472 m
+.45238 .56173 L
+s
+.5 .01472 m
+.5 .56173 L
+s
+.45238 .56173 m
+.5 .56173 L
+s
+.5 .01472 m
+.5 .53934 L
+s
+.54762 .01472 m
+.54762 .53934 L
+s
+.5 .53934 m
+.54762 .53934 L
+s
+.54762 .01472 m
+.54762 .3602 L
+s
+.59524 .01472 m
+.59524 .3602 L
+s
+.54762 .3602 m
+.59524 .3602 L
+s
+.59524 .01472 m
+.59524 .20985 L
+s
+.64286 .01472 m
+.64286 .20985 L
+s
+.59524 .20985 m
+.64286 .20985 L
+s
+.64286 .01472 m
+.64286 .14267 L
+s
+.69048 .01472 m
+.69048 .14267 L
+s
+.64286 .14267 m
+.69048 .14267 L
+s
+.69048 .01472 m
+.69048 .0595 L
+s
+.7381 .01472 m
+.7381 .0595 L
+s
+.69048 .0595 m
+.7381 .0595 L
+s
+.7381 .01472 m
+.7381 .03071 L
+s
+.78571 .01472 m
+.78571 .03071 L
+s
+.7381 .03071 m
+.78571 .03071 L
+s
+.78571 .01472 m
+.78571 .02111 L
+s
+.83333 .01472 m
+.83333 .02111 L
+s
+.78571 .02111 m
+.83333 .02111 L
+s
+.83333 .01472 m
+.83333 .01791 L
+s
+.88095 .01472 m
+.88095 .01791 L
+s
+.83333 .01791 m
+.88095 .01791 L
+s
+.88095 .01472 m
+.88095 .01472 L
+s
+.92857 .01472 m
+.92857 .01472 L
+s
+.88095 .01472 m
+.92857 .01472 L
+s
+.92857 .01472 m
+.92857 .01472 L
+s
+.97619 .01472 m
+.97619 .01472 L
+s
+.92857 .01472 m
+.97619 .01472 L
+s
+P
+P
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 174},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCacheValid->False]}, Open]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{52, Automatic}, {Automatic, 31}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 1003, 15, 70, "Text"],
+Cell[2717, 68, 487, 8, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[3227, 78, 88, 1, 70, "Input"],
+Cell[3318, 81, 9728, 1097, 70, 9570, 1092, "GraphicsData", 
+"PostScript", "Graphics"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

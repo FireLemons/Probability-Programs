@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 # Usage: python3 de_mere_2.py <m> <n> <mute_output>
 #   m:                      The number of coin flips in each experiment
 #   n:                      The number of coin flip experiments to run

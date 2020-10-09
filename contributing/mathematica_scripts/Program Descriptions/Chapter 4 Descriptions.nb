@@ -1,0 +1,147 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      4832,         98]*)
+(*NotebookOutlinePosition[      5940,        135]*)
+(*  CellTagsIndexPosition[      5896,        131]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox["CHAPTER 4 PROGRAM DESCRIPTIONS\n",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\n\nPROGRAM:  Bayes\nCALLING SEQUENCE:  Bayes[hlist, prior, elist, \
+conditional]\nPARAMETERS:\n     hlist , elist - lists of values\n     prior - \
+a list of real numbers\n     conditional - a matrix of real numbers\n\
+SYNOPSIS:\n     -  This program takes as its parameters hlist, a list of an \
+experiment's hypotheses\n        (i.e., the set of all H_i); prior, a list \
+whose i'th entry is the prior probability P(H_i);\n        elist, a list of \
+the experiment's evidence events (i.e., the set of all E_i); and\n        \
+conditional, a matrix whose ij'th entry is the conditional probability P(E_j \
+| H_i). \n        The program returns post, a matrix whose ij'th entry is the \
+posterior probability\n        P(H_j | E_i).  The program also prints out \
+post with its rows and columns labeled\n        by the elements of elist and \
+hlist, respectively.\n     -  Note:  this program requires the program \
+\"LabelMatrix[M, rowlabels,\n         columnlabels]\" be initialized.\n\
+RETURNED VALUES:\n     -  a matrix whose ij'th entry is the posterior \
+probability P(H_j | E_i)\nLOCATION:\n     Folder:  Chapter 4\n     File:      \
+  \"Bayes.Chpt4.mat\"\n     \n\nPROGRAM:  BetaDensity\nCALLING SEQUENCE:  \
+BetaDensity[alpha, beta, x]\nPARAMETERS:\n     alpha, beta - real numbers\n   \
+  x - an unassigned variable name\nSYNOPSIS:\n     -  This gives the beta \
+density function with parameters alpha and beta.\n     -  Note:  this program \
+requires the package \"Statistics`ContinuousDistributions`\"\n         be \
+loaded in.\nRETURNED VALUES:\n     -  the beta density function with \
+parameters alpha and beta\nLOCATION:\n     Folder:  Chapter 4\n     File:     \
+  \"Important Programs\"\n     \n     \nPROGRAM:  TwoArm\nCALLING SEQUENCE:  \
+TwoArm[n, x, y, s]\nPARAMETERS:\n     n, s - integers\n     x, y - real \
+numbers\nSYNOPSIS:\n     -  This program simulates the two strategies \
+play-the-better-machine and \n        play-the-winner, in connection with the \
+Two-Armed Bandit problem.  The\n        variables x and y represent the \
+respective probabilities that machines 1\n        and 2 pay off a dollar on a \
+single play.  If s = 1, the play-the-better-machine\n        strategy is \
+used; otherwise, the play-the-winner strategy is used.  The\n        variable \
+n is the number of plays to be simulated.  For each play, the program\n       \
+ prints out which machine was used, and what the results of the play were \
+(i.e.,\n        whether it was won or lost).  Further, the program plots the \
+final expermimentally-\n        determined densities for x and y, plotting \
+that of x with a solid line, and that of y\n        with a dotted one.\n     \
+- Note:  this program requires the program \"BetaDensity[alpha, beta, x]\" be\
+\n        initialized.\nRETURNED VALUES:\n     -  none\nLOCATION:\n     \
+Folder:  Chapter 4\n     File:       \"TwoArm.Chpt4.mat\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{12, Automatic}, {Automatic, 13}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 3118, 46, 70, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

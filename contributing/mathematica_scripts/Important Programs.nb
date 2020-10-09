@@ -1,0 +1,1171 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     39181,       1031]*)
+(*NotebookOutlinePosition[     40320,       1067]*)
+(*  CellTagsIndexPosition[     40276,       1063]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["\<\
+Off[SetDelayed::write];
+Off[General::stop];
+Off[Set::write];
+Off[General::spell];
+Off[Power::indet];
+Off[Plot::plnr]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell["<<DiscreteMath`Permutations`", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell["<<Statistics`ContinuousDistributions`", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell["<<Statistics`HypothesisTests`", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  StyleBox[
+  "PROGRAM:  Areabargraph\nCALLING SEQUENCE:  Areabargraph[data, xmin, xmax, \
+k]\nPARAMETERS:\n     data - a list of real numbers\n     xmin, xmax - real \
+numbers\n     k - an integer\nSYNOPSIS:\n     -  This program divides the \
+interval [xmin, xmax] on the x-axis into k subintervals\n        of equal \
+length.  Then, on each subinterval, a box is erected whose area is\n        \
+equal to the percentage of values in the list data which are in the \
+subinterval.\n        Important note:  only data values which fall in the \
+user-defined interval will be\n        included in\tthe bar graph.  If not \
+all data values are included, a warning is\n        displayed.  I f you wish \
+to be sure of including ",
+    FontFamily->"Helvetica"],
+  StyleBox["all",
+    FontFamily->"Helvetica",
+    FontVariations->{"Underline"->True}],
+  StyleBox[
+  " data values in the graph,\n        choose xmin = Min[data] and xmax = \
+Max[data].   (See also \"Bargraph.\")\nRETURNED VALUES:\n     -  none\n\
+LOCATION:\n     File:  \"Important Programs\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[Areabargraph];
+Areabargraph[data_, xmin_, xmax_, k_] :=
+Block[{sorteddata = {},
+       length = Length[data],
+       dx = (xmax - xmin)/k,
+       currentupperlim = xmin + dx,
+       result = {},
+       index = 1,
+       counter,
+       rectanglelist = {},
+       linelist = {},
+       graphicslist = {}
+      },
+      sorteddata = Sort[data];
+      If[((sorteddata[[1]] < xmin)||
+          (sorteddata[[length]] > xmax)),
+         Print[\"Note:  some data values lie outside the user-defined \
+interval.\"]
+        ];
+      Block[{},
+            For[i = 1, i <= k, i++,
+                counter = 0;
+                While[((index <= length)&&
+                      (sorteddata[[index]] <=
+                       currentupperlim)),
+                      counter++;
+                      index++;
+                     ];
+                result = Append[result, counter];
+                currentupperlim += dx;
+               ];
+           rectanglelist = 
+                 Table[Rectangle[{xmin + (i-1)*dx,0},
+                                 {xmin + i*dx,result[[i]]/(length*dx)}
+                                ],
+                            {i, 1, k}
+                      ];
+           rectanglelist = Prepend[rectanglelist,
+                                   RGBColor[0, 0, 1]
+                                  ];
+           linelist = Table[{Line[{{xmin + (i-1)*dx,0},
+                                   {xmin + (i-1)*dx,result[[i]]/(length*dx)}
+                                  }
+                                 ],
+                             Line[{{xmin + i*dx,0},
+                                   {xmin + i*dx,result[[i]]/(length*dx)}
+                                  }
+                                 ],
+                             Line[{{xmin + (i-1)*dx, 
+                                    result[[i]]/(length*dx)},
+                                   {xmin + i*dx,
+                                    result[[i]]/(length*dx)}
+                                  }
+                                 ]
+                             },
+                             {i, 1, k}
+                           ];
+          linelist = Flatten[linelist,1];
+          graphicslist = Union[rectanglelist, linelist];
+   \t\t  Show[Graphics[{rectanglelist, linelist}, 
+                         Axes -> True,
+                         PlotRange -> All,
+                         Frame -> True
+                       ]
+              ]           
+         ]
+     ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  StyleBox[
+  "PROGRAM:   Bargraph\nCALLING SEQUENCE:  Bargraph[data, xmin, xmax, k]\n\
+PARAMETERS:\n     data - a list of real numbers\n     xmin, xmax - real \
+numbers\n     k - an integer\nSYNOPSIS:\n     -  This program divides the \
+interval [xmin, xmax] on the x-axis into k subintervals\n        of equal \
+length.  Then, on each subinterval, a box is erected whose height is\n        \
+equal to the percentage of values in the list data which are in the \
+subinterval. \n        Important note:  only data values which fall in the \
+user-defined interval will be\n        included in\tthe bar graph.  If not \
+all data values are included, a warning is\n        displayed.  I f you wish \
+to be sure of including ",
+    FontFamily->"Helvetica"],
+  StyleBox["all",
+    FontFamily->"Helvetica",
+    FontVariations->{"Underline"->True}],
+  StyleBox[
+  " data values in the graph,\n        choose xmin = Min[data] and xmax = \
+Max[data].     (See also \"Areabargraph.\")\nRETURNED VALUES:\n     -  none\n\
+LOCATION:\n     File:  \"Important Programs\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[Bargraph];
+Bargraph[data_, xmin_, xmax_, k_] :=
+Block[{sorteddata = {},
+       length = Length[data],
+       dx = (xmax - xmin)/k,
+       currentupperlim = xmin + dx,
+       result = {},
+       index = 1,
+       counter,
+       rectanglelist = {},
+       linelist = {},
+       graphicslist = {}
+      },
+      sorteddata = Sort[data];
+      If[((sorteddata[[1]] < xmin)||
+          (sorteddata[[length]] > xmax)),
+         Print[\"Note:  some data values lie outside the user-defined \
+interval.\"]
+        ];
+      Block[{},
+            For[i = 1, i <= k, i++,
+                counter = 0;
+                While[((index <= length)&&
+                       (sorteddata[[index]] <=
+                        currentupperlim)),
+                      counter++;
+                      index++;
+                     ];
+                result = Append[result, counter];
+                currentupperlim += dx;
+               ];
+           rectanglelist = 
+                 Table[Rectangle[{xmin + (i-1)*dx,0},
+                                 {xmin + i*dx,result[[i]]/length}
+                                ],
+                       {i, 1, k}
+                      ];
+           rectanglelist = Prepend[rectanglelist,
+                                   RGBColor[0, 0, 1]
+                                  ];
+           linelist = Table[{Line[{{xmin + (i-1)*dx,0},
+                                   {xmin + (i-1)*dx,result[[i]]/length}
+                                  }
+                                 ],
+                             Line[{{xmin + i*dx,0},
+                                   {xmin + i*dx,result[[i]]/length}
+                                  }
+                                 ],
+                             Line[{{xmin + (i-1)*dx, 
+                                    result[[i]]/length},
+                                   {xmin + i*dx,
+                                    result[[i]]/length}
+                                  }
+                                 ]
+                            },
+                            {i, 1, k}
+                           ];
+          linelist = Flatten[linelist,1];
+          graphicslist = Union[rectanglelist, linelist];
+          Show[Graphics[{rectanglelist, linelist}, 
+                        Axes -> True,
+                        PlotRange -> All,
+                        Frame -> True
+                       ]
+              ]
+\t\t ]
+     ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  BetaDensity\nCALLING SEQUENCE:  BetaDensity[alpha, beta, x]\n\
+PARAMETERS:\n     alpha, beta - real numbers\n     x - an unassigned variable \
+name\nSYNOPSIS:\n     -  This gives the beta density function with parameters \
+alpha and beta.\n     -  Note:  this program requires the package \
+\"Statistics`ContinuousDistributions`\"\n         be loaded in.\nRETURNED \
+VALUES:\n     -  the beta density function with parameters alpha and beta\n\
+LOCATION:\n     Folder:  Chapter 4\n     File:       \"Important Programs\"",
+  FontFamily->"Helvetica",
+  FontWeight->"Plain"]], "Input",
+  CellMargins->{{7, Inherited}, {Inherited, Inherited}},
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[BetaDensity];
+BetaDensity[alpha_, beta_, x_]  := 
+  PDF[BetaDistribution[alpha, beta], x]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  Bin\nCALLING SEQUENCE:  Bin[n, p, k]\nPARAMETERS:\n     n, k - \
+integers\n     p - a real number\nSYNOPSIS:\n     -  This function returns \
+the probability of exactly k successes in n Bernoulli trials\n          with \
+probability of success p on each experiment.\nRETURNED VALUES:\n     -  the \
+probability of exactly k successes in n Bernoulli trials with probability of\n\
+        success p on each experiment\n   LOCATION:\n     File:  \"Important \
+Programs\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["Bin[n_, p_, k_] := Binomial[n, k]*(p^k)*((1-p)^(n-k))", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  ConsolidateList\nCALLING SEQUENCE:  ConsolidateList[inputlist]\n\
+PARAMETERS:\n     inputlist - a list of ordered pairs of real numbers\n\
+SYNOPSIS:\n     -  This program takes as its input a list of ordered pairs, \
+which is assumed to be\n        sorted in lexicographic order, and produces a \
+list of ordered pairs in which each\n        pair's second element is the sum \
+of all second elements of inputlist ordered pairs\n        with the same \
+first coordinate.\n    -  Example:  ConsolidateList[{{1,1}, {1,5}, {2,3}, \
+{5,6}, {5,2}}] = {{1,6}, {2,3}, {5,8}} .\nRETURNED VALUES:\n     -  the list \
+described above\nLOCATION:\n       File:       \"ImportantPrograms\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[ConsolidateList];
+ConsolidateList[inputlist_] :=
+Block[{l = Length[inputlist],
+       a = {},
+       i = 1,
+       currentxvalue
+      },
+      While[(i <= l),
+          Block[{b = {0, 0}
+                },
+                currentxvalue = inputlist[[i]][[1]];
+                b[[1]] = currentxvalue;
+                While[(inputlist[[i]][[1]] == currentxvalue),
+                      Block[{},
+                            b[[2]] = b[[2]] + inputlist[[i]][[2]];
+                            i++;
+                           ];
+                      If[(i > l), Break[]];
+                     ];
+                a = Append[a, b];
+               ];    
+           ];
+      Return[a]
+     ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  ContinuousMean\nCALLING SEQUENCE:  ContinuousMean[f, a, b]\n\
+PARAMETERS:\n     f -  the name of a pre-defined function of one variable\n   \
+  a, b - real numbers (or +/- Infinity)\nSYNOPSIS:\n     -  This program \
+calculates the mean of density function f on [a, b].\n     -  Keep in mind \
+that the function f[x] should be defined before this program is\n        \
+called, and  then the name of the function, namely f (or some other name, \
+like\n        Cos) should be given to this program.  The expression for the \
+function (such as\n        x^2, for example) should not  be given as a \
+parameter.\nRETURNED VALUES:\n     -  mean(f)\nLOCATION:\n     File:  \
+\"Important Programs\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[ContinuousMean];
+ContinuousMean[f_, a_, b_] :=
+      Integrate[x * f[x], {x, a, b}]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  ContinuousVariance\nCALLING SEQUENCE:  ContinuousVariance[f, a, b]\
+\nPARAMETERS:\n     f -  the name of a pre-defined function of one variable\n \
+    a, b - real numbers (or +/- Infinity)\nSYNOPSIS:\n     -  This program \
+calculates the variance of density function f on [a, b].\n     -  Keep in \
+mind that the function f[x] should be defined before this program is\n        \
+called, and  then the name of the function, namely f (or some other name, \
+like\n        Cos) should be given to this program.  The expression for the \
+function (such as\n        x^2, for example) should not  be given as a \
+parameter.\n     -  Note:  this program requires the program \
+\"ContinuousMean[f, a, b]\" be initialized.\nRETURNED VALUES:\n     -  \
+variance(f)\nLOCATION:\n     File:  \"Important Programs\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[ContinuousVariance];
+ContinuousVariance[f_, a_, b_] :=
+      var = Integrate[((x - ContinuousMean[f, a, b])^2) 
+                       * f[x], 
+                      {x, a, b}]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  Convolution\nCALLING SEQUENCE:  Convolution[distributionlist1, \
+distributionlist2]\nPARAMETERS:\n     distributionlist1, distributionlist2 - \
+distribution lists\nSYNOPSIS:\n     -  This program returns the convolution \
+of the two discrete distributions given in\n        distributionlist1 and \
+distributionlist2.\n     -  Note:  this program requires the program \
+\"ConsolidateList[inputlist]\" be\n        initialized.\nRETURNED VALUES:\n   \
+  -  the convolution of the two distributions in distributionlist1 and \
+distributionlist2\nLOCATION:\n     File:      \"ImportantPrograms\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[Convolution];
+Convolution[distributionlist1_, distributionlist2_] :=
+Block[{l1 = Length[distributionlist1],
+       l2 = Length[distributionlist2],
+       i,
+       j,
+       newdistribution = {}
+      },
+      For[i = 1, i <= l1, i++,
+          For[j = 1, j <= l2, j++,
+              newdistribution = Append[newdistribution,
+                                       {distributionlist1[[i]][[1]]+
+                                        distributionlist2[[j]][[1]],
+                                        distributionlist1[[i]][[2]]*
+                                        distributionlist2[[j]][[2]]
+                                       }
+                                      ];
+             ];
+         ];
+      newdistribution = Sort[newdistribution];
+      newdistribution = ConsolidateList[newdistribution];
+      Return[newdistribution]
+     ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  DiscreteMean\nCALLING SEQUENCE:  DiscreteMean[distributionlist]\n\
+PARAMETERS:\n     distributionlist - a distribution list\nSYNOPSIS:\n     -  \
+This program returns the mean of the distribution given in distributionlist.\n\
+RETURNED VALUES:\n     -  the mean of the distribution given in \
+distributionlist\nLOCATION:\n     File:  \"Important Programs\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[DiscreteMean];
+DiscreteMean[distributionlist_] :=
+      Sum[distributionlist[[i]][[1]] *
+          distributionlist[[i]][[2]],
+          {i, 1, Length[distributionlist]}
+         ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  DiscreteVariance\nCALLING SEQUENCE:  \
+DiscreteVariance[distributionlist]\nPARAMETERS:\n     distributionlist - a \
+distribution list\nSYNOPSIS:\n     -  This program returns the variance of \
+the distribution given in distributionlist.\n     -  Note:  this program \
+requires the program \"DiscreteMean[distributionlist]\" be\n        \
+initialized.\nRETURNED VALUES:\n     -  the variance of the distribution \
+given in distributionlist\nLOCATION:\n     File:  \"Important Programs\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[DiscreteVariance];
+DiscreteVariance[distributionlist_] :=
+      Sum[((distributionlist[[i]][[1]] - DiscreteMean[distributionlist])^2) 
+           * (distributionlist[[i]][[2]]),
+          {i, 1, Length[distributionlist]}
+         ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  FixedVector\nCALLING SEQUENCE:  FixedVector[P, stateslist, print]\n\
+PARAMETERS:\n     P - a Markov chain transition matrix\n     stateslist - a \
+list of values, with Length[stateslist] = Length[P]\n     print - a Boolean \
+variable (True or False)\nSYNOPSIS:\n     -  This program returns the fixed \
+vector w for an ergodic Markov chain with\n        transition matrix P and \
+possible states in stateslist.  If print = True, the program\n        prints \
+out P and w.\n     -  Note:  this program requires the program \
+\"LabelMatrix[M, rowlabels,\n        columnlabels]\" be initialized.\n\
+RETURNED VALUES:\n     -  P's fixed vector w\nLOCATION:\n     Folder:  \
+Chapter 11\n     File:       \"FixedVector.Chpt11.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[FixedVector];
+FixedVector[P_, stateslist_, print_] :=
+Block[{IdMatrix, B, Z, c = Table[1, {i, 1, Length[P]}], 
+       w
+      },
+       IdMatrix = IdentityMatrix[Length[P]];
+       w = NullSpace[IdMatrix - Transpose[P]][[1]];
+       w = w/Apply[Plus, w];
+       If[print,
+          Print[\"Transition matrix P:\"];
+          Print[LabelMatrix[P, stateslist, stateslist]];
+          Print[\"  \"];
+          Print[\"  \"];
+          Print[\"Fixed vector W:\"];
+          Print[Prepend[{w},stateslist]//MatrixForm]
+         ];
+       Return[w]
+     ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  LabelMatrix\nCALLING SEQUENCE:  LabelMatrix[M, rowlabels, \
+columnlabels]\nPARAMETERS:\n     M - a matrix of values\n     rowlabels, \
+columnlabels - lists of values\nSYNOPSIS:\n     -  This program labels M's \
+rows and columns by creating a new matrix, M2, which\n         contains M's \
+labels.  Since M2's rows and columns contain these labels, M2\n         \
+should not be used in performing computations with M; it should be used only \
+\n         for displaying M.\nRETURNED VALUES:\n     -  the labeled matrix \
+M2, in matrix form\nLOCATION:\n     File:  \"Important Programs\"\n",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[LabelMatrix];
+LabelMatrix[M_, rowlabels_, columnlabels_] :=
+Block[{M2 = M},
+      For[k = 1, k <= Length[M2], k++,
+          M2[[k]] = Prepend[M2[[k]], rowlabels[[k]]]
+         ];
+      M2 = Prepend[M2, Prepend[columnlabels,\" \"]];
+      Return[M2//MatrixForm]
+     ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  NFoldConvolution\nCALLING SEQUENCE:  \
+NFoldConvolution[distributionlist, n]\nPARAMETERS:\n     distributionlist - a \
+distribution list\nSYNOPSIS:\n     -  This program returns the n-fold \
+convolution distribution of the distribution given\n        in \
+distributionlist.\n     -  Note:  this program requires the program \
+\"Convolution[distributionlist1,\n        distributionlist2]\" be \
+initialized.\nRETURNED VALUES:\n     -  the n-fold convolution of the \
+distribution in distributionlist with itself\nLOCATION:\n      File:      \
+\"ImportantPrograms\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[NFoldConvolution];
+NFoldConvolution[distributionlist_, n_] :=
+Block[{currentdistribution = distributionlist},
+      For[i = 2, i <= n, i++,
+          Block[{},
+                currentdistribution = 
+                    Convolution[currentdistribution, 
+                                distributionlist];
+               ];
+         ];
+     Return[currentdistribution]
+    ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  NormalArea\nCALLING SEQUENCE:  NormalArea[a, b]\nPARAMETERS:\n     \
+a, b - real numbers\nSYNOPSIS:\n     -  This function returns the area under \
+the standard normal density curve on [a, b].\n     -  Note:  this function \
+requires the package \"Statistics`ContinuousDistributions`\" be\n        \
+loaded in.\nRETURNED VALUES:\n     -  the area under the standard normal \
+density curve on [a, b]\nLOCATION:\n     File:  \"Important Programs\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[NormalArea];
+NormalArea[a_, b_] :=
+  (CDF[NormalDistribution[0, 1], b]) -
+  (CDF[NormalDistribution[0, 1], a])\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  NormalDensity\nCALLING SEQUENCE:  NormalDensity[x, mu, sigma]\n\
+PARAMETERS:\n     x - an unassigned variable\n     mu, sigma - real numbers\n\
+SYNOPSIS:\n     -  This program is the normal density function with mean mu \
+and standard\n        deviation sigma.\nRETURNED VALUES:\n     -  the normal \
+density function with mean mu and standard deviation sigma\nLOCATION:\n     \
+File:  \"Important Programs\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[NormalDensity];
+NormalDensity[x_, mu_, sigma_] :=
+  (1/Sqrt[2 Pi sigma^2]) Exp[-(x - mu)^2/(2 sigma^2)]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  SimulateDiscreteVariable\nCALLING SEQUENCE:  \
+SimulateDiscreteVariable[plist]\nPARAMETERS:\n     plist - a probability list\
+\nSYNOPSIS:\n     -  This program simulates an experiment which has outcomes \
+x_1, x_2, ...,\n        x_(Length[plist]) with probabilities plist[[1]], \
+plist[[2]], ..., plist[[Length[plist]]],\n        respectively.  The program \
+returns i, where x_i is the outcome of the experiment.\nRETURNED VALUES:\n    \
+ -  i , where x_i is the outcome of the experiment\nLOCATION:\n     File:  \
+\"Important Programs\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[SimulateDiscreteVariable];
+SimulateDiscreteVariable[plist_] :=
+Block[{r, j = 1, subtotal = 0},
+      r = Random[];
+      While[subtotal <= r,
+            subtotal = subtotal + plist[[j]];
+            j++
+           ];
+      Return[j - 1]
+\t    ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell["", "Text",
+  PageWidth->Infinity,
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  SpikeData\nCALLING SEQUENCE:  SpikeData[data]\nPARAMETERS:\n     \
+data - a list of real numbers\nSYNOPSIS:\n     -  This program takes a list \
+of data values representing the outcomes of a series of\n         \
+experiments, and returns the distribution list representing these outcomes \
+and\n         the fraction of the time they occurred (e.g., their \
+experimental probabilities).  The\n         returned list is in a form \
+acceptable as the first parameter being passed to the\n         programs \
+\"Spikegraph[distributionlist, xmin, xmax]\" and \"SpikegraphWithDots\n       \
+  [distributionlist, xmin, xmax, color, print].\"  (See also \"Spikegraph\" \
+and\n         \"SpikegraphWithDots\".)\nRETURNED VALUES:\n     -  a \
+distribution list representing the outcomes, and their probabilities, in data\
+\nLOCATION:\n     File:  \"Important Programs\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[SpikeData];
+SpikeData[data_] :=
+Block[{data2, olist, plist, i, data3},
+      data2 = Sort[data];
+      olist = {data2[[1]]};
+      plist = {1};
+      i = 2;
+      While[(i <= Length[data2]),
+            If[data2[[i]] == data2[[i - 1]],
+               plist[[Length[olist]]]++,
+               olist = Append[olist, data2[[i]]];
+               plist = Append[plist, 1]
+              ];
+            i++
+           ];
+      data3 = Table[{olist[[j]], 
+                     plist[[j]]/Length[data]//N},
+                    {j, 1, Length[olist]}
+                   ];
+      Return[data3]
+     ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  Spikegraph\nCALLING SEQUENCE:  Spikegraph[distributionlist, xmin, \
+xmax, print]\nPARAMETERS:\n     distributionlist - a distribution list\n     \
+xmin, xmax - real numbers\n     print - a Boolean variable (True or False)\n\
+SYNOPSIS:\n     -  This program displays a graph of the distribution of x \
+(where x has the\n        distribution given in distributionlist) by drawing \
+a spike of height p(x) at each x.  If\n        print = True, this graph is \
+displayed.  Otherwise, the display is (for the time being)\n        \
+suppressed.   (If the graph has been suppressed, to see it at a later time \
+type\n        \"Show[%#, DisplayFunction -> $DisplayFunction]\", where # is \
+the input number\n        of the original call to \"Spikegraph.\")  The input \
+distribution list is assumed to be\n        in increasing order of the \
+x-values.  Important note:  only values of x which fall in\n        the \
+user-defined interval [xmin,  xmax] will be included in the graph.   If not \
+all\n        values of x are included, and print = True, a warning is \
+displayed.  If print = False,\n        no such warning will be given, even if \
+the graph is later displayed.   (See also\n        \"SpikeData\" and \
+\"SpikegraphWithDots.\")\nRETURNED VALUES:\n     -  none\nLOCATION:\n     \
+File:  \"Important Programs\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[Spikegraph];
+Spikegraph[distributionlist_, xmin_, xmax_, print_] :=
+Block[{num = Length[distributionlist],
+       j, k,
+       linelist
+      },
+      linelist = Table[Line[{distributionlist[[i]],
+                            {distributionlist[[i]][[1]], 0}}
+                           ],
+                       {i, 1, num}
+                      ];
+      j = 1;
+      While[distributionlist[[j]][[1]] < xmin,
+            linelist = Drop[linelist, 1];
+            j++
+           ];
+      k = num;
+      While[distributionlist[[k]][[1]] > xmax,
+            linelist = Drop[linelist, -1];
+            k--
+           ];
+      If[print,
+         If[((distributionlist[[1]][[1]] < xmin)||
+             (distributionlist[[num]][[1]] > xmax)),
+            Print[\"Note:  some outcome values lie outside the user-defined \
+interval.\"]
+           ];
+         Show[Graphics[linelist],
+              PlotRange -> All,
+              Frame -> True
+             ],
+         Show[Graphics[linelist],
+              DisplayFunction -> Identity,
+              PlotRange -> All,
+              Frame -> True
+             ]
+        ] 
+     ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  SpikegraphWithDots\nCALLING SEQUENCE:  \
+SpikegraphWithDots[distributionlist, xmin, xmax, color, print]\nPARAMETERS:\n \
+    distributionlist - a distribution list\n     xmin, xmax - real numbers\n  \
+   color - a list of 3 color-specification real numbers\n     print - a \
+Boolean variable (True or False)\nSYNOPSIS:\n     -  This program displays a \
+graph of the distribution of x (where x has the\n        distribution given \
+in distributionlist) by drawing a spike of height p(x) at each x,\n        \
+and topping that spike with a dot of color color.  If print = True, this \
+graph is\n        displayed.  Otherwise,  the display is (for the time being) \
+suppressed.   (If the\n        graph has been suppressed, to see it at a \
+later time type \"Show[%#,\n        DisplayFunction -> $DisplayFunction]\", \
+where # is the input number of the\n        original call to \
+SpikegraphWithDots.)  The input distribution list is assumed to be\n        \
+in increasing order of the x-values.  Important note:  only values of x which \
+fall\n        in the user-defined interval [xmin, xmax] will be included in \
+the graph.   If not all\n        values of x are included, and print = True, \
+a warning is displayed.  If print = False,\n        no such warning will be \
+given, even if the graph is later displayed. \nRETURNED VALUES:\n     -  none\
+\nLOCATION:\n     File:  \"Important Programs\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell["\<\
+Clear[SpikegraphWithDots];
+SpikegraphWithDots[distributionlist_, xmin_, xmax_, 
+                   color_, print_] :=
+Block[{num = Length[distributionlist],
+       j, k,
+       linelist
+      },
+      linelist = Table[Line[{distributionlist[[i]],
+                            {distributionlist[[i]][[1]], 0}}
+                           ],
+                       {i, 1, num}
+                      ];
+      pointlist = Table[Point[distributionlist[[i]]],
+                        {i, 1, num}
+                       ];
+      j = 1;
+      While[distributionlist[[j]][[1]] < xmin,
+            linelist = Drop[linelist, 1];
+            pointlist = Drop[pointlist, 1];
+            j++
+           ];
+      k = num;
+      While[distributionlist[[k]][[1]] > xmax,
+            linelist = Drop[linelist, -1];
+            pointlist = Drop[pointlist, -1];
+            k--
+           ];
+      finallist = Join[linelist, pointlist];
+      If[print,
+         If[((distributionlist[[1]][[1]] < xmin)||
+             (distributionlist[[num]][[1]] > xmax)),
+            Print[\"Note:  some outcome values lie outside the user-defined \
+interval.\"]
+           ];
+         Show[Graphics[linelist],
+              Graphics[{PointSize[.02],
+                       RGBColor[color[[1]], color[[2]], color[[3]]],
+                       pointlist}
+                      ],
+              PlotRange -> All,
+              Frame -> True
+             ],
+         Show[Graphics[linelist],
+              Graphics[{PointSize[.02],
+                       RGBColor[color[[1]], color[[2]], color[[3]]],
+                       pointlist}
+                      ],
+              DisplayFunction->Identity,
+              PlotRange -> All,
+              Frame -> True
+             ]
+        ]
+     ]\
+\>", "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "RandomNumbers::usage = \"",
+  StyleBox[
+  "RandomNumbers[n] displays n random real numbers between 0 and 1.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "CoinTosses::usage = \"",
+  StyleBox[
+  "CoinTosses[n, print] simulates n tosses of a fair coin, and prints the \
+proportion of tosses that come up heads. If print = True, then the outcomes \
+of the tosses (H/T) are also printed.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "DeMere1::usage = \"",
+  StyleBox["DeMere1[n, print]",
+    FontColor->RGBColor[0, 0, 1]],
+  StyleBox[" ",
+    FontFamily->"Helvetica",
+    FontWeight->"Plain",
+    FontColor->RGBColor[0, 0, 1]],
+  StyleBox[
+  "simulates 4 rolls of a die, and determines whether a six has appeared (a \
+'success'). It repeats this experiment n times, and prints the number of \
+trials that resulted in a success. It also prints the proportion of trials \
+that resulted in a success. Finally, if print = True, then the rolls are \
+printed out.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "DeMere2::usage = \"",
+  StyleBox[
+  "DeMere2[n, m, print] simulates m rolls of two dice, and determines whether \
+a double 6 has appeared (a 'success'). It repeats this experiment n times, \
+and prints the number of trials that resulted in a success. It also prints \
+the proportion of trials that resulted in a success. Finally, if print = \
+True, then the rolls are printed out.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "HTSimulation::usage = \"",
+  StyleBox[
+  "HTSimulation[n, m, print] simulates an experiment in which a fair coin is \
+tossed m times. The experiment is repeated n times. The program records the \
+'winnings' in each experiment, where the winnings are defined to be the \
+number of heads minus the number of tails. It also keeps track of the number \
+of times the winnings are 'positive' in the course of an experiment (we count \
+as 'positive' a time at which the winnings are 0 but the previous winnings \
+are positive). The program returns a list whose first element is a list of \
+the winnings in each experiment (winningslist), and whose second element is a \
+list of times in the lead in each experiment (timesinleadlist). If print = \
+True and n = 1, then a graph of the game is displayed. If print = True and n \
+> 1, then spike graphs of the winningslist and timesinleadlist are displayed. \
+",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "HorseRace::usage = \"",
+  StyleBox[
+  "HorseRace[n] simulates n of the horse races described in Chapter 1. The \
+program prints each race winner, and returns a list containing the number of \
+times each horse won.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "GeneralSimulation::usage = \"",
+  StyleBox[
+  "GeneralSimulation[n, plist, m, print]simulates m general experiments in \
+which the outcomes 1, 2, ..., n occur with probabilties plist[[1]], \
+plist[[2]], ..., plist[[n]]. The observed frequencies of the outcomes are \
+printed, and if print = True, the outcomes are printed, and spike graphs of \
+the observed data frequencies and plist data",
+    FontColor->RGBColor[0, 0, 1]],
+  StyleBox[" ",
+    FontFamily->"Helvetica",
+    FontWeight->"Plain"],
+  StyleBox[
+  "frequencies are displayed on the same set of axes (the observed data \
+spikes are topped with blue dots, the plist data spikes with red). Finally, \
+the program returns a list of the n observed frequencies.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "BertrandsParadox::usage = \"",
+  StyleBox[
+  "BertrandsParadox[n, print] illustrates Bertrand's Paradox by choosing n \
+random chords of a circle three times, each time using a different one of the \
+three coordinatizations described in the book. For each coordinatization, the \
+program prints the proportion of chosen chords with length greater than \
+Sqrt[3] and, if print = True, displays a picture of the experiment, drawing  \
+every one-hundredth chord.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "BuffonsNeedle::usage = \"",
+  StyleBox[
+  "BuffonsNeedle[n, print] simulates the Buffon needle experiment described \
+in the book, dropping n pins on a 10 x 10 grid. The program returns an \
+estimate for Pi, using the book's method. If print = True, a graphical \
+display of the experiment is produced, showing every one-hundredth pin. ",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "BusParadox::usage = \"",
+  StyleBox[
+  "BusParadox[n] simulates the bus paradox problem stated in the book, for n \
+days. It displays an area bar graph of the waiting times, and returns the \
+experimentally-determined mean waiting time.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "Darts::usage = \"",
+  StyleBox[
+  "Darts[n, print] simulates n throws of a dart at a circular dartboard of \
+radius 1. The program displays a bar graph in which the area of the i'th bar \
+is equal to the fraction of the total falling in the i'th region. If print = \
+True, then the program returns a list of distances that the dart landed from \
+the center of the board.",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "GaltonBoard::usage = \"",
+  StyleBox[
+  "GaltonBoard[n, m, print] simulates n Galton board experiments, with m rows \
+of pins. Each simulation consists of choosing 0 or 1 m times, and summing the \
+chosen numbers. The program then displays an area bar graph of the experiment \
+results. If print = True, a list of all the final positions is returned.  ",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[TextData[{
+  "MonteCarlo::usage = \"",
+  StyleBox[
+  "MonteCarlo[n, f, xmin, xmax, ymax] estimates  the area under the input \
+function f[x] and above the interval [xmin, xmax] by choosing n random points \
+in the rectangle above the interval [xmin, xmax] and between the y-values 0 \
+and ymax. The program returns its area estimate,  and also plots the random \
+points and the function f[x] on the interval  [xmin, xmax].",
+    FontColor->RGBColor[0, 0, 1]],
+  "\";"
+}], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 509},
+WindowMargins->{{52, Automatic}, {Automatic, 16}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1709, 49, 195, 9, 96, "Input",
+  InitializationCell->True],
+Cell[1907, 60, 99, 2, 26, "Input",
+  InitializationCell->True],
+Cell[2009, 64, 108, 2, 26, "Input",
+  InitializationCell->True],
+Cell[2120, 68, 100, 2, 26, "Input",
+  InitializationCell->True],
+Cell[2223, 72, 1160, 23, 320, "Text"],
+Cell[3386, 97, 2541, 70, 1048, "Input",
+  InitializationCell->True],
+Cell[5930, 169, 1162, 23, 320, "Text"],
+Cell[7095, 194, 2486, 70, 1048, "Input",
+  InitializationCell->True],
+Cell[9584, 266, 700, 11, 222, "Input"],
+Cell[10287, 279, 174, 6, 54, "Input",
+  InitializationCell->True],
+Cell[10464, 287, 589, 10, 235, "Text"],
+Cell[11056, 299, 124, 2, 26, "Input",
+  InitializationCell->True],
+Cell[11183, 303, 797, 12, 252, "Text"],
+Cell[11983, 317, 769, 27, 376, "Input",
+  InitializationCell->True],
+Cell[12755, 346, 812, 13, 269, "Text"],
+Cell[13570, 361, 168, 6, 54, "Input",
+  InitializationCell->True],
+Cell[13741, 369, 924, 14, 286, "Text"],
+Cell[14668, 385, 261, 8, 96, "Input",
+  InitializationCell->True],
+Cell[14932, 395, 711, 11, 235, "Text"],
+Cell[15646, 408, 937, 26, 418, "Input",
+  InitializationCell->True],
+Cell[16586, 436, 477, 8, 184, "Text"],
+Cell[17066, 446, 265, 9, 96, "Input",
+  InitializationCell->True],
+Cell[17334, 457, 607, 10, 218, "Text"],
+Cell[17944, 469, 316, 9, 110, "Input",
+  InitializationCell->True],
+Cell[18263, 480, 846, 13, 303, "Text"],
+Cell[19112, 495, 633, 21, 292, "Input",
+  InitializationCell->True],
+Cell[19748, 518, 709, 11, 269, "Text"],
+Cell[20460, 531, 353, 12, 138, "Input",
+  InitializationCell->True],
+Cell[20816, 545, 685, 12, 235, "Text"],
+Cell[21504, 559, 457, 15, 180, "Input",
+  InitializationCell->True],
+Cell[21964, 576, 567, 9, 70, "Text"],
+Cell[22534, 587, 195, 7, 68, "Input",
+  InitializationCell->True],
+Cell[22732, 596, 530, 9, 70, "Text"],
+Cell[23265, 607, 188, 6, 54, "Input",
+  InitializationCell->True],
+Cell[23456, 615, 660, 11, 70, "Text"],
+Cell[24119, 628, 330, 13, 152, "Input",
+  InitializationCell->True],
+Cell[24452, 643, 87, 3, 70, "Text"],
+Cell[24542, 648, 982, 15, 70, "Text"],
+Cell[25527, 665, 673, 24, 306, "Input",
+  InitializationCell->True],
+Cell[26203, 691, 1437, 21, 70, "Text"],
+Cell[27643, 714, 1204, 41, 558, "Input",
+  InitializationCell->True],
+Cell[28850, 757, 1521, 22, 70, "Text"],
+Cell[30374, 781, 1831, 56, 796, "Input",
+  InitializationCell->True],
+Cell[32208, 839, 238, 8, 40, "Input",
+  InitializationCell->True],
+Cell[32449, 849, 359, 10, 68, "Input",
+  InitializationCell->True],
+Cell[32811, 861, 654, 18, 111, "Input",
+  InitializationCell->True],
+Cell[33468, 881, 511, 12, 124, "Input",
+  InitializationCell->True],
+Cell[33982, 895, 1030, 19, 250, "Input",
+  InitializationCell->True],
+Cell[35015, 916, 344, 10, 68, "Input",
+  InitializationCell->True],
+Cell[35362, 928, 850, 20, 181, "Input",
+  InitializationCell->True],
+Cell[36215, 950, 590, 13, 138, "Input",
+  InitializationCell->True],
+Cell[36808, 965, 467, 11, 110, "Input",
+  InitializationCell->True],
+Cell[37278, 978, 367, 10, 82, "Input",
+  InitializationCell->True],
+Cell[37648, 990, 501, 12, 110, "Input",
+  InitializationCell->True],
+Cell[38152, 1004, 483, 11, 110, "Input",
+  InitializationCell->True],
+Cell[38638, 1017, 539, 12, 124, "Input",
+  InitializationCell->True]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

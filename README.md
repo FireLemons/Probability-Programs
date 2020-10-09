@@ -2,14 +2,19 @@
 The scripts for [Introduction to Probability by Charles M. Grinstead and J. Laurie Snell](http://www.dartmouth.edu/~chance/teaching_aids/books_articles/probability_book/book.html) ported to python  
   
 ## Setup
-### Linux
-Install Python 3.x and git  
+Install Python 3.8 and git  
   
+Other versions of python 3.X may work  
+To install using a different version of python, open Pipfile in a text editor and edit the version number  
+    [requires]
+    python_version = "3.8"
+
+### Linux
 Make sure pip for python 3 is installed  
 `pip3 --version` should not print an error  
   
 Install pipenv via pip  
-`pip install --user pipenv`  
+`pip3 install --user pipenv`  
 
 Clone the repo  
 `git clone git@github.com:FireLemons/Probability-Programs.git`  
@@ -25,17 +30,23 @@ Install tkinter to be able to display graphs
 ### Windows  
 Help wanted  
   
+### MacOS  
+Help Wanted  
+  
 ## Running Programs  
 run `pipenv shell` in the project folder to start a subshell with all the dependencies loaded  
   
-In the subshell `python3 name_of_program.py` will run a program.  
-Most programs require arguments(user input usually a number).  
-If the arguments are erroneous a usage hint will be printed.  
-The same usage hint is also at the top of each program file.
+In the subshell, run a program by typing `python3 name_of_program.py`.  
 
 ## Contributing  
 This repo aims to port the wolfram mathematica programs found [here](http://www.dartmouth.edu/~chance/teaching_aids/books_articles/probability_book/BookAlgorithms.html) to python.  
   
+When I first discovered the book, I went to download the programs and saw that they were all written in proprietary languages so I decided to prot the programs to python.  
+  
+The program files don't have to be 1 to 1 with the mathematica files. If you can find a way to simplify or improve a program, go for it.  
+  
+When creating a program, first copy contributing/template.py and edit from there.
+  
 When editing programs please keep in mind they may need to be modified by someone who may not have a background in programming.  
   
-As of now I only plan to port standalone programs. Help for porting mathematica notebook files to jupyter notebook would be greatly appreciated.
+For the near future I only plan to port standalone programs. In the future I would like to port the mathematica notebook files to jupyter notebook.

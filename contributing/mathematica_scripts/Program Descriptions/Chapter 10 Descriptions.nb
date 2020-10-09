@@ -1,0 +1,133 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      3750,         84]*)
+(*NotebookOutlinePosition[      4859,        121]*)
+(*  CellTagsIndexPosition[      4815,        117]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox["CHAPTER 10 PROGRAM DESCRIPTIONS\n",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\n\nPROGRAM:  Branch\nCALLING SEQUENCE:  Branch[gmax, plist]\nPARAMETERS:\n\
+     gmax - an integer\n     plist - a probability list\nSYNOPSIS:\n     -  \
+Given that a parent will produce at most Length[plist] offspring, and will \
+produce\n        i offspring with probability plist[[i]], this program \
+computes and displays the\n        probabilities that a branching process \
+designated by this information will die\n        out by generation g, for g = \
+1 to gmax.\nRETURNED VALUES:\n     -  a list whose elements are {i,  d_i}, \
+for i = 1 to gmax\nLOCATION:\n     Folder:  Chapter 10\n     File:       \
+\"Branch.Chpt10.mat\"\n     \n     \nPROGRAM:  BranchingSimulation\nCALLING \
+SEQUENCE:  BranchingSimulation[n, gmax, plist, changepoint]\nPARAMETERS:\n    \
+ n, gmax, changepoint - integers\n     plist - a a probability list\n\
+SYNOPSIS:\n     -  This program simulates the branching process designated by \
+plist (which states\n        that a parent will produce at most Length[plist] \
+offspring, and will produce i\n        offspring with probability \
+plist[[i]]), until generation gmax.  When the size of a\n        generation \
+becomes greater than changepoint, the size of the next generation is\n        \
+determined by the normal density.  The program does n such simulations, and\n \
+       plots the branching processes with the x-axis indicating number of \
+generations,\n        and the lines y = f(x) indicating the sizes of the \
+generations at time x.\n     -  Note:  this program requires the programs \
+\"DiscreteMean[distributionlist],\"\n        \
+\"DiscreteVariance[distributionlist],\" and \"SimulateDiscreteVariable[plist]\
+\" be\n        initialized.\nRETURNED VALUES:\n     -  none\nLOCATION:\n     \
+Folder:  Chapter 10\n     File:       \"BranchingSimulation.Chpt10.mat\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{108, Automatic}, {30, Automatic}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 2036, 32, 70, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

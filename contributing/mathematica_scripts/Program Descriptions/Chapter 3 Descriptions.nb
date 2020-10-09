@@ -1,0 +1,235 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     11266,        186]*)
+(*NotebookOutlinePosition[     12374,        223]*)
+(*  CellTagsIndexPosition[     12330,        219]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox["CHAPTER 3 PROGRAM DESCRIPTIONS",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\n\n \nPROGRAM:  A\nCALLING SEQUENCE:  A[n, r]\nPARAMETERS:\n     n, r - \
+integers\nSYNOPSIS:\n     -  This program calculates the Eulerian number A(n, \
+r) (i.e., the number of\n        orderings of {1, 2, ..., n} with r falls).\n\
+RETURNED VALUES:\n     -  the Eulerian number A(n, r)\nLOCATION:\n     \
+Folder:  Chapter 3\n     File:       \"ShuffleCalculations.Chpt3.mat\"\n     \
+\n     \nPROGRAM:  AllPermutations\nCALLING SEQUENCE:  AllPermutations[n]\n\
+PARAMETERS:\n     n - an integer\nSYNOPSIS:\n     -  This program returns a \
+list of all the permutations of the set {1, 2, ..., n}.\nRETURNED VALUES:\n   \
+  -  a list of all the permutations of the set {1, 2, ..., n}\nLOCATION:\n    \
+ Folder:  Chapter 3\n     File:       \"AllPermutations.Chpt3.mat\"\n     \n  \
+   \nPROGRAM:  AShuffle\nCALLING SEQUENCE:  AShuffle[a, deck, print]\n\
+PARAMETERS:\n     a - an integer\n     deck - a list\n     print - a Boolean \
+variable (True or False)\nSYNOPSIS:\n     -  This program models an a-shuffle \
+of a deck ordered as in the list deck.  (For\n        instance:  if you want \
+to a-shuffle a numerically-ordered deck of length n, enter\n        Table[i, \
+{i, 1, n}] as the deck parameter.)  If print = True, then the program \
+displays\n        a list of places the cuts occurred, and a list of the piles \
+into which those cuts\n        divided the original deck.  The program \
+returns a list representing the shuffled\n        deck.\n    -  Note:  k \
+riffle shuffles are equivalent to one (2^k) shuffle.\nRETURNED VALUES:\n     \
+-  a list representing the shuffled deck\nLOCATION:\n     Folder:  Chapter 3\n\
+     File:       \"AShuffle.Chpt3.mat\"\n     \n     \nPROGRAM:  BinomialPlot\
+\nCALLING SEQUENCE:  BinomialPlot[nlist, p]\nPARAMETERS:\n     nlist - a list \
+of integers\n     p - a real number\nSYNOPSIS:\n     -  For each n in nlist, \
+this program plots a spike graph of the distribution for n\n        Bernoulli \
+trials with probability of success p.  These graphs are all plotted on the\n  \
+      same set of axes.\n     -  Note:  this program requires the programs \
+\"Bin[n, p, k]\" and\n        \"Spikegraph[distributionlist, xmin, xmax, \
+print]\" be initialized.\nRETURNED VALUES:\n     -  none\nLOCATION:\n     \
+Folder:  Chapter 3\n     File:       \"BinomialPlot.Chpt3.mat\"\n     \n\n\
+PROGRAM:  BinomialProbabilities\nCALLING SEQUENCE:  BinomialProbabilities[n, \
+p, kmin, kmax, print]\nPARAMETERS:\n     n - an integer\n     p - a real \
+number\n     kmin - an integer\n     kmax - an integer\n     print - a \
+Boolean variable (True or False)\nSYNOPSIS:\n     -   If print = True, this \
+program prints the binomial probabilities b[n, p, k], for\n         kmin <= k \
+<= kmax.  The program returns the sum of these probabilities.\n     -  Note:  \
+this program requires the program \"Bin[n, p, k]\" be initialized.\nRETURNED \
+VALUES:\n     -  none\nLOCATION:\n     Folder:  Chapter 3\n     File:       \
+\"BinomialProbabilities.Chpt3.mat\"\n     \n\nPROGRAM:  Birthday\nCALLING \
+SEQUENCE:  Birthday[rmin, rmax, inc]\nPARAMETERS:\n     rmin, rmax, inc -  \
+integers\nSYNOPSIS:\n     -  This program computes and displays the \
+probabilities that no two people in a\n        group of size r have the same \
+birthday, where r ranges from rmin to rmax by\n        increment inc.\n\
+RETURNED VALUES:\n     - none\nLOCATION:\n     Folder:  Chapter 3\n     File: \
+      \"Birthday.Chpt3.mat\"\n",
+    FontFamily->"Helvetica"],
+  StyleBox["\n   ",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\nPROGRAM:  FixedPoints\nCALLING SEQUENCE:  FixedPoints[n, m, significant]\
+\nPARAMETERS:\n     n, m - integers\n     significant - a real number\n\
+SYNOPSIS:\n     -  This program generates n random permutations of the \
+numbers 1, . . ., m, and\n        calculates the number of fixed points in \
+each.  For each possible number of fixed\n        points the proportion of \
+simulations with that number of fixed points is printed, if\n        that \
+proportion is greater than the significant parameter of the program.  \n    - \
+ Note:  this program requires the package \"DiscreteMath`Permutations`\"  be\n\
+       loaded in.\nRETURNED VALUES:\n     - none\nLOCATION:\n     Folder:  \
+Chapter 3\n     File:        \"FixedPoints.Chpt3.mat\"\n     \n\nPROGRAM:  \
+GaltonBoard\nCALLING SEQUENCE:  GaltonBoard[n, m, print]\nPARAMETERS:\n     \
+n, m - integers\n     print - a Boolean variable (True or False)\nSYNOPSIS:\n \
+    -  This program simulates n Galton board experiments, with m rows of \
+pins.  Each \n        simulation consists of choosing 0 or 1 m times, and \
+summing the chosen\n        numbers (each distinct sum represents a distinct \
+final position of a dropped\n        BB-shot).  The program then displays an \
+area bar graph of the experiment\n        results.  If print = True, a list \
+of all the final positions is returned.  \n     -  Note:  this program \
+requires the program \"Areabargraph[data, xmin, xmax, k]\" be \n        \
+initialized.\nRETURNED VALUES:\n     -  a list of all the final positions of \
+the shots (if print  = True)\nLOCATION:\n     Folder:  Chapter 3\n     File:  \
+     \"GaltonBoard.Chpt3.mat\"\n     \n \nPROGRAM:  PowerCurve\nCALLING \
+SEQUENCE:  PowerCurve[n, mlist, nullp, altp, errormax]\nPARAMETERS:\n      n \
+- an integer\n      mlist - a list of integers\n     nullp, altp, errormax - \
+real numbers\nSYNOPSIS:\n     -  The book defines, given m and n, alpha(p) = \
+Sum[binomial(n, p, k)], k = m, ..., n. \n         The user enters into this \
+program nullp (the null hypthesis p-value) and an altp\n         (an \
+alternative hypothesis p, greater than nullp).  The program then defines pmin\
+\n         = nullp - Abs[altp - nullp] and pmax = altp + Abs[altp - nullp], \
+and plots alpha(p)\n         on the interval [pmin, pmax] for each value m in \
+mlist, with n equal to the\n         parameter n.  The program displays all \
+of these graphs together on a single set\n         of axes, along with a \
+dotted-line box, whose edges are decided as follows: we\n         ultimately \
+want each of the probabilities of a type 1or type 2 error occurring to be\n   \
+      <=  errormax.  The box the program draws is such that a value of m \
+satisfies this\n         requirement if and only if the graph of alpha(p) \
+enters the box from the bottom\n         and leaves from the top (see book \
+for more details).\n     -  Note:  this program requires the program \"Bin[n, \
+p, k]\" be initialized.\nRETURNED VALUES:\n     -  none\nLOCATION:\n     \
+Folder:  Chapter 3\n     File:       \"PowerCurve.Chpt3.mat\"\n      \n \n\
+PROGRAM:  Records\nCALLING SEQUENCE:  Records[num, n]\nPARAMETERS:\n     num, \
+n - integers\nSYNOPSIS:\n     -  This program counts the number of  \
+\"records,\" as defined in the book, in\n        individual random \
+permutations of {1, 2, ..., n}.  The number of permutations\n        tested \
+is num.  The program returns the average number of records per\n        \
+permutation.          \n     -  Note:  this program requires the package \
+\"DiscreteMath`Permutations`\"  be\n        loaded in.\nRETURNED VALUES:\n    \
+ -  the average number of records per permutation\nLOCATION:\n     Folder:  \
+Chapter 3\n     File:        \"Records.Chpt3.mat\"\n     \n     \nPROGRAM:  \
+StirlingApproximations\nCALLING SEQUENCE:  StirlingApproximations[nmin, nmax]\
+\nPARAMETERS:\n     nmin, nmax - integers\nSYNOPSIS:\n     -  This program \
+calculates and displays n!, the Stirling approximation of n!, and the\n       \
+ ratio of these two numbers, for every integer n between nmin and nmax.\n\
+RETURNED VALUES:\n     -  a list whose elements are {i, i!, the Stirling \
+approximation of i!, the ratio of these\n        last two numbers}, for i = \
+nmin to nmax\nLOCATION:\n     Folder:  Chapter 3\n     File:       \
+\"StirlingApprox.Chpt3.mat\"\n     \n\nPROGRAM:  VariationDistance\nCALLING \
+SEQUENCE:  VariationDistance[n, k]\nPARAMETERS:\n     n, k - integers\n\
+SYNOPSIS:\n     -  This program calculates the variation distance, v(k), \
+between a process which\n        produces random orderings of n cards,  and \
+the process consisting of\n        one (2^k)-shuffle (or, equivalently, of k \
+successive riffle shuffles) of those cards. \n        The distance will be \
+between 0 and 1: the greater the distance, the less random\n        the \
+orderings produced by the second process.\n     -  Note:  this program \
+requires the program \"A[n, r]\" be initialized.\nRETURNED VALUES:\n     -  \
+v(k)\nLOCATION:\n     Folder:  Chapter 3\n     File:       \
+\"ShuffleCalculations.Chpt3.mat\"\n \n\nPROGRAM:  VariationList\nCALLING \
+SEQUENCE:  VariationList[n, m]\nPARAMETERS:\n     n, m - integers\nSYNOPSIS:\n\
+     -  For k = 1 to m, this program calculates and displays the variation \
+distance, v(k),\n        between a process which produces random orderings of \
+n cards,  and the\n        process consisting of one (2^k)-shuffle of those \
+cards.  It also provides a plot of\n        the points (k, v(k)) for k = 1 to \
+m.\n    -  Note:  this program requires the program \"VariationDistance[n, k]\
+\" be initialized.\nRETURNED VALUES:\n     -  a list whose i'th element is \
+{i, v(i)}\nLOCATION:\n     Folder:  Chapter 3\n     File:       \
+\"ShuffleCalculations.Chpt3.mat\"\n",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{28, Automatic}, {30, Automatic}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 9552, 134, 70, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

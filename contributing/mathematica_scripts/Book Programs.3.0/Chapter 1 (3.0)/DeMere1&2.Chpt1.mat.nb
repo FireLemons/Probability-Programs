@@ -1,0 +1,201 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5703,        131]*)
+(*NotebookOutlinePosition[      6844,        169]*)
+(*  CellTagsIndexPosition[      6800,        165]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[StyleBox[
+"PROGRAM:  DeMere1\nCALLING SEQUENCE:   DeMere1[n, print] \nPARAMETERS: \n    \
+ n - an integer\n     print - a Boolean variable (True or False)\nSYNOPSIS:   \
+\n     - This program simulates 4 rolls of a die, and determines whether a \
+six has\n        appeared (a \"success\").  It repeats this experiment n \
+times, and prints the number\n        of trials that resulted in a success.  \
+It also prints the proportion of trials that\n        resulted in a success.  \
+ Finally, if print = True, then the rolls are printed out.\n RETURNED VALUES:\
+\n     -  none\nLOCATION:\n     Folder:  Chapter 1\n     File:       \
+\"DeMere1&2.Chpt1.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[DeMere1];\nDeMere1[n_, print_] :=\nBlock[\n      {successcounter = 0,\n\
+       currentrollset = {}\n      },\n      For[i = 1, i <= n, i++,\n         \
+ currentrollset = {};\n          For[j = 1, j <= 4, j++,\n              \
+currentrollset = \n                Append[currentrollset, \n                  \
+     Ceiling[6*Random[]]\n                      ];\n             ];\n         \
+ If[print, Print[currentrollset]\n            ];\n          \
+If[Count[currentrollset, 6] > 0,\n             successcounter++\n            \
+];\n         ];\n      Print[\"number of successes = \", \n            \
+successcounter\n           ];\n      Print[\"proportion of successes = \",\n  \
+          N[successcounter/n, 5]\n           ]\n     ]"], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData["DeMere1[1000, False]"], "Input",
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"number of successes = 522\nproportion of successes = 0.522"], "Print",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]],
+
+Cell[TextData[StyleBox[
+"PROGRAM:  DeMere2\nCALLING SEQUENCE:   DeMere2[n, m, print]\nPARAMETERS:  \n \
+    n, m - integers\n\t\t   print - a Boolean variable (True or False)\n\
+SYNOPSIS:   \n     - This program simulates m rolls of two dice, and \
+determines whether a double 6 \t\n       has appeared (a \"success\").  It \
+repeats this experiment n times, and prints the\n       number of trials that \
+resulted in a success.  It also prints the proportion of trials\n       that \
+resulted in a success.   Finally, if print = True, then the rolls are printed \
+out.\nRETURNED VALUES:\n     -  none\nLOCAT ION:\n     Folder:  Chapter 1\n   \
+  File:       \"DeMere1&2.Chpt1.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[DeMere2];\nDeMere2[n_, m_, print_] :=\nBlock[{successcounter = 0,\n    \
+   currentrollset = {}\n      },\n      For[i = 1, i <= n, i++,\n          \
+currentrollset = {};\n          For[j = 1, j <= m, j++,\n              \
+currentrollset = \n                Append[currentrollset, \n                  \
+     {Ceiling[6*Random[]],\n                        Ceiling[6*Random[]]\n     \
+                  }\n                      ];\n             ];\n          \
+If[print, Print[currentrollset]\n            ];\n          \
+If[Count[currentrollset, {6, 6}] > 0,\n             successcounter++\n        \
+    ];\n         ];\n      Print[\"number of successes = \", \n            \
+successcounter\n           ];\n      Print[\"proportion of successes = \",\n  \
+          N[successcounter/n, 5]\n           ]\n     ]"], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData["DeMere2[1000, 24, False]"], "Input",
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"number of successes = 475\nproportion of successes = 0.475"], "Print",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]],
+
+Cell[CellGroupData[{Cell[TextData["DeMere2[1000, 25, False]"], "Input",
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"number of successes = 517\nproportion of successes = 0.517"], "Print",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{20, Automatic}, {Automatic, 31}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 755, 12, 70, "Text"],
+Cell[2469, 65, 823, 12, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[3315, 79, 73, 1, 70, "Input"],
+Cell[3391, 82, 134, 3, 70, "Print"]
+}, Open  ]],
+Cell[3537, 87, 769, 12, 70, "Text"],
+Cell[4309, 101, 899, 13, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[5231, 116, 77, 1, 70, "Input"],
+Cell[5311, 119, 134, 3, 70, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5477, 124, 77, 1, 70, "Input"],
+Cell[5557, 127, 134, 3, 70, "Print"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

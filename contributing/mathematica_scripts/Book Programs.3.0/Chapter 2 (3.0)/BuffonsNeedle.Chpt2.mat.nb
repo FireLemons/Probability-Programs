@@ -1,0 +1,545 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      9180,        486]*)
+(*NotebookOutlinePosition[     10321,        524]*)
+(*  CellTagsIndexPosition[     10277,        520]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[StyleBox[
+"PROGRAM:  BuffonsNeedle\nCALLING SEQUENCE:  BuffonsNeedle[n, print]\n\
+PARAMETERS:\n     n - an integer\n     print - a Boolean variable (True or \
+False)\nSYNOPSIS:\n     -  This program simulates the Buffon needle \
+experiment described in the book,\n        dropping n pins on a 10 x 10 grid. \
+ The program computes an estimate for Pi,\n        using the book's method.  \
+If print = True, a graphical display of the experiment \n        is produced, \
+showing every one-hundredth pin. \nRETURNED VALUES:\n     -  none\nLOCATION:\n\
+     Folder:  Chapter 2\n     File:       \"BuffonsNeedle.Chpt2.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[BuffonsNeedle];\nBuffonsNeedle[n_,print_] :=\nBlock[{x, y, theta, a, \
+b, total = 0, graphlist = {}},\n\t  (* box creates a graphics object on which \
+the experiments are displayed *)\n      box = Graphics[{Line[{{0,0},{10,0}}], \
+ \n                      Line[{{10,0},{10,10}}],\n      \t\t          \
+Line[{{10,10},{0,10}}],\n                      Line[{{0,10},{0,0}}],\n        \
+              Line[{{0,1},{10,1}}],\n                      \
+Line[{{0,2},{10,2}}],\n                      Line[{{0,3},{10,3}}],\n          \
+            Line[{{0,4},{10,4}}],\n                      \
+Line[{{0,5},{10,5}}],\n                      Line[{{0,6},{10,6}}],\n          \
+            Line[{{0,7},{10,7}}],\n                      \
+Line[{{0,8},{10,8}}],\n                      Line[{{0,9},{10,9}}],\n          \
+            Line[{{0,10},{10,10}}]\n                     }\n                  \
+  ];  \n\t  For[i = 1, i <= n, i++,\n\t      x = Random[Real, {0,10}];      \
+(*  Generates one endpoint with random coordinates.  *)\n\t      y = \
+Random[Real, {0,10}];\n\t      theta = Random[Real, {0,2*Pi//N}];   (*  \
+Generates a random angle for the orientation of the segment.  *)\n\t      \
+endpts = {{x,y}, {x+Cos[theta], y+Sin[theta]}};  (* Computes the other \
+endpoint. *)\n\t      a = Min[y, y+Sin[theta]];    (*  The next few \
+statements determine whether the segment crosses one of the horizontal bars.  \
+*)\n\t      b = Floor[Max[y,y+Sin[theta]]];\n\t      If[a <= b, total++];    \
+(*  If the segment does cross a bar, total is increased by one.  *)\n         \
+ If[(Mod[i,100] == 0)&&(print),   (*  Adds one line out of a hundred to the \
+list to be displayed.  *)\n\t         graphlist = Append[graphlist, \n\t      \
+\t\t\t\t        Graphics[Line[endpts]]\n\t      \t\t\t\t       ]\n\t        \
+];\n\t     ];\n\t  If[print, Show[box, graphlist, AspectRatio->.95]];   (*  \
+Displays final picture.  *)\n\t  Print[\"The simulated estimate for Pi is \", \
+(2*n)/total//N, \".\"];\n\t ]"], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData["BuffonsNeedle[10000, True]"], "Input",
+  AspectRatioFixed->True],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .95 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.0608257 0.08423 0.0923112 0.0770308 [
+[ 0 0 0 0 ]
+[ 1 .95 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+P
+0 0 m
+1 0 L
+1 .95 L
+0 .95 L
+closepath
+clip
+newpath
+p
+p
+.004 w
+.06083 .09231 m
+.90313 .09231 L
+s
+.90313 .09231 m
+.90313 .86262 L
+s
+.90313 .86262 m
+.06083 .86262 L
+s
+.06083 .86262 m
+.06083 .09231 L
+s
+.06083 .16934 m
+.90313 .16934 L
+s
+.06083 .24637 m
+.90313 .24637 L
+s
+.06083 .3234 m
+.90313 .3234 L
+s
+.06083 .40043 m
+.90313 .40043 L
+s
+.06083 .47747 m
+.90313 .47747 L
+s
+.06083 .5545 m
+.90313 .5545 L
+s
+.06083 .63153 m
+.90313 .63153 L
+s
+.06083 .70856 m
+.90313 .70856 L
+s
+.06083 .78559 m
+.90313 .78559 L
+s
+.06083 .86262 m
+.90313 .86262 L
+s
+P
+.004 w
+.68525 .2034 m
+.74089 .26123 L
+s
+.37727 .28025 m
+.31896 .33583 L
+s
+.74156 .32556 m
+.79782 .26823 L
+s
+.75359 .14657 m
+.75302 .2236 L
+s
+.25824 .73838 m
+.29333 .66835 L
+s
+.63863 .77543 m
+.5628 .74189 L
+s
+.38115 .85108 m
+.37297 .77441 L
+s
+.09933 .11507 m
+.15562 .05776 L
+s
+.51652 .79667 m
+.43386 .81147 L
+s
+.28709 .75163 m
+.36954 .76739 L
+s
+.52372 .11814 m
+.4479 .15169 L
+s
+.09283 .7764 m
+.02381 .82056 L
+s
+.45483 .45893 m
+.38554 .50273 L
+s
+.20391 .69163 m
+.22067 .76712 L
+s
+.79267 .85783 m
+.75645 .92738 L
+s
+.57865 .28997 m
+.53343 .35496 L
+s
+.89221 .36302 m
+.95492 .31159 L
+s
+.74889 .54413 m
+.73543 .62017 L
+s
+.86174 .60372 m
+.94292 .62428 L
+s
+.57222 .55403 m
+.60354 .48252 L
+s
+.53063 .12497 m
+.44978 .14657 L
+s
+.44292 .6245 m
+.4296 .54844 L
+s
+.35589 .37753 m
+.43629 .35458 L
+s
+.70381 .58895 m
+.78789 .59352 L
+s
+.49687 .39916 m
+.57349 .43116 L
+s
+.80331 .78898 m
+.7295 .75185 L
+s
+.19961 .5327 m
+.28222 .51769 L
+s
+.27899 .35536 m
+.30137 .42962 L
+s
+.46156 .76027 m
+.39389 .7144 L
+s
+.28119 .3988 m
+.28798 .47558 L
+s
+.47912 .57888 m
+.53106 .63952 L
+s
+.25668 .53911 m
+.26448 .46241 L
+s
+.23355 .60261 m
+.21033 .52856 L
+s
+.35358 .78413 m
+.26998 .79351 L
+s
+.70307 .38285 m
+.638 .43176 L
+s
+.12325 .51766 m
+.04152 .53628 L
+s
+.62041 .25303 m
+.61727 .33 L
+s
+.67431 .14045 m
+.59091 .12966 L
+s
+.28859 .25296 m
+.27206 .3285 L
+s
+.21557 .60917 m
+.15436 .66208 L
+s
+.87579 .17571 m
+.94963 .21278 L
+s
+.50835 .56086 m
+.42414 .55922 L
+s
+.83959 .20897 m
+.75759 .19139 L
+s
+.84688 .19389 m
+.82147 .26733 L
+s
+.66069 .62316 m
+.62143 .555 L
+s
+.3379 .57643 m
+.25404 .58367 L
+s
+.45485 .56912 m
+.38552 .52537 L
+s
+.1603 .38449 m
+.08303 .41516 L
+s
+.33288 .46432 m
+.39995 .41772 L
+s
+.27864 .24828 m
+.36202 .23737 L
+s
+.55475 .83762 m
+.63594 .81709 L
+s
+.66305 .18918 m
+.6843 .11464 L
+s
+.28307 .422 m
+.22581 .36551 L
+s
+.08248 .12772 m
+.02384 .18303 L
+s
+.37031 .20595 m
+.31682 .14644 L
+s
+.26004 .36741 m
+.34404 .36177 L
+s
+.50817 .2597 m
+.52298 .33553 L
+s
+.39743 .52768 m
+.31333 .53195 L
+s
+.1241 .10194 m
+.20644 .11816 L
+s
+.30396 .43595 m
+.29488 .51253 L
+s
+.75382 .38919 m
+.83073 .35779 L
+s
+.69578 .44431 m
+.71251 .51981 L
+s
+.10636 .8079 m
+.08388 .88214 L
+s
+.59436 .18153 m
+.51177 .19668 L
+s
+.15524 .49744 m
+.20162 .43314 L
+s
+.75198 .17639 m
+.75931 .25313 L
+s
+.64897 .51239 m
+.72596 .48114 L
+s
+.89341 .35551 m
+.97619 .34126 L
+s
+.16202 .13685 m
+.24366 .15582 L
+s
+.55143 .81054 m
+.57918 .88327 L
+s
+.36382 .30045 m
+.32529 .36895 L
+s
+.78231 .45368 m
+.70767 .41798 L
+s
+.20755 .1548 m
+.21119 .07784 L
+s
+.63062 .18445 m
+.57564 .2428 L
+s
+.83584 .49405 m
+.76516 .53595 L
+s
+.88533 .68074 m
+.82235 .73189 L
+s
+.47543 .32373 m
+.52401 .2608 L
+s
+.24672 .49917 m
+.3247 .47004 L
+s
+.16539 .8054 m
+.08139 .79975 L
+s
+.47691 .17297 m
+.41234 .1235 L
+s
+.13537 .16312 m
+.05131 .16792 L
+s
+.31773 .1635 m
+.39889 .18411 L
+s
+.39091 .54721 m
+.41 .62224 L
+s
+.07919 .67028 m
+.12436 .7353 L
+s
+.17679 .682 m
+.25875 .66421 L
+s
+.62151 .32799 m
+.61673 .4049 L
+s
+.53202 .63092 m
+.5866 .57225 L
+s
+.84266 .46453 m
+.79654 .40007 L
+s
+.85932 .22343 m
+.92771 .17847 L
+s
+.66572 .79797 m
+.6963 .7262 L
+s
+.13042 .16664 m
+.0472 .15471 L
+s
+.21529 .32307 m
+.16211 .38281 L
+s
+.29314 .59026 m
+.20998 .57799 L
+s
+.10894 .09398 m
+.14065 .02262 L
+s
+.72225 .24417 m
+.65202 .2867 L
+s
+.86458 .19704 m
+.93928 .16144 L
+s
+.80546 .79806 m
+.87883 .76022 L
+s
+.89155 .17597 m
+.84251 .11334 L
+s
+.76345 .63799 m
+.7393 .56419 L
+s
+.1821 .49639 m
+.23665 .55508 L
+s
+P
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 267},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCacheValid->False],
+
+Cell[TextData["The simulated estimate for Pi is 3.12647."], "Print",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{20, Automatic}, {15, Automatic}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 718, 11, 70, "Text"],
+Cell[2432, 64, 2074, 29, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[4529, 95, 79, 1, 70, "Input"],
+Cell[4611, 98, 4438, 383, 70, 4280, 378, "GraphicsData", 
+"PostScript", "Graphics"],
+Cell[9052, 483, 116, 2, 70, "Print"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

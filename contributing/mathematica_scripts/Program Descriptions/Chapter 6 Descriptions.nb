@@ -1,0 +1,135 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      3891,         86]*)
+(*NotebookOutlinePosition[      4999,        123]*)
+(*  CellTagsIndexPosition[      4955,        119]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox["CHAPTER 6 PROGRAM DESCRIPTIONS",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\n\n\nPROGRAM:  Craps\nCALLING SEQUENCE:  Craps[n]\nPARAMETERS:\n     n - \
+an integer\nSYNOPSIS:\n     -  This program simulates n plays of the game of \
+craps, with a bet of one dollar\n         being made for each game.  The \
+program prints out the average number of\n         winnings per game.\n\
+RETURNED VALUES:\n     - none\nLOCATION:\n     Folder:  Chapter 6\n     File: \
+      \"Craps.Chpt6.mat\"\n     \n     \nPROGRAM:  Die\nCALLING SEQUENCE:  \
+Die[n, s]\nPARAMETERS:\n     n, s - integers\nSYNOPSIS:\n     -  This program \
+simulates the following experiment n times: an s-sided die is\n         \
+rolled.  If an odd number turns up, an amount equal to that number is won; if \
+an\n         even number turns up, an amount equal to that number is lost.  \
+The program\n         displays the frequency and the relative frequency with \
+which each outcome\n         occurs, as well as displaying the average gain \
+over the n trials.\nRETURNED VALUES:\n     -  the average gain over the n \
+trials\nLOCATION:\n     Folder:  Chapter 6\n     File:      \"Die.Chpt6.mat\"\
+\n     \n\nPROGRAM:  StockSystem\nCALLING SEQUENCE:  StockSystem[n]\n\
+PARAMETERS:\n     n - an integer\nSYNOPSIS:\n     -  This program simulates \
+Mr. Ace's playing of the stock market, as described in the\n        book, \
+where he must stop after n days.  Without loss of generality, we let the\n    \
+    book's V = 0.  The program prints out and returns Mr. Ace's net gain \
+after the n\n        days, and plots the points (x, f(x)) for x = 0 to n, \
+where x is the number of the day,\n        and f(x) is the value of V on day \
+x.  The points are connected with lines:  dotted\n        lines indicate time \
+during which Mr. Ace holds stock under his system; unbroken\n        lines \
+indicate time during which he does not hold stock.\nRETURNED VALUES:\n     -  \
+Mr. Ace's net gain\nLOCATION:\n     Folder:  Chapter 6\n     File:       \
+\"StockSystem.Chpt6.mat\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{44, Automatic}, {Automatic, -2}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 2177, 34, 70, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

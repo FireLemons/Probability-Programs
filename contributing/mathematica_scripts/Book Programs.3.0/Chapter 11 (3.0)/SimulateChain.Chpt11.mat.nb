@@ -1,0 +1,196 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5113,        133]*)
+(*NotebookOutlinePosition[      6253,        171]*)
+(*  CellTagsIndexPosition[      6209,        167]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox[
+  "PROGRAM:  SimulateChain\nCALLING SEQUENCE:  SimulateChain[n, P, \
+stateslist, startstate, print]\nPARAMETERS:\n     n - an integer\n     P - a \
+Markov chain transition matrix\n     stateslist - a list of values, with \
+Length[stateslist] = Length[P]\n     startstate - a value found in stateslist\
+\n     print - a Boolean variable (True or False)\nSYNOPSIS:\n     -  This \
+program simulates n steps of a Markov chain with transition matrix P and\n    \
+     states in stateslist, that begins in state startstate.  For each state, \
+the program\n         prints out the number of times that state was reached, \
+and the fraction of the time\n         this occurred.  The program returns a \
+list whose i",
+    FontFamily->"Helvetica"],
+  StyleBox["th",
+    FontFamily->"Helvetica",
+    FontVariations->{"CompatibilityType"->"Superscript"}],
+  StyleBox[
+  " element is the fraction of the\n         time state stateslist[[i]] was \
+reached.  If print = True, the program also prints out\n         each state \
+as it is reached.\nRETURNED VALUES:\n     -  a list whose i",
+    FontFamily->"Helvetica"],
+  StyleBox["th",
+    FontFamily->"Helvetica",
+    FontVariations->{"CompatibilityType"->"Superscript"}],
+  StyleBox[
+  " element is the fraction of the time state stateslist[[i]] was reached\n\
+LOCATION:\n     Folder:  Chapter 11\n     File:       \
+\"SimulateChain.Chpt11.mat\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[SimulateChain];\nSimulateChain[n_, P_, stateslist_, startstate_, \
+print_] :=\nBlock[{totallist = Table[0, {i, 1, Length[stateslist]}],\n       \
+state\n      },\n      state = Flatten[Position[stateslist, \
+startstate]][[1]];\n      For[j = 1, j <= n, j++,\n          r = Random[];\n  \
+        For[k = 1, k <= Length[stateslist], k++,\n              r = r - \
+P[[state]][[k]];\n              If[r < 0,\n                 state = k;\n      \
+           totallist[[k]] = totallist[[k]] + 1;\n                 If[print, \
+Print[stateslist[[state]]]];\n                 Break[]\n                ]\n   \
+          ]       \n         ];\n      Print[\"State  Times  Fraction\"];\n   \
+   Print[\"  \"];\n      For[l = 1, l <= Length[totallist], l++,\n          \
+Print[stateslist[[l]],  \"        \", \n                totallist[[l]], \"    \
+ \",\n                N[totallist[[l]]/n, 5]\n               ]\n         ];   \
+\n      Return[N[totallist/n,5]]\n     ]"], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData["P={{.5,.25,.25},{.5,0,.5},{.25,.25,.5}}"], "Input",
+  AspectRatioFixed->True],
+
+Cell[OutputFormData[
+"\<\
+{{0.5, 0.25, 0.25}, {0.5, 0, 0.5}, {0.25, 0.25, 0.5}}\
+\>", 
+"\<\
+{{0.5, 0.25, 0.25}, {0.5, 0, 0.5}, {0.25, 0.25, 0.5}}\
+\>"], "Output",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]],
+
+Cell[CellGroupData[{Cell[TextData[
+"SimulateChain[10000, P, {\"R\", \"N\", \"S\"}, \"S\", False]"], "Input",
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"State  Times  Fraction\n  \nR        4006     0.4006\nN        1963     \
+0.1963\nS        4031     0.4031"], "Print",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[OutputFormData[
+"\<\
+{0.4006000000000001, 0.1963, 0.4031000000000001}\
+\>", 
+"\<\
+{0.4006, 0.1963, 0.4031}\
+\>"], "Output",
+  Evaluatable->False,
+  AspectRatioFixed->True]}, Open]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{12, Automatic}, {Automatic, 1}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 1503, 31, 70, "Text"],
+Cell[3217, 84, 1046, 15, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[4286, 101, 92, 1, 70, "Input"],
+Cell[4381, 104, 210, 8, 70, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4623, 114, 114, 2, 70, "Input"],
+Cell[4740, 118, 182, 4, 70, "Print"],
+Cell[4925, 124, 176, 8, 70, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

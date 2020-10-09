@@ -1,0 +1,677 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      9246,        618]*)
+(*NotebookOutlinePosition[     10387,        656]*)
+(*  CellTagsIndexPosition[     10343,        652]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[StyleBox[
+"PROGRAM:  StockSystem\nCALLING SEQUENCE:  StockSystem[n]\nPARAMETERS:\n     \
+n - an integer\nSYNOPSIS:\n     -  This program simulates Mr. Ace's playing \
+of the stock market, as described in the\n        book, where he must stop \
+after n days.  Without loss of generality, we let the\n        book's V = 0.  \
+The program prints out and returns Mr. Ace's net gain after the n\n        \
+days, and plots the points (x, f(x)) for x = 0 to n, where x is the number of \
+the day,\n        and f(x) is the value of V on day x.  The points are \
+connected with lines:  dotted\n        lines indicate time during which Mr. \
+Ace holds stock under his system; unbroken\n        lines indicate time \
+during which he does not hold stock.\nRETURNED VALUES:\n     -  Mr. Ace's net \
+gain\nLOCATION:\n     Folder:  Chapter 6\n     File:       \
+\"StockSystem.Chpt6.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[StockSystem];\nStockSystem[n_, print_] :=\nBlock[{r, total = 0, tlist \
+= {{0,0}}, linelist = {},\n       own = True,\n       gain = 0\n      },\n    \
+  For[i = 2, i <= n, i++,\n          r = Random[Integer, {0, 1}];\n          \
+If[r == 1, total++, total--];\n          tlist = Append[tlist, {i - 1, \
+total}];\n          t1 = tlist[[i - 1]];\n          t2 = tlist[[i]];\n        \
+  If[(own),\n             If[print,\n                linelist = \
+Append[linelist,\n                               Graphics[{Dashing[{.03, \
+.03}],\n                                        Line[{t1, t2}]}\n             \
+                          ]\n                                 ]\n             \
+  ];\n             If[total == 1,\n                gain++;\n                \
+own = False\n               ],  \n             If[print,\n                \
+linelist = Append[linelist,\n                                  \
+Graphics[Line[{t1, t2}]]\n                                 ]\n               \
+];\n             If[(!own)&&(total == 0),\n                own = True\n       \
+        ]\n            ];\n         ];   \n      If[total < 0, gain = gain + \
+total];\n      Print[\"Net gain = \", gain];\n      If[print, Show[linelist, \
+Axes -> True]];\n      Return[gain]\n     ]"], "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData["StockSystem[20, True];"], "Input",
+  AspectRatioFixed->True],
+
+Cell[TextData["Net gain = 1"], "Print",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.0238095 0.0501253 0.161866 0.0735755 [
+[(2.5)] .14912 .16187 0 2 Msboxa
+[(5)] .27444 .16187 0 2 Msboxa
+[(7.5)] .39975 .16187 0 2 Msboxa
+[(10)] .52506 .16187 0 2 Msboxa
+[(12.5)] .65038 .16187 0 2 Msboxa
+[(15)] .77569 .16187 0 2 Msboxa
+[(17.5)] .901 .16187 0 2 Msboxa
+[(-2)] .01131 .01472 1 0 Msboxa
+[(2)] .01131 .30902 1 0 Msboxa
+[(4)] .01131 .45617 1 0 Msboxa
+[(6)] .01131 .60332 1 0 Msboxa
+[ -0.001 -0.001 0 0 ]
+[ 1.001 .61903 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+p
+.002 w
+.14912 .16187 m
+.14912 .16812 L
+s
+P
+[(2.5)] .14912 .16187 0 2 Mshowa
+p
+.002 w
+.27444 .16187 m
+.27444 .16812 L
+s
+P
+[(5)] .27444 .16187 0 2 Mshowa
+p
+.002 w
+.39975 .16187 m
+.39975 .16812 L
+s
+P
+[(7.5)] .39975 .16187 0 2 Mshowa
+p
+.002 w
+.52506 .16187 m
+.52506 .16812 L
+s
+P
+[(10)] .52506 .16187 0 2 Mshowa
+p
+.002 w
+.65038 .16187 m
+.65038 .16812 L
+s
+P
+[(12.5)] .65038 .16187 0 2 Mshowa
+p
+.002 w
+.77569 .16187 m
+.77569 .16812 L
+s
+P
+[(15)] .77569 .16187 0 2 Mshowa
+p
+.002 w
+.901 .16187 m
+.901 .16812 L
+s
+P
+[(17.5)] .901 .16187 0 2 Mshowa
+p
+.001 w
+.04887 .16187 m
+.04887 .16562 L
+s
+P
+p
+.001 w
+.07393 .16187 m
+.07393 .16562 L
+s
+P
+p
+.001 w
+.099 .16187 m
+.099 .16562 L
+s
+P
+p
+.001 w
+.12406 .16187 m
+.12406 .16562 L
+s
+P
+p
+.001 w
+.17419 .16187 m
+.17419 .16562 L
+s
+P
+p
+.001 w
+.19925 .16187 m
+.19925 .16562 L
+s
+P
+p
+.001 w
+.22431 .16187 m
+.22431 .16562 L
+s
+P
+p
+.001 w
+.24937 .16187 m
+.24937 .16562 L
+s
+P
+p
+.001 w
+.2995 .16187 m
+.2995 .16562 L
+s
+P
+p
+.001 w
+.32456 .16187 m
+.32456 .16562 L
+s
+P
+p
+.001 w
+.34962 .16187 m
+.34962 .16562 L
+s
+P
+p
+.001 w
+.37469 .16187 m
+.37469 .16562 L
+s
+P
+p
+.001 w
+.42481 .16187 m
+.42481 .16562 L
+s
+P
+p
+.001 w
+.44987 .16187 m
+.44987 .16562 L
+s
+P
+p
+.001 w
+.47494 .16187 m
+.47494 .16562 L
+s
+P
+p
+.001 w
+.5 .16187 m
+.5 .16562 L
+s
+P
+p
+.001 w
+.55013 .16187 m
+.55013 .16562 L
+s
+P
+p
+.001 w
+.57519 .16187 m
+.57519 .16562 L
+s
+P
+p
+.001 w
+.60025 .16187 m
+.60025 .16562 L
+s
+P
+p
+.001 w
+.62531 .16187 m
+.62531 .16562 L
+s
+P
+p
+.001 w
+.67544 .16187 m
+.67544 .16562 L
+s
+P
+p
+.001 w
+.7005 .16187 m
+.7005 .16562 L
+s
+P
+p
+.001 w
+.72556 .16187 m
+.72556 .16562 L
+s
+P
+p
+.001 w
+.75063 .16187 m
+.75063 .16562 L
+s
+P
+p
+.001 w
+.80075 .16187 m
+.80075 .16562 L
+s
+P
+p
+.001 w
+.82581 .16187 m
+.82581 .16562 L
+s
+P
+p
+.001 w
+.85088 .16187 m
+.85088 .16562 L
+s
+P
+p
+.001 w
+.87594 .16187 m
+.87594 .16562 L
+s
+P
+p
+.001 w
+.92607 .16187 m
+.92607 .16562 L
+s
+P
+p
+.001 w
+.95113 .16187 m
+.95113 .16562 L
+s
+P
+p
+.001 w
+.97619 .16187 m
+.97619 .16562 L
+s
+P
+p
+.002 w
+0 .16187 m
+1 .16187 L
+s
+P
+p
+.002 w
+.02381 .01472 m
+.03006 .01472 L
+s
+P
+[(-2)] .01131 .01472 1 0 Mshowa
+p
+.002 w
+.02381 .30902 m
+.03006 .30902 L
+s
+P
+[(2)] .01131 .30902 1 0 Mshowa
+p
+.002 w
+.02381 .45617 m
+.03006 .45617 L
+s
+P
+[(4)] .01131 .45617 1 0 Mshowa
+p
+.002 w
+.02381 .60332 m
+.03006 .60332 L
+s
+P
+[(6)] .01131 .60332 1 0 Mshowa
+p
+.001 w
+.02381 .04415 m
+.02756 .04415 L
+s
+P
+p
+.001 w
+.02381 .07358 m
+.02756 .07358 L
+s
+P
+p
+.001 w
+.02381 .10301 m
+.02756 .10301 L
+s
+P
+p
+.001 w
+.02381 .13244 m
+.02756 .13244 L
+s
+P
+p
+.001 w
+.02381 .1913 m
+.02756 .1913 L
+s
+P
+p
+.001 w
+.02381 .22073 m
+.02756 .22073 L
+s
+P
+p
+.001 w
+.02381 .25016 m
+.02756 .25016 L
+s
+P
+p
+.001 w
+.02381 .27959 m
+.02756 .27959 L
+s
+P
+p
+.001 w
+.02381 .33845 m
+.02756 .33845 L
+s
+P
+p
+.001 w
+.02381 .36788 m
+.02756 .36788 L
+s
+P
+p
+.001 w
+.02381 .39731 m
+.02756 .39731 L
+s
+P
+p
+.001 w
+.02381 .42674 m
+.02756 .42674 L
+s
+P
+p
+.001 w
+.02381 .4856 m
+.02756 .4856 L
+s
+P
+p
+.001 w
+.02381 .51503 m
+.02756 .51503 L
+s
+P
+p
+.001 w
+.02381 .54446 m
+.02756 .54446 L
+s
+P
+p
+.001 w
+.02381 .57389 m
+.02756 .57389 L
+s
+P
+p
+.002 w
+.02381 0 m
+.02381 .61803 L
+s
+P
+P
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+p
+p
+[ .03 .03 ] 0 setdash
+.004 w
+.02381 .16187 m
+.07393 .08829 L
+s
+P
+p
+[ .03 .03 ] 0 setdash
+.004 w
+.07393 .08829 m
+.12406 .01472 L
+s
+P
+p
+[ .03 .03 ] 0 setdash
+.004 w
+.12406 .01472 m
+.17419 .08829 L
+s
+P
+p
+[ .03 .03 ] 0 setdash
+.004 w
+.17419 .08829 m
+.22431 .16187 L
+s
+P
+p
+[ .03 .03 ] 0 setdash
+.004 w
+.22431 .16187 m
+.27444 .08829 L
+s
+P
+p
+[ .03 .03 ] 0 setdash
+.004 w
+.27444 .08829 m
+.32456 .01472 L
+s
+P
+p
+[ .03 .03 ] 0 setdash
+.004 w
+.32456 .01472 m
+.37469 .08829 L
+s
+P
+p
+[ .03 .03 ] 0 setdash
+.004 w
+.37469 .08829 m
+.42481 .01472 L
+s
+P
+p
+[ .03 .03 ] 0 setdash
+.004 w
+.42481 .01472 m
+.47494 .08829 L
+s
+P
+p
+[ .03 .03 ] 0 setdash
+.004 w
+.47494 .08829 m
+.52506 .16187 L
+s
+P
+p
+[ .03 .03 ] 0 setdash
+.004 w
+.52506 .16187 m
+.57519 .23544 L
+s
+P
+.004 w
+.57519 .23544 m
+.62531 .30902 L
+s
+.62531 .30902 m
+.67544 .38259 L
+s
+.67544 .38259 m
+.72556 .45617 L
+s
+.72556 .45617 m
+.77569 .52974 L
+s
+.77569 .52974 m
+.82581 .60332 L
+s
+.82581 .60332 m
+.87594 .52974 L
+s
+.87594 .52974 m
+.92607 .45617 L
+s
+.92607 .45617 m
+.97619 .38259 L
+s
+P
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 174},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCacheValid->False]}, Open]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{20, Automatic}, {Automatic, 16}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 973, 15, 70, "Text"],
+Cell[2687, 68, 1352, 19, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[4062, 89, 75, 1, 70, "Input"],
+Cell[4140, 92, 87, 2, 70, "Print"],
+Cell[4230, 96, 5004, 521, 70, 4846, 516, "GraphicsData", 
+"PostScript", "Graphics"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

@@ -1,0 +1,854 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     16578,        795]*)
+(*NotebookOutlinePosition[     17719,        833]*)
+(*  CellTagsIndexPosition[     17675,        829]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[StyleBox[
+"PROGRAM:  TwoArm\nCALLING SEQUENCE:  TwoArm[n, x, y, s, print]\nPARAMETERS:\n\
+     n, s - integers\n     x, y - real numbers\n     print - a Boolean \
+variable (True or False)\nSYNOPSIS:\n     -  This program simulates the two \
+strategies play-the-better-machine and \n        play-the-winner, in \
+connection with the Two-Armed Bandit problem.  The\n        variables x and y \
+represent the respective probabilities that machines 1\n        and 2 pay off \
+a dollar on a single play.  If s = 1, the play-the-better-machine\n        \
+strategy is used; otherwise, the play-the-winner strategy is used.  The\n     \
+   variable n is the number of plays to be simulated.  If print = True, then \
+for each\n        play, the program prints out which machine was used, and \
+what the results of the\n        play were (i.e., whether it was won or \
+lost).  Further, the program plots the final\n        \
+experimentally-determined densities for x and y, plotting that of x with a \
+solid line,\n        and that of y with a dotted one.\n     - Note:  this \
+program requires the program \"BetaDensity[alpha, beta, x]\" be\n        \
+initialized.\nRETURNED VALUES:\n     -  none\nLOCATION:\n     Folder:  \
+Chapter 4\n     File:       \"TwoArm.Chpt4.mat\"",
+  FontFamily->"Helvetica"]], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Clear[TwoArm];\nTwoArm[n_, x_, y_, s_, print_] :=\nBlock[{win1 = 0, lose1 = \
+0, win2 = 0, lose2 = 0,\n       p1, p2,\n       currentmachine = 1,\n       \
+machinelist = {},\n       resultlist = {}\n      },\n      If[(s == 1),\n     \
+ \n(* Play-the-better-machine strategy *)\n\n      Block[{},\n            \
+For[i = 1, i <= n, i++,\n                machinelist = \n                     \
+Append[machinelist,\n                            currentmachine\n             \
+              ];\n                If[(currentmachine == 1),\n                \
+Block[{},\n                      If[(Random[] < x),\n                      \
+Block[{},\n                            win1++;\n                            \
+resultlist = \n                                    Append[resultlist,\n       \
+                                    \"W\"\n                                   \
+       ]\n                           ],\n                      Block[{},\n    \
+                        lose1++;\n                            resultlist =\n  \
+                                  Append[resultlist,\n                        \
+                   \"L\"\n                                          ]\n       \
+                    ] \n                        ]\n                     ],\n  \
+              Block[{},\n                      If[(Random[] < y),\n           \
+           Block[{},\n                            win2++;\n                   \
+         resultlist =\n                                    Append[resultlist,\
+\n                                           \"W\"\n                          \
+                ]\n                           ], \n                      \
+Block[{},\n                            lose2++;\n                            \
+resultlist =\n                                    Append[resultlist,\n        \
+                                   \"L\"\n                                    \
+      ]\n                           ] \n                        ]\n           \
+          ]\n                   ];   (* endif *)\n                p1 = (win1 \
++ 1)/(win1 + lose1 + 2);\n                p2 = (win2 + 1)/(win2 + lose2 + 2);\
+\n                If[(p1 > p2),\n                   currentmachine = 1,\n     \
+              currentmachine = 2\n                  ]\n                ]  (* \
+endfor *)\n            ],  (* endblock *)\n            \n (* \
+Play-the-winner-strategy *)          \n           \n      Block[{},\n         \
+   For[i = 1, i <= n, i++,\n                machinelist = \n                  \
+   Append[machinelist,\n                            currentmachine\n          \
+                 ];\n                If[(currentmachine == 1),\n              \
+  Block[{},\n                      If[(Random[] < x),\n                      \
+Block[{},\n                            win1++;\n                            \
+resultlist = \n                                    Append[resultlist,\n       \
+                                    \"W\"\n                                   \
+       ]\n                           ],\n                      Block[{},\n    \
+                        lose1++;\n                            resultlist =\n  \
+                                  Append[resultlist,\n                        \
+                   \"L\"\n                                          ];\n      \
+                      currentmachine = 2\n                           ]\n      \
+                  ]\n                     ],\n                Block[{},\n     \
+                 If[(Random[] < y),\n                      Block[{},\n        \
+                    win2++;\n                            resultlist = \n      \
+                              Append[resultlist,\n                            \
+               \"W\"\n                                          ]\n           \
+                ],\n                      Block[{},\n                         \
+   lose2++;\n                            resultlist =\n                       \
+             Append[resultlist,\n                                           \
+\"L\"\n                                          ];\n                         \
+   currentmachine = 1\n                           ]\n                        \
+]\n                     ]\n                   ]  (* endif *)\n                \
+]  (* endfor *)\n            ]  (* endblock *)\n        ];  (* end big if *)\n\
+      If[print,\n         Print[\"Machine  Result\"]\n        ];\n      \
+If[print,\n         For[i = 1, i <= n, i++, \n             Print[\"   \",\n   \
+                machinelist[[i]],\n                   \"       \",\n          \
+         resultlist[[i]]\n                  ]\n            ]\n        ];\n    \
+  Show[Plot[BetaDensity[win1 + 1, lose1 + 1, z],\n                {z, 0, 1},\n\
+                DisplayFunction -> Identity\n               ],\n           \
+Plot[BetaDensity[win2 + 1, lose2 + 1, z],\n                {z, 0, 1},\n       \
+         PlotStyle -> {{Dashing[{0.02, 0.02}]}},\n                \
+DisplayFunction -> Identity\n               ],\n           DisplayFunction -> \
+$DisplayFunction,\n           PlotRange -> All\n          ]\n    ]\n"], 
+  "Input",
+  InitializationCell->True,
+  AspectRatioFixed->True],
+
+Cell[CellGroupData[{Cell[TextData["TwoArm[20, .6, .7, 2, True];"], "Input",
+  AspectRatioFixed->True],
+
+Cell[TextData[
+"Machine  Result\n   1       W\n   1       L\n   2       W\n   2       W\n   \
+2       W\n   2       W\n   2       W\n   2       W\n   2       W\n   2       \
+W\n   2       W\n   2       W\n   2       W\n   2       L\n   1       W\n   1 \
+      L\n   2       W\n   2       L\n   1       W\n   1       W"], "Print",
+  Evaluatable->False,
+  AspectRatioFixed->True],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.0238095 0.952381 0.0147151 0.134354 [
+[(0.2)] .21429 .01472 0 2 Msboxa
+[(0.4)] .40476 .01472 0 2 Msboxa
+[(0.6)] .59524 .01472 0 2 Msboxa
+[(0.8)] .78571 .01472 0 2 Msboxa
+[(1)] .97619 .01472 0 2 Msboxa
+[(1)] .01131 .14907 1 0 Msboxa
+[(2)] .01131 .28342 1 0 Msboxa
+[(3)] .01131 .41778 1 0 Msboxa
+[(4)] .01131 .55213 1 0 Msboxa
+[ -0.001 -0.001 0 0 ]
+[ 1.001 .61903 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+p
+.002 w
+.21429 .01472 m
+.21429 .02097 L
+s
+P
+[(0.2)] .21429 .01472 0 2 Mshowa
+p
+.002 w
+.40476 .01472 m
+.40476 .02097 L
+s
+P
+[(0.4)] .40476 .01472 0 2 Mshowa
+p
+.002 w
+.59524 .01472 m
+.59524 .02097 L
+s
+P
+[(0.6)] .59524 .01472 0 2 Mshowa
+p
+.002 w
+.78571 .01472 m
+.78571 .02097 L
+s
+P
+[(0.8)] .78571 .01472 0 2 Mshowa
+p
+.002 w
+.97619 .01472 m
+.97619 .02097 L
+s
+P
+[(1)] .97619 .01472 0 2 Mshowa
+p
+.001 w
+.0619 .01472 m
+.0619 .01847 L
+s
+P
+p
+.001 w
+.1 .01472 m
+.1 .01847 L
+s
+P
+p
+.001 w
+.1381 .01472 m
+.1381 .01847 L
+s
+P
+p
+.001 w
+.17619 .01472 m
+.17619 .01847 L
+s
+P
+p
+.001 w
+.25238 .01472 m
+.25238 .01847 L
+s
+P
+p
+.001 w
+.29048 .01472 m
+.29048 .01847 L
+s
+P
+p
+.001 w
+.32857 .01472 m
+.32857 .01847 L
+s
+P
+p
+.001 w
+.36667 .01472 m
+.36667 .01847 L
+s
+P
+p
+.001 w
+.44286 .01472 m
+.44286 .01847 L
+s
+P
+p
+.001 w
+.48095 .01472 m
+.48095 .01847 L
+s
+P
+p
+.001 w
+.51905 .01472 m
+.51905 .01847 L
+s
+P
+p
+.001 w
+.55714 .01472 m
+.55714 .01847 L
+s
+P
+p
+.001 w
+.63333 .01472 m
+.63333 .01847 L
+s
+P
+p
+.001 w
+.67143 .01472 m
+.67143 .01847 L
+s
+P
+p
+.001 w
+.70952 .01472 m
+.70952 .01847 L
+s
+P
+p
+.001 w
+.74762 .01472 m
+.74762 .01847 L
+s
+P
+p
+.001 w
+.82381 .01472 m
+.82381 .01847 L
+s
+P
+p
+.001 w
+.8619 .01472 m
+.8619 .01847 L
+s
+P
+p
+.001 w
+.9 .01472 m
+.9 .01847 L
+s
+P
+p
+.001 w
+.9381 .01472 m
+.9381 .01847 L
+s
+P
+p
+.002 w
+0 .01472 m
+1 .01472 L
+s
+P
+p
+.002 w
+.02381 .14907 m
+.03006 .14907 L
+s
+P
+[(1)] .01131 .14907 1 0 Mshowa
+p
+.002 w
+.02381 .28342 m
+.03006 .28342 L
+s
+P
+[(2)] .01131 .28342 1 0 Mshowa
+p
+.002 w
+.02381 .41778 m
+.03006 .41778 L
+s
+P
+[(3)] .01131 .41778 1 0 Mshowa
+p
+.002 w
+.02381 .55213 m
+.03006 .55213 L
+s
+P
+[(4)] .01131 .55213 1 0 Mshowa
+p
+.001 w
+.02381 .04159 m
+.02756 .04159 L
+s
+P
+p
+.001 w
+.02381 .06846 m
+.02756 .06846 L
+s
+P
+p
+.001 w
+.02381 .09533 m
+.02756 .09533 L
+s
+P
+p
+.001 w
+.02381 .1222 m
+.02756 .1222 L
+s
+P
+p
+.001 w
+.02381 .17594 m
+.02756 .17594 L
+s
+P
+p
+.001 w
+.02381 .20281 m
+.02756 .20281 L
+s
+P
+p
+.001 w
+.02381 .22968 m
+.02756 .22968 L
+s
+P
+p
+.001 w
+.02381 .25655 m
+.02756 .25655 L
+s
+P
+p
+.001 w
+.02381 .31029 m
+.02756 .31029 L
+s
+P
+p
+.001 w
+.02381 .33717 m
+.02756 .33717 L
+s
+P
+p
+.001 w
+.02381 .36404 m
+.02756 .36404 L
+s
+P
+p
+.001 w
+.02381 .39091 m
+.02756 .39091 L
+s
+P
+p
+.001 w
+.02381 .44465 m
+.02756 .44465 L
+s
+P
+p
+.001 w
+.02381 .47152 m
+.02756 .47152 L
+s
+P
+p
+.001 w
+.02381 .49839 m
+.02756 .49839 L
+s
+P
+p
+.001 w
+.02381 .52526 m
+.02756 .52526 L
+s
+P
+p
+.001 w
+.02381 .579 m
+.02756 .579 L
+s
+P
+p
+.001 w
+.02381 .60587 m
+.02756 .60587 L
+s
+P
+p
+.002 w
+.02381 0 m
+.02381 .61803 L
+s
+P
+P
+p
+p
+p
+.004 w
+.02381 .01472 m
+.02505 .01472 L
+.02629 .01472 L
+.02753 .01472 L
+.02877 .01472 L
+.03001 .01472 L
+.03125 .01472 L
+.03249 .01472 L
+.03373 .01472 L
+.03497 .01472 L
+.03621 .01472 L
+.03745 .01472 L
+.03869 .01472 L
+.04117 .01472 L
+.04241 .01472 L
+.04365 .01472 L
+.04613 .01472 L
+.04861 .01472 L
+.05109 .01472 L
+.05357 .01473 L
+.05605 .01473 L
+.05853 .01474 L
+.06101 .01475 L
+.06349 .01475 L
+.06845 .01478 L
+.07341 .01481 L
+.07837 .01485 L
+.08333 .0149 L
+.09325 .01506 L
+.09821 .01516 L
+.10317 .01529 L
+.1131 .01561 L
+.12302 .01605 L
+.13294 .01662 L
+.14286 .01735 L
+.1627 .01937 L
+.17262 .0207 L
+.18254 .02227 L
+.20238 .02623 L
+.22222 .03137 L
+.2619 .04571 L
+.30159 .06594 L
+.34127 .09212 L
+.38095 .12369 L
+.42063 .1594 L
+.46032 .19737 L
+.5 .23514 L
+.53968 .26983 L
+.55952 .28504 L
+.57937 .2983 L
+Mistroke
+.59921 .30922 L
+.60913 .31368 L
+.61905 .31742 L
+.62897 .3204 L
+.63393 .32158 L
+.63889 .32256 L
+.64385 .32333 L
+.64633 .32364 L
+.64881 .32389 L
+.65129 .32408 L
+.65253 .32416 L
+.65377 .32423 L
+.65501 .32427 L
+.65625 .32431 L
+.65749 .32433 L
+.65873 .32434 L
+.65997 .32433 L
+.66121 .32431 L
+.66245 .32427 L
+.66369 .32422 L
+.66493 .32416 L
+.66617 .32408 L
+.66865 .32388 L
+.67113 .32362 L
+.67361 .3233 L
+.67857 .32249 L
+.68353 .32144 L
+.68849 .32014 L
+.69841 .31683 L
+.70833 .31252 L
+.71825 .30723 L
+.7381 .29369 L
+.77778 .25522 L
+.81746 .20369 L
+.85714 .14392 L
+.89683 .08389 L
+.91667 .05728 L
+.93651 .03537 L
+.94643 .02685 L
+.95139 .02332 L
+.95635 .02034 L
+.96131 .01795 L
+.96379 .01698 L
+.96627 .01618 L
+.96875 .01555 L
+.96999 .0153 L
+.97123 .01509 L
+.97247 .01493 L
+.97371 .01481 L
+.97495 .01474 L
+Mistroke
+.97619 .01472 L
+Mfstroke
+P
+P
+p
+[ .02 .02 ] 0 setdash
+p
+.004 w
+.02381 .01472 m
+.02505 .01472 L
+.02629 .01472 L
+.02753 .01472 L
+.02877 .01472 L
+.03001 .01472 L
+.03125 .01472 L
+.03249 .01472 L
+.03373 .01472 L
+.03497 .01472 L
+.03621 .01472 L
+.03745 .01472 L
+.03869 .01472 L
+.03993 .01472 L
+.04117 .01472 L
+.04241 .01472 L
+.04365 .01472 L
+.04489 .01472 L
+.04613 .01472 L
+.04737 .01472 L
+.04861 .01472 L
+.04985 .01472 L
+.05109 .01472 L
+.05233 .01472 L
+.05357 .01472 L
+.05481 .01472 L
+.05605 .01472 L
+.05729 .01472 L
+.05853 .01472 L
+.05977 .01472 L
+.06101 .01472 L
+.06225 .01472 L
+.06349 .01472 L
+.06473 .01472 L
+.06597 .01472 L
+.06721 .01472 L
+.06845 .01472 L
+.06969 .01472 L
+.07093 .01472 L
+.07217 .01472 L
+.07341 .01472 L
+.07465 .01472 L
+.07589 .01472 L
+.07713 .01472 L
+.07837 .01472 L
+.08085 .01472 L
+.08209 .01472 L
+.08333 .01472 L
+.08581 .01472 L
+.08705 .01472 L
+Mistroke
+.08829 .01472 L
+.08953 .01472 L
+.09077 .01472 L
+.09325 .01472 L
+.09449 .01472 L
+.09573 .01472 L
+.09697 .01472 L
+.09821 .01472 L
+.10069 .01472 L
+.10317 .01472 L
+.10565 .01472 L
+.10813 .01472 L
+.11062 .01472 L
+.1131 .01472 L
+.11558 .01472 L
+.11806 .01472 L
+.12054 .01472 L
+.12302 .01472 L
+.1255 .01472 L
+.12798 .01472 L
+.13046 .01472 L
+.13294 .01472 L
+.13542 .01472 L
+.1379 .01472 L
+.14038 .01472 L
+.14286 .01472 L
+.14782 .01472 L
+.1503 .01472 L
+.15278 .01472 L
+.15526 .01472 L
+.15774 .01472 L
+.1627 .01472 L
+.16518 .01472 L
+.16766 .01472 L
+.17014 .01472 L
+.17262 .01472 L
+.17758 .01472 L
+.18254 .01472 L
+.1875 .01472 L
+.19246 .01472 L
+.19742 .01472 L
+.20238 .01472 L
+.20734 .01472 L
+.2123 .01472 L
+.21726 .01472 L
+.22222 .01472 L
+.22718 .01472 L
+.23214 .01472 L
+.2371 .01472 L
+.24206 .01472 L
+Mistroke
+.24702 .01472 L
+.25198 .01472 L
+.25694 .01472 L
+.2619 .01472 L
+.27183 .01472 L
+.27679 .01473 L
+.28175 .01473 L
+.28671 .01473 L
+.29167 .01474 L
+.30159 .01475 L
+.30655 .01476 L
+.31151 .01477 L
+.32143 .01479 L
+.33135 .01482 L
+.34127 .01487 L
+.35119 .01493 L
+.36111 .01501 L
+.37103 .01512 L
+.38095 .01527 L
+.39087 .01546 L
+.40079 .01571 L
+.41071 .01602 L
+.42063 .01642 L
+.43056 .01693 L
+.44048 .01757 L
+.4504 .01836 L
+.46032 .01934 L
+.47024 .02054 L
+.48016 .022 L
+.49008 .02378 L
+.5 .02591 L
+.51984 .03149 L
+.53968 .03929 L
+.55952 .04994 L
+.57937 .06414 L
+.59921 .08268 L
+.61905 .10634 L
+.65873 .17177 L
+.69841 .26361 L
+.7381 .37779 L
+.77778 .49712 L
+.79762 .54838 L
+.80754 .56935 L
+.8125 .5783 L
+.81746 .58607 L
+.82242 .59255 L
+.8249 .59526 L
+.82738 .59761 L
+.82986 .59957 L
+.83234 .60114 L
+Mistroke
+.83358 .60177 L
+.83482 .6023 L
+.83606 .60272 L
+.8373 .60303 L
+.83854 .60323 L
+.83978 .60332 L
+.84102 .60329 L
+.84226 .60315 L
+.8435 .6029 L
+.84474 .60252 L
+.84598 .60203 L
+.84722 .60141 L
+.85218 .59768 L
+.85466 .59505 L
+.85714 .59188 L
+.8621 .58391 L
+.86706 .5737 L
+.87698 .54629 L
+.8869 .50937 L
+.89683 .463 L
+.93651 .20577 L
+.97619 .01472 L
+Mfstroke
+P
+P
+P
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 174},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCacheValid->False]}, Open]]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 640}, {0, 460}},
+AutoGeneratedPackage->Automatic,
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 365},
+WindowMargins->{{36, Automatic}, {15, Automatic}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]X2:?oQon82n@960dL5:0?l0080001804P000000]X2:001
+0000I00000400@4100000BL?00400@00000000000000000201T1T0000000@000
+00000000004000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 1365, 20, 70, "Text"],
+Cell[3079, 73, 5205, 68, 70, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[8307, 143, 81, 1, 70, "Input"],
+Cell[8391, 146, 377, 6, 70, "Print"],
+Cell[8771, 154, 7795, 640, 70, 7637, 635, "GraphicsData", 
+"PostScript", "Graphics"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)

@@ -1,0 +1,200 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      8644,        151]*)
+(*NotebookOutlinePosition[      9752,        188]*)
+(*  CellTagsIndexPosition[      9708,        184]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+
+Cell[TextData[{
+  StyleBox["CHAPTER 9 PROGRAM DESCRIPTIONS",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold"],
+  StyleBox[
+  "\n\n\nPROGRAM:  CLTBernoulliGlobal\nCALLING SEQUENCE:  \
+CLTBernoulliGlobal[n, p, kmin, kmax, half]\nPARAMETERS:\n     n, kmin, kmax - \
+integers\n     p - a real number\n     half - a Boolean variable (True or \
+False)\nSYNOPSIS:\n    -  This program uses the normal approximation to \
+approximate the probability that\n       S_n, a sum of n Bernoulli trials \
+with probability p of success for each trial, lies in\n       [kmin, kmax].  \
+If half = True, the program includes the 1/2 correction; otherwise, it\n      \
+ doesn't.\n    -  Note:  this program requires the program \"NormalArea[a, b]\
+\" be initialized.\nRETURNED VALUES:\n     -  the approximated probability \
+that S_n lies in [kmin, kmax]\nLOCATION:\n     Folder:  Chapter 9\n     File: \
+      \"CLTBernoulliGlobal.Chpt9.mat\"\n        \n       \nPROGRAM:  \
+CLTBernoulliLocal\nCALLING SEQUENCE:  CLTBernoulliLocal[n, p, k]\nPARAMETERS:\
+\n     n, k - integers\n     p - a real number\nSYNOPSIS:\n     -  This \
+program computes and displays the exact calculation of binomial(n, p, k)\n    \
+    and the normal approximation of the same.\n     -  Note:  this program \
+requires the program \"Bin[n, p, k]\" be initialized.\nRETURNED VALUES:\n     \
+-  {b(n, p, k), normal approximation of b(n, p, k)}\nLOCATION:\n     Folder:  \
+Chapter 9\n     File:       \"CLTBernoulliLocal.Chpt9.mat\"\n     \n     \n\
+PROGRAM:  CLTBernoulliPlot\nCALLING SEQUENCE:  CLTBernoulliPlot[n, p]\n\
+PARAMETERS:\n     n - an integer\n     p - a real number\nSYNOPSIS:\n     -  \
+This program displays the standard normal distribution curve, and a spike \
+graph\n        of the standardized binomial probabilities binomial(i, p, k), \
+for i = 1 to n.  It\n        displays these two graphs on the interval [-4, \
+4], on a single set of axes.\n     -  Note:  this program requires the \
+programs \"Bin[n, p, k]\" and\n        \"Spikegraph[distributionlist, xmin, \
+xmax, print]\" be initialized.\nRETURNED VALUES:\n     -  none\nLOCATION:\n   \
+  Folder:  Chapter 9\n     File:       \"CLTBernoulliPlot.Chpt9.mat\"\n     \n\
+     \nPROGRAM:  CLTGeneral\nCALLING SEQUENCE:  CLTGeneral[n, a, b]\n\
+PARAMETERS:\n     n, a, b - integers\nSYNOPSIS:\n     -  This program \
+illustrates the Central Limit Theorem by doing the following:  first,\n       \
+ the program generates n random discrete distributions on subsets of [a, b], \
+and\n        convolutes them to find the distribution of S_n, the sum of n \
+experiments\n        governed by these distributions.  Now, the CLT asserts \
+that the distribution of\n        S_n*, the standardized version of S_n, \
+approaches the standard normal as n\n        approaches infinity.  The \
+program shows this by displaying a spike graph of\n        S_n*, along with a \
+plot of the standard normal density curve, on the interval\n        [-4, 4].\n\
+    -  Note:  this program requires the programs \"MakeDistribution[a, b]\", \
+\n       \"Convolution[distributionlist]\", \
+\"DiscreteMean[distributionlist]\",\n       \
+\"DiscreteVariance[distributionlist]\", \"Spikegraph[distributionlist, xmin, \
+xmax,\n       print]\", and \"NormalDensity[x, mu, sigma]\" be initialized.\n\
+RETURNED VALUES:\n     -  none\nLOCATION:\n     Folder:  Chapter 9\n     \
+File:        \"CLTGeneral.Chpt9.mat\"\n     \n     \nPROGRAM:  \
+CLTIndTrialsGlobal\nCALLING SEQUENCE:  CLTIndTrialsGlobal[n, \
+distributionlist, kmin, kmax, half]\nPARAMETERS:\n     n, kmin, kmax - \
+integers\n     distributionlist - a distribution list\n     half - a Boolean \
+variable (True or False)\nSYNOPSIS:\n    -  This program uses the normal \
+approximation to approximate the probability that\n       S_n, a sum of n \
+independent trials with common distribution given in\n       \
+distributionlist, lies in [kmin, kmax].  If half = True, the program includes \
+the 1/2\n       correction; otherwise, it doesn't.\n    -  Note:  this \
+program requires the programs \"DiscreteMean[distributionlist]\",\n       \
+\"DiscreteVariance[distributionlist]\", and \"NormalArea[a, b]\" be \
+initialized.\nRETURNED VALUES:\n     -  the approximated probability that S_n \
+lies in [kmin, kmax]\nLOCATION:\n     Folder:  Chapter 9\n     File:       \
+\"CLTIndTrialsGlobal.Chpt9.mat\"\n     \nPROGRAM:  CLTIndTrialsLocal\nCALLING \
+SEQUENCE:  CLTIndTrialsLocal[n, distributionlist, k]\nPARAMETERS:\n     n, k \
+- integers\n     distributionlist - a distribution list\nSYNOPSIS:\n     -  \
+This program computes and displays the exact calculation of P(S_n = k) and \
+the\n         normal approximation of the same, where S_n is a sum of n \
+independent\n         variables with common distribution given in \
+distributionlist.\n     -  Note:  this program requires the programs \
+\"NFoldConvolution[distributionlist, n]\",\n        \
+\"DiscreteMean[distributionlist]\", and \
+\"DiscreteVariance[distributionlist]\" be\n        initialized.\nRETURNED \
+VALUES:\n     -  {P(S_n = k), normal approximation P(S_n = k)}\nLOCATION:\n   \
+  Folder:  Chapter 9\n     File:       \"CLTIndTrialsLocal.Chpt9.mat\"\n     \
+\n     \nPROGRAM:  CLTIndTrialsPlot\nCALLING SEQUENCE:  CLTIndTrialsPlot[n, \
+distributionlist]\nPARAMETERS:\n     n - an integer\n     distributionlist - \
+a distribution list\nSYNOPSIS:\n     -  This program displays the standard \
+normal distribution curve, and a scaled\n        spike graph of the \
+standardizations of the probabilities P(S_n = j), where S_n is\n        a sum \
+of n independent variables with common distribution given in\n        \
+distributionlist.  The program displays these two graphs on the interval [-4, \
+4], on\n        a single set of axes.\n     -  Note:  this program requires \
+the programs \"DiscreteMean[distributionlist]\",\n        \
+\"DiscreteVariance[distributionlist]\", \
+\"NFoldConvolution[distributionlist]\" and\n        \
+\"Spikegraph[distributionlist, xmin, xmax, print]\" be initialized.\nRETURNED \
+VALUES:\n     -  none\nLOCATION:\n     Folder:  Chapter 9\n     File:       \
+\"CLTIndTrialsPlot.Chpt9.mat\"\n     \nPROGRAM:  MakeDistribution\nCALLING \
+SEQUENCE:  MakeDistribution[a, b]\nPARAMETERS:\n     a, b - integers\n\
+SYNOPSIS:\n     -  This program generates a random discrete distribution \
+whose range is contained\n        in the integers in [a, b].  To do this it \
+(1)  randomly chooses m, the number of\n        integers in [a, b] which will \
+be outcome values of the distribution;  (2) \n        randomly chooses m \
+integers in [a, b]; and (3)  assigns a random probability\n        \
+distribution to those m integers.\nRETURNED VALUES:\n     -  a distribution \
+list with outcome values are integers in [a, b]\nLOCATION:\n     Folder:  \
+Chapter 9\n     File:       \"CLTGeneral.Chpt9.mat\"",
+    FontFamily->"Helvetica"]
+}], "Text",
+  Evaluatable->False,
+  AspectRatioFixed->True]
+},
+FrontEndVersion->"Macintosh 3.0",
+ScreenRectangle->{{0, 800}, {0, 580}},
+WindowToolbars->{},
+CellGrouping->Automatic,
+WindowSize->{520, 485},
+WindowMargins->{{92, Automatic}, {Automatic, 13}},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->False,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"MacintoshAutomaticEncoding",
+MacintoshSystemPageSetup->"\<\
+00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001
+0000I00000400`<300000BL?00400@0000000000000006P801T1T00000000000
+00000000000000000000000000000000\>"
+]
+
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1711, 51, 6930, 99, 70, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
