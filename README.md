@@ -30,17 +30,18 @@ Install tkinter to be able to display graphs
 
 ### Windows  
 Make sure pip for python 3 is installed  
+Make sure the `"%AppData%\Python\Python3X\Scripts"` directory is added to PATH env variable.  
 `pip3 --version` should not print an error  
   
 Install pipenv via pip  
 `pip install pipenv`  
 
-Clone the repo and extract it
+Clone the repo  
+`git clone git@github.com:FireLemons/Probability-Programs.git`  
 
 Install the project dependencies  
 `cd Probability-Programs`  
 `pipenv install`  
-Make sure the `"%AppData%\Python\Python3X\Scripts"` directory is added to PATH env variable.
 **this may take several minutes**
 
 Tkinter comes bundled with Windows installer. Use `python -m tkinter` to check if Tkinter is installed properly
