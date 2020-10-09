@@ -42,7 +42,7 @@ In the subshell, run a program by typing `python3 name_of_program.py`.
 ## Contributing  
 This repo aims to port the wolfram mathematica programs found [here](http://www.dartmouth.edu/~chance/teaching_aids/books_articles/probability_book/BookAlgorithms.html) to python.  
   
-When I first discovered the book, I went to download the programs and saw that they were all written in proprietary languages so I decided to prot the programs to python.  
+When I first discovered the book, I went to download the programs and saw that they were all written in proprietary languages so I decided to port the programs to python.  
   
 The program files don't have to be 1 to 1 with the mathematica files. If you can find a way to simplify or improve a program, go for it.  
   
