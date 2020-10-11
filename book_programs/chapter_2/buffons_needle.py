@@ -1,4 +1,4 @@
-# Usage: python3 name_of_program.py <n> 
+# Usage: python3 buffons_needle.py <n> 
 #   n:   The Number of Needles used
 
 # Example Usage: python3 buffons_needle.py 5000
