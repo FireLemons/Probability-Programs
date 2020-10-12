@@ -1,4 +1,4 @@
-# Usage: python3 darts.py <n> <show_graph> <mute_output>
+# Usage: python3 darts.py <n> <mute_output>
 #   n:                      The number of dart throwns to be simulated
 #   mute_output(optional):  If the value is "mute" or "m" the distances of the individual darts and the graph of the results is not shown.
 
