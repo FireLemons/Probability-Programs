@@ -4,7 +4,6 @@
 
 # Example Usage: python3 darts.py 5
 
-#import matplotlib.pyplot as pyplot for graphing
 import random
 import sys
 import math
@@ -52,31 +51,30 @@ if bad_input:
 mute_output = len(args) >= 3 and (args[2] == "m" or args[2] == "mute")
 dart_distances = []
 
+if not mute_output:
+    print("Distances of the darts: ")
+
 for i in range(dart_throws_count):
     current_distance = math.sqrt(random.uniform(0, 1)**2 + random.uniform(0, 1)**2)
     while current_distance > 1:
         current_distance = math.sqrt(random.uniform(0, 1)**2 + random.uniform(0, 1)**2)
     if not mute_output:
-        print(current_distance)
+        print(round(current_distance, 3))
     dart_distances.append(current_distance)
 
 ##################
 # Graphing Results
 ##################
 
-if not mute_output:
-    pyplot.suptitle("1.1 Distribution of Darts by ranges")
-    pyplot.xlabel("Distance from the center")
-    pyplot.ylabel("Share of darts in this range")
-    pyplot.xlim(0, 1)
+pyplot.suptitle("1.1 Distribution of Darts by ranges")
+pyplot.xlabel("Distance from the center")
+pyplot.ylabel("Share of darts in this range")
+pyplot.xlim(0, 1)
 
-    for i in range(10):
-        current_range_count = 0
-        if dart_throws_count > 0:
-            current_range_count = sum(i/10 <= distance < (i+1)/10 for distance in dart_distances)/dart_throws_count
-        pyplot.bar((i+0.5)/10, current_range_count, width=0.08)
+for i in range(10):
+    current_range_count = 0
+    if dart_throws_count > 0:
+        current_range_count = sum(i/10 <= distance < (i+1)/10 for distance in dart_distances)/dart_throws_count
+    pyplot.bar((i+0.5)/10, current_range_count, width=0.08)
 
-    pyplot.show()
-
-# Print Results
-print("Distances of the darts: ", dart_distances)
+pyplot.show()
