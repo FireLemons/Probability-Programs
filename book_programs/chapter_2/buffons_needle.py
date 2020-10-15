@@ -11,9 +11,9 @@ import sys
 
 args = sys.argv
 
-#####################
-# User Input Handling
-#####################
+#######################
+# User Input Handling #
+#######################
 bad_input = False
 
 # Less than 1 argument
@@ -42,9 +42,9 @@ if bad_input:
     print("Example Usage: python3 buffons_needle.py 5000")
     sys.exit(1)
 
-###################
-# Buffons Needle  #
-###################
+##################
+# Buffons Needle #
+##################
 class DefineNeedle:
     def __init__(self, x=None, y=None, theta=None, length=0.5):
         if x is None:
@@ -113,9 +113,9 @@ class BuffonSimulation:
                 "\n Approximation of Pi: " + str(estimated_pi) +
                 "\n Error: " + str(error) + "%")
 
-##################
-# Plotting Results
-##################
+####################
+# Plotting Results #
+####################
 
     def plot_needles(self):
         for needle in range(n):
