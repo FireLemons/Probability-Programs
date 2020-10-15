@@ -17,7 +17,7 @@ args = sys.argv
 bad_input = False
 
 # Less than 1 argument
-if len(args) < 1:
+if len(args) < 2:
     bad_input = True
     print("ERROR: Insufficient arguments")
 
