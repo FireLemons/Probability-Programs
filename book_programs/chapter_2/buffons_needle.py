@@ -38,7 +38,8 @@ if 'n' in globals() and n < 0:
 # Print usage help when arguments are bad
 if bad_input:
     print("\nUsage: python3 buffons_needle.py <n>")
-    print("  n:   The Number of Needles used")
+    print("  n:   The Number of Needles used\n")
+    print("Example Usage: python3 buffons_needle.py 5000")
     sys.exit(1)
 
 ###################
