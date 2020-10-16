@@ -1,8 +1,8 @@
-#   Usage: python3 bertrands_paradox.py <NCHORDS_TO_PLOT> <nchords> 
-#   NCHORDS_TO_PLOT:  The number of chords to plot
-#   Don't plot more than 1000 number of chords because they overlap too much
-#   and obscure the point we're trying to make.
-#   nchords:  The sample size of chords to do the statistics
+#	Usage: python3 bertrands_paradox.py <NCHORDS_TO_PLOT> <nchords> 
+#	NCHORDS_TO_PLOT:  The number of chords to plot
+#	Don't plot more than 1000 number of chords because they overlap too much
+#	and obscure the point we're trying to make.
+#	nchords:  The sample size of chords to do the statistics
 
 # Example Usage: python3 bertrands_paradox.py 1000 10000
 
@@ -20,7 +20,7 @@ args = sys.argv
 bad_input = False
 
 # Less than 2 arguments
-if len(args) < 2:
+if len(args) < 3:
     bad_input = True
     print("ERROR: Insufficient arguments")
 
