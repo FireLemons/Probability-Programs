@@ -80,7 +80,7 @@ def setup_axes():
 
     fig, axes = plt.subplots(nrows=1, ncols=2, subplot_kw={'aspect': 'equal'})
     for ax in axes:
-        circle = Circle((0,0), r, facecolor='none')
+        circle = Circle((0,0), r, color='black', fill=False)
         ax.add_artist(circle)
         ax.set_xlim((-r,r))
         ax.set_ylim((-r,r))
