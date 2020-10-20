@@ -32,7 +32,7 @@ except ValueError:
     print("ERROR: Could not convert n to an integer")
 
 # Argument is negtive
-if 'dart_throws' in globals() and dart_throws < 0:
+if 'dart_throws_count' in globals() and dart_throws_count < 0:
     bad_input = True
     print("ERROR: n cannot be negative")
 
