@@ -6,7 +6,6 @@
 import matplotlib.pyplot as pyplot
 import random
 import math
-import numpy as np
 import sys
 
 args = sys.argv
@@ -50,24 +49,30 @@ def make_needle():
     needle = {}
 
     length = 0.5
-    x = random.uniform(0, 1)
-    y = random.uniform(0, 1)
+    center_x = random.uniform(0, 1)
+    center_y = random.uniform(0, 1)
     theta = random.uniform(0, math.pi)
+    delta_x = length / 2 * math.cos(theta)
+    delta_y = length / 2 * math.sin(theta)
 
-    needle["x"] = x
-    needle["y"] = y
     needle["theta"] = theta
-    needle["coordinates"] = np.array([x, y])
-    needle["complex_representation"] = np.array([length / 2 * math.cos(theta), length / 2 * math.sin(theta)])
-    needle["end_points"] = np.array([
-        np.add(needle["coordinates"], -1 * needle["complex_representation"]),
-        np.add(needle["coordinates"], needle["complex_representation"])
-    ])
+    needle["end_points"] = []
+    needle["end_points"].append({
+        "x": center_x - delta_x,
+        "y": center_y - delta_y,
+    })
+    needle["end_points"].append({
+        "x": center_x + delta_x,
+        "y": center_y + delta_y,
+    })
 
     return needle
 
 def is_needle_intersecting_with_y(needle, y):
-    return needle["end_points"][0][1] < y and needle["end_points"][1][1] > y
+    first_end_point = needle["end_points"][0]
+    second_end_point = needle["end_points"][1]
+
+    return first_end_point["y"] < y and second_end_point["y"] > y
 
 class BuffonSimulation:
     def __init__(self):
@@ -78,34 +83,36 @@ class BuffonSimulation:
 
         fig = pyplot.figure(figsize=(10, 10))
         self.buffon = pyplot.subplot()
-        self.results_text = fig.text(
-            0, 0, self.estimate_pi(), size=15)
+        self.results_text = fig.text(0, 0, self.estimate_pi(), size=15)
         self.buffon.set_xlim(-0.1, 1.1)
         self.buffon.set_ylim(-0.1, 1.1)
 
     def plot_floor_boards(self):
         for j in range(self.boards):
             self.floor.append(0+j)
-            self.buffon.hlines(
-                y=self.floor[j], xmin=0, xmax=1, color='black', linestyle='--', linewidth=2.0)
+            self.buffon.hlines(y=self.floor[j], xmin=0, xmax=1, color='black', linestyle='--', linewidth=2.0)
 
     def toss_needles(self):
         needle = make_needle()
         self.list_of_needles.append(needle)
+
+        first_end_point = needle["end_points"][0]
+        second_end_point = needle["end_points"][1]
+
         x_coordinates = [
-            needle["end_points"][0][0],
-            needle["end_points"][1][0]
+            first_end_point["x"],
+            second_end_point["x"]
         ]
+
         y_coordinates = [
-            needle["end_points"][0][1],
-            needle["end_points"][1][1]
+            first_end_point["y"],
+            second_end_point["y"]
         ]
 
         for board in range(self.boards):
             if is_needle_intersecting_with_y(needle, self.floor[board]):
                 self.number_of_intersections += 1
-                self.buffon.plot(x_coordinates, y_coordinates,
-                                 color='green', linewidth=1)
+                self.buffon.plot(x_coordinates, y_coordinates, color='green', linewidth=1)
                 return
         self.buffon.plot(x_coordinates, y_coordinates, color='red', linewidth=1)
 
@@ -137,7 +144,6 @@ class BuffonSimulation:
         self.plot_floor_boards()
         self.plot_needles()
         pyplot.show()
-
 
 simulation = BuffonSimulation()
 simulation.plot()
