@@ -45,8 +45,9 @@ if bad_input:
 # Buffons Needle #
 ##################
 
+# Creates a "needle" represented by a list of 2 endpoints
 def make_needle():
-    needle = {}
+    needle = []
 
     length = 0.5
     center_x = random.uniform(0, 1)
@@ -55,13 +56,11 @@ def make_needle():
     delta_x = length / 2 * math.cos(theta)
     delta_y = length / 2 * math.sin(theta)
 
-    needle["theta"] = theta
-    needle["end_points"] = []
-    needle["end_points"].append({
+    needle.append({
         "x": center_x - delta_x,
         "y": center_y - delta_y,
     })
-    needle["end_points"].append({
+    needle.append({
         "x": center_x + delta_x,
         "y": center_y + delta_y,
     })
@@ -69,8 +68,8 @@ def make_needle():
     return needle
 
 def is_needle_intersecting_with_y(needle, y):
-    first_end_point = needle["end_points"][0]
-    second_end_point = needle["end_points"][1]
+    first_end_point = needle[0]
+    second_end_point = needle[1]
 
     return first_end_point["y"] < y and second_end_point["y"] > y
 
@@ -96,8 +95,8 @@ class BuffonSimulation:
         needle = make_needle()
         self.list_of_needles.append(needle)
 
-        first_end_point = needle["end_points"][0]
-        second_end_point = needle["end_points"][1]
+        first_end_point = needle[0]
+        second_end_point = needle[1]
 
         x_coordinates = [
             first_end_point["x"],
