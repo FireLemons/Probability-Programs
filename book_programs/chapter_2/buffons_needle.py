@@ -45,6 +45,30 @@ if bad_input:
 ##################
 # Buffons Needle #
 ##################
+
+def make_needle():
+    needle = {}
+
+    length = 0.5
+    x = random.uniform(0, 1)
+    y = random.uniform(0, 1)
+    theta = random.uniform(0, math.pi)
+
+    needle["x"] = x
+    needle["y"] = y
+    needle["theta"] = theta
+    needle["coordinates"] = np.array([x, y])
+    needle["complex_representation"] = np.array([length / 2 * math.cos(theta), length / 2 * math.sin(theta)])
+    needle["end_points"] = np.array([
+        np.add(needle["coordinates"], -1 * needle["complex_representation"]),
+        np.add(needle["coordinates"], needle["complex_representation"])
+    ])
+
+    return needle
+
+def is_needle_intersecting_with_y(needle, y):
+    return needle["end_points"][0][1] < y and needle["end_points"][1][1] > y
+
 class DefineNeedle:
     def __init__(self, x=None, y=None, theta=None, length=0.5):
         if x is None:
@@ -56,8 +80,8 @@ class DefineNeedle:
 
         self.needle_coordinates = np.array([x, y])
         self.complex_representation = np.array(
-            [length/2 * math.cos(theta), length/2*math.sin(theta)])
-        self.end_points = np.array([np.add(self.needle_coordinates, -1*np.array(
+-            [length/2 * math.cos(theta), length/2*math.sin(theta)])
+        self.end_points = np.array([np.add(self.needle_coordinates, -1 * np.array(
             self.complex_representation)), np.add(self.needle_coordinates, self.complex_representation)])
 
     def intersects_with_y(self, y):
@@ -85,21 +109,24 @@ class BuffonSimulation:
                 y=self.floor[j], xmin=0, xmax=1, color='black', linestyle='--', linewidth=2.0)
 
     def toss_needles(self):
-        needle_object = DefineNeedle()
-        self.list_of_needle_objects.append(needle_object)
-        x_coordinates = [needle_object.end_points[0]
-                         [0], needle_object.end_points[1][0]]
-        y_coordinates = [needle_object.end_points[0]
-                         [1], needle_object.end_points[1][1]]
+        needle = make_needle()
+        self.list_of_needle_objects.append(needle)
+        x_coordinates = [
+            needle["end_points"][0][0],
+            needle["end_points"][1][0]
+        ]
+        y_coordinates = [
+            needle["end_points"][0][1],
+            needle["end_points"][1][1]
+        ]
 
         for board in range(self.boards):
-            if needle_object.intersects_with_y(self.floor[board]):
+            if is_needle_intersecting_with_y(needle, self.floor[board]):
                 self.number_of_intersections += 1
                 self.buffon.plot(x_coordinates, y_coordinates,
                                  color='green', linewidth=1)
                 return
-        self.buffon.plot(x_coordinates, y_coordinates,
-                         color='red', linewidth=1)
+        self.buffon.plot(x_coordinates, y_coordinates, color='red', linewidth=1)
 
     def estimate_pi(self, needles_tossed=0):
         if self.number_of_intersections == 0:
