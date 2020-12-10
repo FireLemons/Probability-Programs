@@ -45,7 +45,13 @@ if bad_input:
 # Buffons Needle #
 ##################
 
+floor = []
+boards = 2
+list_of_needles = []
+number_of_intersections = 0
+
 # Creates a "needle" represented by a list of 2 endpoints
+#   returns A list containing 2 dictionarys; each representing the coordinates of an endpoint
 def make_needle():
     needle = []
 
@@ -73,76 +79,66 @@ def is_needle_intersecting_with_y(needle, y):
 
     return first_end_point["y"] < y and second_end_point["y"] > y
 
-class BuffonSimulation:
-    def __init__(self):
-        self.floor = []
-        self.boards = 2
-        self.list_of_needles = []
-        self.number_of_intersections = 0
+def estimate_pi(needles_tossed):
+    global number_of_intersections
+    if number_of_intersections == 0:
+        estimated_pi = 0
+    else:
+        estimated_pi = needles_tossed / number_of_intersections
 
-        fig = pyplot.figure(figsize=(10, 10))
-        self.buffon = pyplot.subplot()
-        self.results_text = fig.text(0, 0, self.estimate_pi(), size=15)
-        self.buffon.set_xlim(-0.1, 1.1)
-        self.buffon.set_ylim(-0.1, 1.1)
+    error = abs(((math.pi - estimated_pi) / math.pi) * 100)
+    return (f"Intersections: {number_of_intersections}\n Total Needles: {needles_tossed}\n Approximation of Pi: {estimated_pi}\n Error:{error}%")
 
-    def plot_floor_boards(self):
-        for j in range(self.boards):
-            self.floor.append(0+j)
-            self.buffon.hlines(y=self.floor[j], xmin=0, xmax=1, color='black', linestyle='--', linewidth=2.0)
+fig = pyplot.figure(figsize=(10, 10))
+buffon = pyplot.subplot()
+buffon.set_xlim(-0.1, 1.1)
+buffon.set_ylim(-0.1, 1.1)
 
-    def toss_needles(self):
-        needle = make_needle()
-        self.list_of_needles.append(needle)
+# Don't show incomplete graphs
+#pyplot.close()
+results_text = fig.text(0, 0, estimate_pi(0), size=15)
 
-        first_end_point = needle[0]
-        second_end_point = needle[1]
+def plot_floor_boards():
+    for j in range(boards):
+        floor.append(0 + j)
+        buffon.hlines(y=floor[j], xmin=0, xmax=1, color='black', linestyle='--', linewidth=2.0)
 
-        x_coordinates = [
-            first_end_point["x"],
-            second_end_point["x"]
-        ]
+def toss_needles():
+    global number_of_intersections
+    needle = make_needle()
+    list_of_needles.append(needle)
 
-        y_coordinates = [
-            first_end_point["y"],
-            second_end_point["y"]
-        ]
+    first_end_point = needle[0]
+    second_end_point = needle[1]
 
-        for board in range(self.boards):
-            if is_needle_intersecting_with_y(needle, self.floor[board]):
-                self.number_of_intersections += 1
-                self.buffon.plot(x_coordinates, y_coordinates, color='green', linewidth=1)
-                return
-        self.buffon.plot(x_coordinates, y_coordinates, color='red', linewidth=1)
+    x_coordinates = [
+        first_end_point["x"],
+        second_end_point["x"]
+    ]
 
-    def estimate_pi(self, needles_tossed=0):
-        if self.number_of_intersections == 0:
-            estimated_pi = 0
-        else:
-            estimated_pi = (needles_tossed) / \
-                (1 * self.number_of_intersections)
-        error = abs(((math.pi - estimated_pi)/math.pi)*100)
-        return (" Intersections:" + str(self.number_of_intersections) +
-                "\n Total Needles: " + str(needles_tossed) +
-                "\n Approximation of Pi: " + str(estimated_pi) +
-                "\n Error: " + str(error) + "%")
+    y_coordinates = [
+        first_end_point["y"],
+        second_end_point["y"]
+    ]
 
-####################
-# Plotting Results #
-####################
+    for board in range(boards):
+        if is_needle_intersecting_with_y(needle, floor[board]):
+            number_of_intersections += 1
+            buffon.plot(x_coordinates, y_coordinates, color='green', linewidth=1)
+            return
+    buffon.plot(x_coordinates, y_coordinates, color='red', linewidth=1)
 
-    def plot_needles(self):
-        for needle in range(n):
-            self.toss_needles()
-            self.results_text.set_text(self.estimate_pi(needle+1))
-            if (needle+1) % 200 == 0:
-                pyplot.pause(1/200)
-        pyplot.title("The simulated estimate for Pi is ")
+def plot_needles():
+    for needle in range(n):
+        toss_needles()
+        results_text.set_text(estimate_pi(needle + 1))
+        if (needle + 1) % 200 == 0:
+            pyplot.pause(1 / 200)
+    pyplot.title("The simulated estimate for Pi is ")
 
-    def plot(self):
-        self.plot_floor_boards()
-        self.plot_needles()
-        pyplot.show()
+def plot():
+    plot_floor_boards()
+    plot_needles()
+    pyplot.show()
 
-simulation = BuffonSimulation()
-simulation.plot()
+plot()
