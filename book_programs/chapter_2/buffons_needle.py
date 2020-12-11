@@ -73,12 +73,6 @@ def make_needle():
 
     return needle
 
-def is_needle_intersecting_with_y(needle, y):
-    first_end_point = needle[0]
-    second_end_point = needle[1]
-
-    return first_end_point["y"] < y and second_end_point["y"] > y
-
 def estimate_pi(needles_tossed):
     global number_of_intersections
     if number_of_intersections == 0:
@@ -94,17 +88,15 @@ buffon = pyplot.subplot()
 buffon.set_xlim(-0.1, 1.1)
 buffon.set_ylim(-0.1, 1.1)
 
-# Don't show incomplete graphs
-#pyplot.close()
 results_text = fig.text(0, 0, estimate_pi(0), size=15)
 
-def plot_floor_boards():
-    for j in range(boards):
-        floor.append(0 + j)
-        buffon.hlines(y=floor[j], xmin=0, xmax=1, color='black', linestyle='--', linewidth=2.0)
+# Plot floor boards
+for j in range(boards):
+    floor.append(j)
+    buffon.hlines(y=floor[j], xmin=0, xmax=1, color='black', linestyle='--', linewidth=2.0)
 
-def toss_needles():
-    global number_of_intersections
+# Plot needles
+for i in range(1, n + 1):
     needle = make_needle()
     list_of_needles.append(needle)
 
@@ -121,24 +113,17 @@ def toss_needles():
         second_end_point["y"]
     ]
 
-    for board in range(boards):
-        if is_needle_intersecting_with_y(needle, floor[board]):
-            number_of_intersections += 1
-            buffon.plot(x_coordinates, y_coordinates, color='green', linewidth=1)
-            return
-    buffon.plot(x_coordinates, y_coordinates, color='red', linewidth=1)
+    # If the line is intersecting with a board
+    if any(first_end_point["y"] < board_y and second_end_point["y"] > board_y for board_y in floor):
+        number_of_intersections += 1
+        buffon.plot(x_coordinates, y_coordinates, color='green', linewidth=1)
+    else:
+        buffon.plot(x_coordinates, y_coordinates, color='red', linewidth=1)
 
-def plot_needles():
-    for needle in range(n):
-        toss_needles()
-        results_text.set_text(estimate_pi(needle + 1))
-        if (needle + 1) % 200 == 0:
-            pyplot.pause(1 / 200)
-    pyplot.title("The simulated estimate for Pi is ")
+    results_text.set_text(estimate_pi(i))
 
-def plot():
-    plot_floor_boards()
-    plot_needles()
-    pyplot.show()
+    if i % 200 == 0:
+        pyplot.pause(1 / 200)
 
-plot()
+pyplot.title("The simulated estimate for Pi is ")
+pyplot.show()
