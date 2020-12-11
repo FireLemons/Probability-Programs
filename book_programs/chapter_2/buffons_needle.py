@@ -44,9 +44,9 @@ if bad_input:
 ##################
 # Buffons Needle #
 ##################
-floor = []
-boards = 2
+lines = []
 list_of_needles = []
+number_of_lines = 2
 number_of_intersections = 0
 
 # Create needles as a list containing 2 dictionarys each representing an endpoint of the needle
@@ -81,10 +81,10 @@ buffon.set_ylim(-0.1, 1.1)
 
 results_text = fig.text(0, 0, "Intersections: 0\n Total Needles: 0\n Approximation of Pi: 0\n Error: 100%", size=15)
 
-# Plot floor boards
-for j in range(boards):
-    floor.append(j)
-    buffon.hlines(y=floor[j], xmin=0, xmax=1, color='black', linestyle='--', linewidth=2.0)
+# Plot lines
+for j in range(number_of_lines):
+    lines.append(j)
+    buffon.hlines(y=lines[j], xmin=0, xmax=1, color='black', linestyle='--', linewidth=2.0)
 
 # Plot needles
 for i in range(1, n + 1):
@@ -102,15 +102,15 @@ for i in range(1, n + 1):
         second_end_point["y"]
     ]
 
-    # If the line is intersecting with a board
-    if any(first_end_point["y"] < board_y and second_end_point["y"] > board_y for board_y in floor):
+    # If the needle is intersecting with a line
+    if any(first_end_point["y"] < line_y and second_end_point["y"] > line_y for line_y in lines):
         number_of_intersections += 1
         buffon.plot(x_coordinates, y_coordinates, color='green', linewidth=1)
     else:
         buffon.plot(x_coordinates, y_coordinates, color='red', linewidth=1)
 
     needles_tossed = i
-    estimated_pi = needles_tossed / number_of_intersections
+    estimated_pi = needles_tossed / number_of_intersections if number_of_intersections > 0 else 0
 
     error = abs(((math.pi - estimated_pi) / math.pi) * 100)
 
