@@ -44,15 +44,13 @@ if bad_input:
 ##################
 # Buffons Needle #
 ##################
-
 floor = []
 boards = 2
 list_of_needles = []
 number_of_intersections = 0
 
-# Creates a "needle" represented by a list of 2 endpoints
-#   returns A list containing 2 dictionarys; each representing the coordinates of an endpoint
-def make_needle():
+# Create needles as a list containing 2 dictionarys each representing an endpoint of the needle
+for i in range(n):
     needle = []
 
     length = 0.5
@@ -71,24 +69,17 @@ def make_needle():
         "y": center_y + delta_y,
     })
 
-    return needle
+    list_of_needles.append(needle)
 
-def estimate_pi(needles_tossed):
-    global number_of_intersections
-    if number_of_intersections == 0:
-        estimated_pi = 0
-    else:
-        estimated_pi = needles_tossed / number_of_intersections
-
-    error = abs(((math.pi - estimated_pi) / math.pi) * 100)
-    return (f"Intersections: {number_of_intersections}\n Total Needles: {needles_tossed}\n Approximation of Pi: {estimated_pi}\n Error:{error}%")
-
+####################
+# Plotting Results #
+####################
 fig = pyplot.figure(figsize=(10, 10))
 buffon = pyplot.subplot()
 buffon.set_xlim(-0.1, 1.1)
 buffon.set_ylim(-0.1, 1.1)
 
-results_text = fig.text(0, 0, estimate_pi(0), size=15)
+results_text = fig.text(0, 0, "Intersections: 0\n Total Needles: 0\n Approximation of Pi: 0\n Error: 100%", size=15)
 
 # Plot floor boards
 for j in range(boards):
@@ -97,9 +88,7 @@ for j in range(boards):
 
 # Plot needles
 for i in range(1, n + 1):
-    needle = make_needle()
-    list_of_needles.append(needle)
-
+    needle = list_of_needles[i - 1]
     first_end_point = needle[0]
     second_end_point = needle[1]
 
@@ -120,7 +109,12 @@ for i in range(1, n + 1):
     else:
         buffon.plot(x_coordinates, y_coordinates, color='red', linewidth=1)
 
-    results_text.set_text(estimate_pi(i))
+    needles_tossed = i
+    estimated_pi = needles_tossed / number_of_intersections
+
+    error = abs(((math.pi - estimated_pi) / math.pi) * 100)
+
+    results_text.set_text(f"Intersections: {number_of_intersections}\n Total Needles: {needles_tossed}\n Approximation of Pi: {estimated_pi}\n Error:{error}%")
 
     if i % 200 == 0:
         pyplot.pause(1 / 200)
