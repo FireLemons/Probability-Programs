@@ -52,7 +52,7 @@ lines = range(number_of_lines)
 
 experiment_error_percentage = 0
 
-# Create needles as a list containing 2 dictionarys each representing an endpoint of the needle
+# Create needles as a list containing 2 dictionaries each representing an endpoint of the needle
 for i in range(n):
     needle = []
 
@@ -94,15 +94,19 @@ print(f"The simulated estimate for pi is: {pi_estimated_value} with error: {expe
 # Plotting Results #
 ####################
 fig = pyplot.figure(figsize=(10, 10))
-buffon = pyplot.subplot()
-buffon.set_xlim(-0.1, 1.1)
-buffon.set_ylim(-0.1, 1.1)
+pyplot.title("Buffon's Needle")
 
-results_text = fig.text(0, 0, "Intersections: 0\n Total Needles: 0\n Approximation of Pi: 0\n Error: 100%", size=15)
+needle_display = pyplot.subplot()
+needle_display.set_xlim(-0.1, 1.1)
+needle_display.set_ylim(-0.1, 1.1)
+pyplot.xticks([])
+pyplot.yticks(lines)
+
+results_text = fig.text(0, 0, f"Intersections: {intersecting_needle_count}\nTotal Needles: {n}\nApproximation of Pi: {pi_estimated_value}\nError:{experiment_error_percentage}%", size=12)
 
 # Plot lines
 for j in range(number_of_lines):
-    buffon.hlines(y=lines[j], xmin=0, xmax=1, color='black', linestyle='--', linewidth=2.0)
+    needle_display.hlines(y=lines[j], xmin=-0.1, xmax=1.1, color='black', linewidth=2.0)
 
 # Plot needles
 for i in range(1, n + 1):
@@ -131,11 +135,9 @@ for i in range(1, n + 1):
         if lesser_y <= line_y and line_y <= greater_y:
             needle_color = "green"
 
-    buffon.plot(x_coordinates, y_coordinates, color=needle_color, linewidth=1)
+    needle_display.plot(x_coordinates, y_coordinates, color=needle_color, linewidth=1)
 
     if i % 200 == 0:
         pyplot.pause(1 / 200)
 
-pyplot.title("The simulated estimate for Pi is ")
-results_text.set_text(f"Intersections: {intersecting_needle_count}\n Total Needles: {n}\n Approximation of Pi: {pi_estimated_value}\n Error:{experiment_error_percentage}%")
 pyplot.show()
