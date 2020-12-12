@@ -44,10 +44,13 @@ if bad_input:
 ##################
 # Buffons Needle #
 ##################
-lines = []
 list_of_needles = []
+intersecting_needle_count = 0
+
 number_of_lines = 2
-number_of_intersections = 0
+lines = range(number_of_lines)
+
+experiment_error_percentage = 0
 
 # Create needles as a list containing 2 dictionarys each representing an endpoint of the needle
 for i in range(n):
@@ -71,6 +74,20 @@ for i in range(n):
 
     list_of_needles.append(needle)
 
+    # Test each line for needle instersection
+    for line_y in lines:
+        lesser_y = min(needle[0]["y"], needle[1]["y"])
+        greater_y = max(needle[0]["y"], needle[1]["y"])
+        # If the needle is intersecting with a line
+        if lesser_y <= line_y and line_y <= greater_y:
+            intersecting_needle_count += 1
+
+if n > 0: # Check in case of divide by zero error when n is set to 0
+    pi_estimated_value = n / intersecting_needle_count
+else:
+    pi_estimated_value = 0
+
+experiment_error_percentage = abs(((math.pi - pi_estimated_value) / math.pi) * 100)
 ####################
 # Plotting Results #
 ####################
@@ -83,7 +100,6 @@ results_text = fig.text(0, 0, "Intersections: 0\n Total Needles: 0\n Approximati
 
 # Plot lines
 for j in range(number_of_lines):
-    lines.append(j)
     buffon.hlines(y=lines[j], xmin=0, xmax=1, color='black', linestyle='--', linewidth=2.0)
 
 # Plot needles
@@ -102,22 +118,22 @@ for i in range(1, n + 1):
         second_end_point["y"]
     ]
 
-    # If the needle is intersecting with a line
-    if any(first_end_point["y"] < line_y and second_end_point["y"] > line_y for line_y in lines):
-        number_of_intersections += 1
-        buffon.plot(x_coordinates, y_coordinates, color='green', linewidth=1)
-    else:
-        buffon.plot(x_coordinates, y_coordinates, color='red', linewidth=1)
+    # Color intersecting needles green and non intersecting needles red
+    needle_color = "red"
 
-    needles_tossed = i
-    estimated_pi = needles_tossed / number_of_intersections if number_of_intersections > 0 else 0
+    # Test each line for needle instersection
+    for line_y in lines:
+        lesser_y = min(needle[0]["y"], needle[1]["y"])
+        greater_y = max(needle[0]["y"], needle[1]["y"])
+        # If the needle is intersecting with a line
+        if lesser_y <= line_y and line_y <= greater_y:
+            needle_color = "green"
 
-    error = abs(((math.pi - estimated_pi) / math.pi) * 100)
-
-    results_text.set_text(f"Intersections: {number_of_intersections}\n Total Needles: {needles_tossed}\n Approximation of Pi: {estimated_pi}\n Error:{error}%")
+    buffon.plot(x_coordinates, y_coordinates, color=needle_color, linewidth=1)
 
     if i % 200 == 0:
         pyplot.pause(1 / 200)
 
 pyplot.title("The simulated estimate for Pi is ")
+results_text.set_text(f"Intersections: {intersecting_needle_count}\n Total Needles: {n}\n Approximation of Pi: {pi_estimated_value}\n Error:{experiment_error_percentage}%")
 pyplot.show()
