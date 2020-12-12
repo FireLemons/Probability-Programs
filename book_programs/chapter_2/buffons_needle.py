@@ -88,6 +88,8 @@ else:
     pi_estimated_value = 0
 
 experiment_error_percentage = abs(((math.pi - pi_estimated_value) / math.pi) * 100)
+
+print(f"The simulated estimate for pi is: {pi_estimated_value} with error: {experiment_error_percentage}%")
 ####################
 # Plotting Results #
 ####################
